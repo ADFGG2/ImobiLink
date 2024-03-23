@@ -1,14 +1,47 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-
+import LoginECadastro from "../pages/LoginECadastro";
+import Login from "../pages/Login";
+import SelecaoCadastro from "../pages/SelecaoCadastro";
+import Duvidas from "../pages/Duvidas";
 
 const Stack = createNativeStackNavigator();
 
-const MyStack = () => {
+export default function MyStack() {
+  
   return (
     <NavigationContainer>
+
       <Stack.Navigator>
+        <Stack.Screen
+          name="LoginECadastro"
+          component={LoginECadastro}
+          options={{ title: "Inicial", headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ title: "Login", headerShown: false }}
+        />
+        <Stack.Screen
+          name="SelecaoCadastro"
+          component={SelecaoCadastro}
+          options={{ title: "SelecaoCadastro", headerShown: false  }}
+        />
+
+{/*     ------------------------------------------
+        ******************************************
+        ------------------------------------------
+*/}
+        <Stack.Screen
+          name="Duvidas"
+          component={Duvidas}
+          options={{ title: "Duvidas", headerShown: false }}
+        />
+      </Stack.Navigator>
+
+
+      {/* <Stack.Navigator>
         ------------------------------------------
         <Stack.Screen
           name="LoginECadastro"
@@ -70,11 +103,7 @@ const MyStack = () => {
           component={Sobre}
           options={{ title: "Sobre" }}
         />
-        <Stack.Screen
-          name="Duvidas"
-          component={Duvidas}
-          options={{ title: "Duvidas" }}
-        />
+        
         ------------------------------------------
         ******************************************
         ------------------------------------------
@@ -122,7 +151,7 @@ const MyStack = () => {
         />
         -----------------------------------------------------------------
         <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 };

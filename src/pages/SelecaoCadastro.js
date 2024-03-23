@@ -2,46 +2,49 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 import { ImageBackground, TouchableOpacity } from 'react-native-web';
+import { useNavigation } from '@react-navigation/native';
 
 
 
+const SelecaoCadastro = () => {  
 
-const SelecaoCadastro = ({ navigation }) =>{
+  const navigation = useNavigation();  
+
   return(
     <View style={styles.container}>
         <ImageBackground
-            source={require("../images/back3.png")}
+            source={require("../images/fundos/back3.png")}
             style={styles.back}
-        >
+        > 
+            <TouchableOpacity onPress={() => navigation.navigate('LoginECadastro')} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
             <View style={styles.espaco}></View>
             <View style={styles.pTexto}>
                 <Text style={styles.titulo}>Agora ja falta pouco</Text>
                 <Text style={styles.texto}>Selecione qual o perdfil de cadastro</Text> 
             </View>
             
-            <View style={styles.espaco2}></View>
 
             <View style={styles.menu}>
                 <View style={styles.linha}>
                     <TouchableOpacity style={styles.coluna} onPress={() => navigation.navigate('CadastroPessoaFisica')} >
-                        <Image source={require("../images/u3.png")} style={styles.imagem}/>
+                        <Image source={require("../images/icons/u3.png")} style={styles.imagem}/>
                         <Text style={styles.user}>Pessoa Física</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.coluna} onPress={() => navigation.navigate('CadastroPessoaJuridica')} >
-                        <Image source={require("../images/u2.png")} style={styles.imagem}/>
+                        <Image source={require("../images/icons/u2.png")} style={styles.imagem}/>
                         <Text style={styles.user}>Pessoa Jurídica</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.linha}>
                     <TouchableOpacity style={styles.coluna} onPress={() => navigation.navigate('CadastroCorretora')}>
-                        <Image source={require("../images/u1.png")} style={styles.imagem} />
-                        <Text style={styles.user}>Corretor de Imóveis</Text>                        
+                        <Image source={require("../images/icons/u1.png")} style={styles.imagem} />
+                        <Text style={styles.user}>Corretor</Text>                        
                     </TouchableOpacity>
                     
                     <TouchableOpacity style={styles.coluna} onPress={() => navigation.navigate('CadastroImobiliaria')} >
-                        <Image source={require("../images/u4.png")} style={styles.imagem} />
+                        <Image source={require("../images/icons/u4.png")} style={styles.imagem} />
                         <Text style={styles.user}>Imobiliaria</Text>                        
                     </TouchableOpacity>
                 </View>
@@ -52,11 +55,9 @@ const SelecaoCadastro = ({ navigation }) =>{
   ); 
 }
 
-SelecaoCadastro.navigationOptions = {
-  title: 'Home',
-}
 
 export default SelecaoCadastro;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -129,6 +130,12 @@ const styles = StyleSheet.create({
   },
   descricao:{
     display: 'flex'
+  },
+  return:{  
+    textAlign: 'left',
+    fontWeight: 'bold',
+    fontSize: '2em',
+    paddingTop: '1vh'
   }
 
 });

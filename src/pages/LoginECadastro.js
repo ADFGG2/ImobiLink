@@ -1,32 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { ImageBackground } from 'react-native-web';
+import { ImageBackground, TouchableOpacity } from 'react-native-web';
 import Botao from '../components/Botao';
+import { useNavigation } from '@react-navigation/native';
 
- 
-const LoginECadastro = ({ navigation }) => {
-  return(
+const LoginECadastro = () => {
+  const navigation = useNavigation();
+
+  return (
     <View style={styles.container}>
 
       <ImageBackground
-      source={require('../images/back1.png')}
-      style={styles.imagemFundo}
+        source={require('../images/fundos/back1.png')}
+        style={styles.imagemFundo}
       >
-        <View style= {styles.espaco} ></View>
+        <View style={styles.espaco} ></View>
 
-        <View style= {styles.menu}>
-          <Botao labelbutton="Login"   onPress={() => navigation.navigate('Login') } />
-          <Botao labelbutton= "Cadastrar" onPress={() => navigation.navigate('SelecaoCadastro') } />
-          <Text>Precisa de ajuda?</Text>
+        <View style={styles.menu}>
+          <Botao labelbutton="Login" aoclicar={() => navigation.navigate('Login')} />
+          <Botao labelbutton="Cadastrar" aoclicar={() => navigation.navigate('SelecaoCadastro')} />
+          <TouchableOpacity onPress={() => navigation.navigate('Duvidas')}><Text>Precisa de ajuda?</Text></TouchableOpacity>
         </View>
 
       </ImageBackground>
     </View>
   );
-    
-  };
 
-  
+};
+
+
 LoginECadastro.navigationOptions = {
   title: 'Home',
 }
@@ -42,9 +44,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imagemFundo: {
-    flex:1,
+    flex: 1,
     resizeMode: "cover",
-    height:"100%",
+    height: "100%",
     width: "100%",
   },
   espaco: {
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: '25%'
-    
+
   }
 
 });

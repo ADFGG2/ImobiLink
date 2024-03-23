@@ -1,51 +1,54 @@
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
+import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { ImageBackground, TextInput } from 'react-native-web';
 import Botao from '../components/Botao';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Login() {
 
+
+  
+
+const Login = () => {
+
+  const navigation = useNavigation();  
   const [user, setUser] = useState('');
   const [senha, setSenha] = useState('');
 
 
   const signIn = ()=> {
-    alert('cliquei');
+    senha=='' ? alert("input vazio") : alert("usuario: "+user+"\n  senha: "+senha)    
   }
 
-  
   return (
     <View style={styles.container}>
 
       <ImageBackground
-      source={require('../images/back2.png')}
+      source={require('../images/fundos/back2.png')}
       style={styles.imagemFundo}
       >
-        <View style= {styles.espaco} ></View>
-
-        <View style= {styles.menu}>
+        <TouchableOpacity onPress={() => navigation.navigate('LoginECadastro')} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity> 
+      </ImageBackground>
+      <View style= {styles.menu}>
 
           <View style={styles.view}>          
 
-              <Image style={styles.img} source={require("../images/pessoinha.png")} />              
+              <Image style={styles.img} source={require("../images/icons/pessoinha.png")} />              
 
               <TextInput 
               style={styles.Input}
               onChangeText={setUser}
-              value="user"
               placeholder="user"/>
 
           </View>
 
           <View style={styles.view}>
 
-              <Image style={styles.img} source={require("../images/cadeado.png")}/>
+              <Image style={styles.img} source={require("../images/icons/cadeado.png")}/>
 
               <TextInput 
               style={styles.Input}
               onChangeText={setSenha}
-              value="senha"
               placeholder="senha" 
             />
           </View>
@@ -53,11 +56,13 @@ export default function Login() {
           <Botao labelbutton="Logar" aoclicar= {signIn} />
           <Text>Esqueci minha senha</Text>
         </View>
-
-        </ImageBackground>
     </View>
   );
+  
 }
+
+export default Login;
+
 
 const styles = StyleSheet.create({
 container: {
@@ -68,20 +73,15 @@ container: {
   },
 imagemFundo: {
     flex:1,
-    resizeMode: "cover",
-    height:"100%",
+    height:"70vh",
     width: "100%",
-  },
-espaco: {
-    height: '70%'
   },
 menu: {
     display: 'flex',
     justifyContent: "space-around",
     alignItems: 'center',
     width: '100%',
-    height: '25%'
-    
+    height: '30%'    
   },
 view: {
     backgroundColor: '#D9D9D9',
@@ -107,6 +107,13 @@ Input:{
 img:{
   width: '5.3vw',
   height: '3vh'
+},
+return:{  
+  textAlign: 'left',
+  fontWeight: 'bold',
+  fontSize: '2em',
+  paddingTop: '1vh',
+  color: 'rgb(255,255,255)'
 }
 
 });
