@@ -4,16 +4,49 @@ import { ImageBackground, TextInput } from 'react-native-web';
 import Botao from '../components/Botao';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-
-
-
-  
+import ApiService from '../Services/ApiService';
+import AuthService from '../Services/AuthService';
+import { useEffect } from 'react';
 
 const Login = () => {
 
   const navigation = useNavigation();  
   const [user, setUser] = useState('');
   const [senha, setSenha] = useState('');
+
+  useEffect(() => {
+    VerificarLogin();
+  }, []);
+
+  async function VerificarLogin() {
+      const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
+
+      if (usuarioEstaLogado) {
+          navigation.navigate("");
+      }
+  }
+  async function RealizarLogin() {
+    try {
+        const body = new URLSearchParams({
+            user,
+            senha,
+        });
+
+        const response = await ApiService.Post("/Usuarios/Login", body)
+        const token = response.data.token;
+
+        await AuthService.SalvarToken(token);
+        navigation.navigate("Home");
+
+    }
+    catch (error) {
+        if (error.response?.status === 401) {
+            ToastService.Error("Erro ao realizar login", "E-mail e/ou senha inválidos!");
+            return;
+        }
+        ToastService.Error("Erro ao realizar login", "Houve um erro no servidor ao realizar o seu login\r\nTente novamente mais tarde.");
+    }
+}
 
 
   const signIn = ()=> {
@@ -37,7 +70,9 @@ const Login = () => {
 
               <TextInput 
               style={styles.Input}
-              onChangeText={setUser}
+              value={user}
+              onChangeText={(text) => {setUser(text)}}              
+              secureTextEntry={true}
               placeholder="user"/>
 
           </View>
@@ -48,12 +83,14 @@ const Login = () => {
 
               <TextInput 
               style={styles.Input}
-              onChangeText={setSenha}
+              value={senha}
+              onChangeText={(text) => {setSenha(text)}}              
+              secureTextEntry={true}
               placeholder="senha" 
             />
           </View>
 
-          <Botao labelbutton="Logar" aoclicar= {signIn} />
+          <Botao labelbutton="Logar" aoclicar= {RealizarLogin} />
           <Text>Esqueci minha senha</Text>
         </View>
     </View>

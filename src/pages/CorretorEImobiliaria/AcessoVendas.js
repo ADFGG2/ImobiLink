@@ -6,28 +6,32 @@ import { useNavigation } from '@react-navigation/native';
 import CardImovel from '../../components/cardImovel/CardImovel'
 
 const AcessoVendas = () => {
-  
-  
-    const signIn = ()=> {
-      senha=='' ? alert("input vazio") : alert("usuario: "+user+"\n  senha: "+senha)    
-    }
-  
-    return (
-        <ImageBackground
-        source={require('../../images/fundos/back6.png')}
-        style={styles.imagemFundo}
-        >
-         <CardImovel valorTotal="1.500,00" tipo="Venda" local="Rua rouxinou n°102" tamanho="23" quartos="2" banheiros="3" salas="4" ativo="true" />
-      </ImageBackground>
-    );
+
+
+  const signIn = () => {
+    senha == '' ? alert("input vazio") : alert("usuario: " + user + "\n  senha: " + senha)
+  }
+
+  const imovel = {
+    valorTotal: "1.500,00", tipo: "Venda", local: "Rua rouxinou n°102", tamanho: "23", quartos: "2", banheiros: "3", salas: "4", ativo: false
+  }
+
+  return (
+    <ImageBackground
+      source={require('../../images/fundos/back6.png')}
+      style={styles.imagemFundo}
+    >
+      <CardImovel imovel={imovel} />
+    </ImageBackground>
+  );
 }
 
-export default AcessoVendas; 
+export default AcessoVendas;
 
 const styles = StyleSheet.create({
   imagemFundo: {
-    flex:1,
-    height:"70vh",
+    flex: 1,
+    height: "70vh",
     width: "100%",
   }
 })

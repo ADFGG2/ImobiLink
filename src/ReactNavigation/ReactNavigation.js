@@ -4,6 +4,7 @@ import LoginECadastro from "../pages/LoginECadastro";
 import Login from "../pages/Login";
 import SelecaoCadastro from "../pages/SelecaoCadastro";
 import Duvidas from "../pages/Duvidas";
+import cadastroCorretor from "../pages/CorretorEImobiliaria/Corretor/CadastrpC";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,11 @@ export default function MyStack() {
           component={SelecaoCadastro}
           options={{ title: "SelecaoCadastro", headerShown: false  }}
         />
+        <Stack.Screen
+          name="CadastroCorretor"
+          component={cadastroCorretor}
+          options={{ title: "cadastroCorretor", headerShown: false }}
+        />
 
 {/*     ------------------------------------------
         ******************************************
@@ -49,11 +55,7 @@ export default function MyStack() {
           options={{ title: "Inicial" }}
         />
         ------------------------------------------
-        <Stack.Screen
-          name="SelecaoCadastro"
-          component={SelecaoCadastro}
-          options={{ title: "SelecaoCadastro" }}
-        />
+        
         <Stack.Screen
           name="CadastroPessoaFisica"
           component={CadastroPF}
@@ -64,11 +66,7 @@ export default function MyStack() {
           component={CadastroPJ}
           options={{ title: "CadastroPJ" }}
         />
-        <Stack.Screen
-          name="CadastroCorretora"
-          component={CadastroC}
-          options={{ title: "CadastroC" }}
-        />
+        
         <Stack.Screen
           name="CadastroImobiliaria"
           component={CadastroI}
