@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     texto:{
-        color: '#FFFFFF',
         fontSize: '1.5em'
     }
 })

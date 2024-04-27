@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import CardImovel from '../../components/cardImovel/CardImovel'
 
-const AcessoAlugueis = () => {
+const AcessoFavoritos = () => {
 
 
   const signIn = () => {
@@ -26,7 +26,7 @@ const AcessoAlugueis = () => {
   );
 }
 
-export default AcessoAlugueis;
+export default AcessoFavoritos;
 
 const styles = StyleSheet.create({
   imagemFundo: {

@@ -3,69 +3,78 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 import { ImageBackground, TextInput, TouchableOpacity } from 'react-native-web';
 import { useNavigation } from '@react-navigation/native';
+import DatePicker from 'react-native-neat-date-picker';
 import CheckBox from '../../../components/checkbox/checkbox';
-import CepInput from '../../../components/cepInput/cepInput';
 import PhoneInput from '../../../components/phoneInput/phoneInput';
-import CnpjInput from '../../../components/cnpjInput/cnpjInput';
+import CpfInput from '../../../components/cpfInput/cpfInput';
 import ToastService from '../../../Services/ToastService';
 import ApiService from '../../../Services/ApiService';
 import AuthService from '../../../Services/AuthService';
 
-const CadastroImobiliaria = () => {
-    const navigation = useNavigation()
+const CadastroCorretor = () => {
+    const navigation = useNavigation();
 
-    const [RazaoSocial, setRazaoSocial] = useState("");
-    const [CNPJ, setCNPJ] = useState("");
+    const [Nome_completo, setNome] = useState("");
+    const [CPF, setCPF] = useState("");
     const [CRECI, setCRECI] = useState("");
     const [Email, setEmail] = useState("");
     const [Telefone, setTelefone] = useState("");
-    const [RepresentanteLegal, setRepresentanteLegal] = useState("");
     const [Senha, setSenha] = useState("");
     const [confirmasenha, setconfirmasenha] = useState("");
-    const [Cidade, setCidade] = useState("");
-    const [CEP, setCEP] = useState("");
-    const [Bairro, setBairro] = useState("");
     const options2 = [{text: 'Concordo com os termos e condições de uso', id:1}];
 
-    async function RealizarCadastro() {
-        try { 
+    const [showDatePicker, setShowDatePicker] = useState(false)
+    const [date, setDate] = useState('');
 
-            if(!RazaoSocial || !CNPJ || !CRECI || !Email || !Telefone || !RepresentanteLegal || !Senha || !Cidade || !CEP || !Bairro ){
-              ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
-              return;
-            }
-            if(Senha != confirmasenha){       
-              ToastService.Error("Erro ao realizar cadastro", "confirmar senha esta diferente");
-              return;}
-            const body = {
-                RazaoSocial,
-                CNPJ,
-                CRECI,
-                Email,
-                Telefone,
-                RepresentanteLegal,
-                Senha,
-                Cidade,
-                CEP,
-                Bairro
-            };
-    
-            const response = await ApiService.Post("/Imobiliarias/CadastrarImobiliaria", body)
-            const token = response.data.token;
-    
-            await AuthService.SalvarToken(token);
-            navigation.navigate("TelaPrincipal1");
-    
-        }
-        catch (error) {
-          console.log(error)
-            if (error.response?.status === 401) {
-                ToastService.Error("Erro ao realizar login", "E-mail e/ou senha inválidos!");
-                return;
-            }
-            ToastService.Error("Erro ao realizar login", "Houve um erro no servidor ao realizar o seu login\r\nTente novamente mais tarde.");
-        }
+    const openDatePicker = () => setShowDatePicker(true);
+
+    const onCancel = () => {
+      setShowDatePicker(false)
     }
+
+    const onConfirm = (output) => {
+      setShowDatePicker(false)
+      setDate(output.dateString)
+    }
+
+
+    async function RealizarCadastro() {
+      try {
+        if(!Nome_completo || !CPF || !CRECI || !Email || !Telefone || !Senha || !date){
+          ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
+          return;
+        }
+        if(Senha != confirmasenha){  
+               
+          ToastService.Error("Erro ao realizar cadastro", "confirmar senha esta diferente");
+          return;}
+          const body = {
+              Nome_completo,
+              CPF,
+              CRECI,
+              Email,
+              Telefone,
+              date,
+              Senha
+          };
+         
+  
+          const response = await ApiService.Post("/Corretores/CadastrarCorretor", body)
+          const token = response.data.token;
+  
+          await AuthService.SalvarToken(token);
+          navigation.navigate("TelaPrincipal1");
+  
+      }
+      catch (error) {
+          console.log(error)
+          if (error.response?.status === 401) {
+              ToastService.Error("Erro ao realizar login", "E-mail e/ou senha inválidos!");
+              return;
+          }
+          ToastService.Error("Erro ao realizar login", "Houve um erro no servidor ao realizar o seu login\r\nTente novamente mais tarde.");
+      }
+  }
 
   return (
       <View style={styles.container}>
@@ -79,43 +88,49 @@ const CadastroImobiliaria = () => {
 
             <TextInput 
             style={styles.inputs}
-            value={RazaoSocial}
-            onChangeText={(texto) => setRazaoSocial(texto)}
-            placeholder="Razao Social" />
+            value={Nome_completo}
+            onChangeText={(texto) => setNome(texto)}
+            placeholder="Nome Completo" />
 
             <View style={styles.duplinha}>
 
-                <CnpjInput 
-                cnpjPai={CNPJ} 
-                setCnpjPai={setCNPJ} />
+                <CpfInput 
+                cpfPai={CPF} 
+                setCpfPai={setCPF} />
+                
 
                 <TextInput 
                 style={styles.inputs2}
                 value={CRECI}
                 onChangeText={(texto) => setCRECI(texto)}
                 placeholder="CRECI F" 
-                maxLength={7}/>
+                maxLength={6} />
 
             </View>
            
 
             <TextInput 
             style={styles.inputs}
-            value={RepresentanteLegal}
-            onChangeText={(texto) => setRepresentanteLegal(texto)}
-            placeholder="Representante Legal" />
+            value={Email}
+            onChangeText={(texto) => setEmail(texto)}
+            placeholder="E-mail" />
 
             <View style={styles.duplinha}>
 
-                <TextInput 
-                style={styles.inputs2}
-                value={Email}
-                onChangeText={(texto) => setEmail(texto)}
-                placeholder="E-mail" />
+            <PhoneInput 
+            telefonePai={Telefone} 
+            setTelefonePai={setTelefone} />
 
-                <PhoneInput 
-                  telefonePai={Telefone} 
-                  setTelefonePai={setTelefone} />
+              <Pressable
+                style={styles.inputs2}
+                onPress={openDatePicker}
+              >
+                <TextInput
+                editable={false}
+                value={date}
+                placeholder="Data de nascimento" />
+
+              </Pressable>
                 
             </View>
 
@@ -126,33 +141,21 @@ const CadastroImobiliaria = () => {
             placeholder="Senha" />
 
             
-            <TextInput
+          <TextInput
             style={styles.inputs}
             value={confirmasenha}
             onChangeText={(texto) => setconfirmasenha(texto)}
             placeholder="Repita a senha" />
 
-            <TextInput 
-            style={styles.inputs}
-            value={Cidade}
-            onChangeText={(texto) => setCidade(texto)}
-            placeholder="Cidade" />
+        
 
-            <View style={styles.duplinha}>
-
-                <CepInput
-                cepPai={CEP}
-                setCepPai={setCEP} 
-                setBairro={setBairro}
-                setCidade={setCidade}/>
-
-                <TextInput 
-                style={styles.inputs2}
-                value={Bairro}
-                onChangeText={(texto) => setBairro(texto)}
-                placeholder="Bairro" />
-            
-            </View>
+            <DatePicker
+              isVisible={showDatePicker}
+              mode={'single'}
+              onCancel={onCancel}
+              onConfirm={onConfirm}
+              colorOptions={{ headerColor: '#000', selectedDateBackgroundColor: "#000" }}
+            />
             <CheckBox options={options2} onChange={op => alert(op)} />
             <Pressable 
               style={styles.botao}
@@ -170,7 +173,7 @@ const CadastroImobiliaria = () => {
   );
 };
 
-export default CadastroImobiliaria;
+export default CadastroCorretor;
 
 
 

@@ -6,6 +6,14 @@ const AuthService = {
     async SalvarToken(token) {
         await AsyncStorage.setItem("@jwt", token);
     },
+    async PegarToken() {
+        return localStorage.getItem("jwt");
+    },
+    async PegarDadosLogados(){
+        const token = await AsyncStorage.getItem("@jwt");
+        const userData = jwtDecode(token);
+        return userData;
+    },
 
     async VerificarSeUsuarioEstaLogado() {
         const token = await AsyncStorage.getItem("@jwt");
@@ -20,6 +28,9 @@ const AuthService = {
         }
 
         return true;
+    },
+    async Sair() {
+        return await AsyncStorage.removeItem("@jwt");
     }
 }
 

@@ -9,20 +9,20 @@ const slides =[
   {key:'1',
   title: 'O que você \nPrecisa',
   text: 'Melhor e mais completa plataforma \nde capitação para o seguimentos \nimobiliário ',
-  image: require('../images/back4.1.png')
+  image: require('../images/fundos/back4.1.png')
 },
 { key:'2',
   title: 'O Imobilink Ajuda Você',
   text: 'Informações completas e detalhadas \ndos imóveis \n \n',
-  image: require('../images/back4.2.png')
+  image: require('../images/fundos/back4.2.png')
 },
 {key:'3',
   title: 'Mais Perto de \nVocê',
   text: 'Imoblink visa atender as busca por  \n imóveis dentro da região de atuação \n de cada corretor ou Imobiliária',
-  image: require('../images/back4.3.png')
+  image: require('../images/fundos/back4.3.png')
 }
 ]
-export default function Tutorial() {
+const Tutorial = ()=> {
   const [showHome, setShowHome] = useState(false)
 
   function renderSlides( {item} ){
@@ -74,6 +74,8 @@ export default function Tutorial() {
   }
   
 }
+
+export default Tutorial;
 
 const styles = StyleSheet.create({
   container: {

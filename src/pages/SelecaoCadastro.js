@@ -31,7 +31,7 @@ const SelecaoCadastro = () => {
               </TouchableOpacity>
 
               <TouchableOpacity onPress={()=>{navigation.navigate("CadastroCorretor")}}>                
-                <OpcaoCadastro tipoUsuario={"Corretora"} />
+                <OpcaoCadastro tipoUsuario={"Corretor(a)"} />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={()=>{navigation.navigate("CadastroImobiliaria")}}>
@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontWeight: 'bold',
     fontSize: '2em',
-    paddingTop: '1vh'
+    paddingTop: '1vh',
+    color: 'white'
   },
   titulo:{
     fontSize: '2.4em',

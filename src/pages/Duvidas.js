@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet,ImageBackground } from 'react-native';
+import { View, Text, StyleSheet,ImageBackground, Pressable,  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,6 +12,7 @@ const navigation = useNavigation();
         source={require('../images/fundos/back5.png')}
         style={styles.imagemFundo}
         >
+          <Pressable onPress={() => navigation.goBack()} ><Text style={styles.return}> {`<`} </Text></Pressable>
           <Text style={styles.text}>Duvidas</Text>  
         </ImageBackground>
       
