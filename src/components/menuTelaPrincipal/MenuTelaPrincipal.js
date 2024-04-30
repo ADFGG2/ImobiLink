@@ -5,7 +5,7 @@ import MeusImoveis from '../../images/icons/telaInicio/meusImoveis.png';
 import Cadastrados from '../../images/icons/telaInicio/cadastrados.png';
 import Imoblink from '../../images/icons/telaInicio/Imoblink.png';
 import { useNavigation } from '@react-navigation/native';
-import Certeza from '../certeza/Certeza';
+import Certeza from '../certezaSair/Certeza';
 
 const MenuTelaPrincipal = ({ func1, func2, func3, func4}) => {
     const navigation = useNavigation();

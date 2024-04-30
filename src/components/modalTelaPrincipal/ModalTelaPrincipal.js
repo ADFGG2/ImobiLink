@@ -5,7 +5,7 @@ import Menu from "../../images/icons/Menu.png";
 import close from "../../images/icons/close.png";
 import edit from "../../images/icons/edit.png";
 import logout from "../../images/icons/logout.png";
-import Certeza from "../certeza/Certeza";
+import Certeza from "../certezaSair/Certeza";
 
 const ModalTelaPrincipal = ()=>{
     const [modalVisible, setModalVisible] = useState(false);

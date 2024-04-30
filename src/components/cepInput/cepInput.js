@@ -4,7 +4,7 @@ import MaskInput from 'react-native-mask-input';
 import validarCEP from '../../Services/FoundCep';
 
 
-const CepInput = ({cepPai, setCepPai, setBairro, setCidade }) => {
+const CepInput = ({cepPai, setCepPai, setBairro, setCidade, setRua }) => {
 
   const [cep, setCep] = useState("");
 
@@ -17,8 +17,8 @@ const CepInput = ({cepPai, setCepPai, setBairro, setCidade }) => {
     onChangeText={(masked, unmasked) => {
       setCep(masked); // you can use the unmasked value as well
       setCepPai(unmasked);
-      validarCEP(unmasked, setBairro, setCidade);
-     
+      
+      setRua? validarCEP(unmasked, setBairro, setCidade, setRua) : validarCEP(unmasked, setBairro, setCidade)
     }}
     mask={[ /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
   />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const consultarEnderecoViaCEP = (cep, setBairro, setCidade) => {
+const consultarEnderecoViaCEP = (cep, setBairro, setCidade, setRua) => {
     const url = `https://viacep.com.br/ws/${cep}/json/`;
   
     fetch(url)
@@ -15,8 +15,13 @@ const consultarEnderecoViaCEP = (cep, setBairro, setCidade) => {
     
         const bairro = data.bairro;
         const cidade = data.localidade;
+        const rua = data.logradouro;
+        
+
         setBairro(bairro);
         setCidade(cidade); 
+
+        setRua?  setRua(rua) : console.log("to aqui ainda");
 
         return endereco;
       })

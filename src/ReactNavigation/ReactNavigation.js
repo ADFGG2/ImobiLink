@@ -117,7 +117,7 @@ export default function MyStack() {
         <Stack.Screen
           name="CadastrarImovel"
           component={CadastrarImovel}
-          options={{ title: "CadastrarImovel" }}
+          options={{ title: "CadastrarImovel", headerShown: false }}
         />
         <Stack.Screen
           name="EditarImovel"
