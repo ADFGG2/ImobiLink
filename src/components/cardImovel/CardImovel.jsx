@@ -1,35 +1,60 @@
-import { View, Text, Touchable, StyleSheet, Image } from 'react-native'
-import React from 'react'
+import { View, Text, Touchable, StyleSheet, Image, Pressable } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native-web'
 import imgDisponivel from '../../images/icons/cardImovel/ativado.jpg';
 import imgIndisponivel from '../../images/icons/cardImovel/desativado.jpg';
+import { useNavigation } from '@react-navigation/native';
+import ToastService from '../../Services/ToastService';
+import ApiService from '../../Services/ApiService';
 
 const cardImovel = ({ imovel }) => {
+    
+  const navigation = useNavigation();
+  const [img, setImg] = useState(""); 
 
+  useEffect(() => {
+    pegaImagem();
+  }, []);
 
+  async function pegaImagem(){
+
+    try{
+        let valor = imovel.codigo;      
+        const response = await ApiService.Get(`/imoveis/PegaImagemFav/${valor}`);
+        console.log("data: "+response.data)
+        setImg(response.data);
+      }
+      catch(erro){
+        console.log(erro);
+        ToastService.Error("Erro ao buscar imagens");
+      }   
+  }
     return (
-        <View style={styles.card}>
+        <View style={styles.card} key={imovel?.Codigo}>
             <View style={styles.parte1}>
                 <Image
-                    source={require('../../images/ImagensImoveis/imovelexemplo.png')}
+                    source={{uri: img}}
                     style={styles.imagemImovel}
                 />
                 <View style={styles.detalhesPart1}>
+                    <View style={styles.primeirosTxts}>
+                        <Text style={styles.texto1}>R$ {imovel.valor}</Text>
+                        <Text style={styles.texto}>{imovel.tipo}</Text>
+                        <Text style={styles.texto}>{imovel.cidade}, {imovel.bairro}</Text>
 
-                    <Text style={styles.texto1}>R$ {imovel.valorTotal}</Text>
-                    <Text style={styles.texto}>{imovel.tipo}</Text>
-                    <Text style={styles.texto}>{imovel.local}</Text>
-
-                    <View style={styles.detalhesEspecificos}>
-                        <View style={styles.conjunto}>
+                        <View style={styles.conjunto1}>
                             <View style={styles.iconLargura}>
                                 <Image
                                     source={require('../../images/icons/cardImovel/largura.png')}
                                     style={styles.iconimg} />
                             </View>
-                            <Text style={styles.texticons}>{imovel.tamanho} m²</Text>
+                            <Text style={styles.texticons}>{imovel.areaUtil} m²</Text>
                         </View>
+                    </View>
+                    
 
+                    <View style={styles.detalhesEspecificos}>
+                        
                         <View style={styles.conjunto}>
                             <View style={styles.iconCama}>
                                 <Image
@@ -37,7 +62,7 @@ const cardImovel = ({ imovel }) => {
                                     style={styles.iconimg} />
                             </View>
 
-                            <Text style={styles.texticons}>{imovel.quartos}</Text>
+                            <Text style={styles.texticons}>{imovel.dormitorios}</Text>
                         </View>
 
                         <View style={styles.conjunto}>
@@ -47,7 +72,7 @@ const cardImovel = ({ imovel }) => {
                                     style={styles.iconimg} />
                             </View>
 
-                            <Text style={styles.texticons}>{imovel.banheiros}</Text>
+                            <Text style={styles.texticons}>{imovel.suites}</Text>
                         </View>
 
                         <View style={styles.conjunto}>
@@ -62,33 +87,42 @@ const cardImovel = ({ imovel }) => {
 
                     </View>
 
-                    <View style={styles.row}>
-                        <View style={styles.iconMais}>
-                            <Image
-                                source={require('../../images/icons/cardImovel/Mais.png')}
-                                style={styles.iconimg2} />
-                        </View>
+                    
+                    <Pressable           
+                        onPress={()=>{
+                            navigation.navigate("AcessoDetalhesImovel", {imovel})
+                   }}
+                        >
+                    <View style={styles.row}>    
+                            <View style={styles.iconMais}>
+                                <Image
+                                    source={require('../../images/icons/cardImovel/Mais.png')}
+                                    style={styles.iconimg2} />
+                            </View>    
+                            <Text style={styles.detalhesImoveisTxt} >Detalhes</Text>
 
-                        <Text style={styles.detalhesImoveisTxt} >Detalhes</Text>
                     </View>
+                    </Pressable>                        
+                    
                     <View style={styles.row}>
-                        <View style={styles.iconMais}>
+                        
+                        <View style={styles.iconMais2}>
                             <Image
                                 source={require('../../images/icons/pessoinha.png')}
-                                style={styles.iconimg2} />
+                                style={styles.iconimg3} />
                         </View>
 
-                        <Text style={styles.detalhesImoveisTxt} >proprietario</Text>
+                        <Text style={styles.detalhesImoveisTxt} >{imovel.nomeAutor}</Text>
                     </View>
 
                     <View style={styles.row}>
                         <View style={styles.iconMais}>
                             <Image
-                                source={imovel.ativo ? imgDisponivel : imgIndisponivel}
+                                source={imovel.status=="Disponível"  ? imgDisponivel : imgIndisponivel}
                                 style={styles.iconimg2} />
                         </View>
 
-                        <Text style={styles.detalhesImoveisTxt} >{imovel.ativo ? "Disponível" : "Indisponível"}</Text>
+                        <Text style={styles.detalhesImoveisTxt} >{imovel.status=="Disponível" ? "Disponível" : "Habitado"}</Text>
                     </View>
                 </View>
             </View>
@@ -100,14 +134,14 @@ export default cardImovel;
 
 const styles = StyleSheet.create({
     card: {
-        width: '100%',
-        height: '35%',
+        width: '90%',
+        height: '15em',
         borderRadius: 20,
         display: 'flex',
         flexDirection: 'column',
-        marginTop: '20vh',
-        borderColor: 'black',
-        borderWidth: 1
+        marginTop: '2em',
+        borderColor: '#797979',
+        borderWidth: 1,
     },
     texto1: {
         textAlign: 'center',
@@ -123,14 +157,28 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 5, // Raio de 30 para o canto superior esquerdo
         borderTopRightRadius: 5,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: 'rgba(217, 217, 217, 0.5)',
+        borderRadius: 25,
     },
     imagemImovel: {
         width: '50%',
-        height: '100%'
+        height: '100%',
+        borderWidth: 1,
+        borderRightColor: '#797979',
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius:20,
+        
+    },
+    primeirosTxts:{
+        width: '100%',
+        display: 'flex',
+        alignItens: 'center',
+        justifyContent: 'center',
+        paddingRight: 1 
     },
     detalhesPart1: {
-        width: '50%',
+        width: '40%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -140,7 +188,7 @@ const styles = StyleSheet.create({
     },
     detalhesEspecificos: {
         width: '90%',
-        height: '40%',
+        height: '20%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -150,7 +198,15 @@ const styles = StyleSheet.create({
         marginLeft: 1,
         display: 'flex',
         flexDirection: 'row',
-
+    },
+    conjunto1: {
+        marginLeft: 1,
+        marginTop: 1,
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     iconLargura: {
         width: '15px',
@@ -180,8 +236,10 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         borderRadius: '1vh',
-        borderWidth: '0.1vh',
-        borderColor: 'Black'
+    },
+    iconimg3: {
+        width: '70%',
+        height: '70%',
     },
     texticons: {
         fontSize: '0.7em',
@@ -194,8 +252,24 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     iconMais: {
-        width: '3.1vw',
-        height: '1.5vh'
+        width: '3.0vw',
+        height: '1.4vh',
+        borderRadius: '1vh',
+        borderWidth: '0.1vh',
+        borderColor: 'Black',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    iconMais2: {
+        width: '3.0vw',
+        height: '1.4vh',     
+        borderRadius: '1vh',
+        borderWidth: '0.1vh',
+        borderColor: 'Black',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     row: {
         display: 'flex',
@@ -209,5 +283,8 @@ const styles = StyleSheet.create({
     },
     detalhesImoveisTxt: {
         paddingLeft: '2vw'
-    }
+    },
+   
+
+
 })

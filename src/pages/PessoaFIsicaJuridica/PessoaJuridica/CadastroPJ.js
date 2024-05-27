@@ -24,9 +24,24 @@ const CadastroPessoaJuridica = () => {
   const [CEP, setCEP] = useState("");
   const [Bairro, setBairro] = useState("");
   const options2 = [{ text: 'Concordo com os termos e condições de uso', id: 1 }];
+  const [Observacoes, setObservacoes] = useState([]);
   
 
   
+  
+  function HandleCheckBox(id) {
+    const index = Observacoes.indexOf(id);
+
+    if (index !== -1) {
+      // Se o número estiver na lista, remova-o
+      const novaLista = [...Observacoes];
+      novaLista.splice(Observacoes, 1);
+      setObservacoes(Observacoes);
+    } else {
+      // Se o número não estiver na lista, adicione-o
+      setObservacoes([...Observacoes, id]);
+    }
+  }
 
   async function RealizarCadastro() {
     if(!NomeEmpresa || !CNPJ || !InscricaoEstadual || !Email || !Telefone || !Senha || !Cidade || !CEP || !Bairro ){
@@ -144,7 +159,7 @@ const CadastroPessoaJuridica = () => {
 
             <CepInput
               cepPai={CEP}
-              setCepPai={setCEP}
+              setCEPPai={setCEP}
               setBairro={setBairro}
               setCidade={setCidade} />
 
@@ -159,7 +174,7 @@ const CadastroPessoaJuridica = () => {
 
         </View>
 
-        <CheckBox options={options2} onChange={op => alert(op)} />
+        <CheckBox options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
 
         <Pressable
           style={styles.botao}

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, Image } from 'react-native';
 import seta from '../../images/icons/downSeta.png';
 
-const InputNumerosSelect = ({ options, onSelect, defaultValue, placeHold, numero }) => {
+const InputNumerosSelect = ({ options, onSelect, defaultValue, placeHold, numero, boolean }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedOption, setSelectedOption] = useState(defaultValue || '');
 
@@ -13,6 +13,7 @@ const InputNumerosSelect = ({ options, onSelect, defaultValue, placeHold, numero
         onSelect(option);
         console.log(option);
     };
+    
 
     return (
         <View>

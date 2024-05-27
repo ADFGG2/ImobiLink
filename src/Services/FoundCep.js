@@ -30,7 +30,7 @@ const consultarEnderecoViaCEP = (cep, setBairro, setCidade, setRua) => {
       });
   };
 
-  function validarCEP(cep, setBairro, setCidade) {
+  function validarCEP(cep, setBairro, setCidade, setRua) {
     // Expressão regular para validar o formato do CEP (xxxxx-xxx)
     
   
@@ -38,7 +38,7 @@ const consultarEnderecoViaCEP = (cep, setBairro, setCidade, setRua) => {
     if (cep.length < 8) {
       return; // Formato inválido
     }else{
-        return consultarEnderecoViaCEP(cep, setBairro, setCidade );
+        return consultarEnderecoViaCEP(cep, setBairro, setCidade, setRua);
     }
   
     // Aqui você pode adicionar outras regras de validação, como verificar se o CEP é válido em uma API de consulta de CEPs

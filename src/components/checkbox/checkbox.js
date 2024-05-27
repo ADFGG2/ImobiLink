@@ -1,41 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import {View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 
-const CheckBox = ({options = [], onchange}) =>{
-
-    const [selected, setSelected] = useState([]);
+const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
 
     function toggle(id) {
-        let index = selected.findIndex(i => i===id);
-        let arrSelecteds = [...selected];
-        if(index !== -1)
-        {
-            arrSelecteds.splice(index, 1);
-        } 
-        else {
-            arrSelecteds.push(id)
-        }
-        setSelected(arrSelecteds);
+        onchange(id);
     }
-
-    //useEffect(() => onChange(selected), [selected]);
 
     return (
         <View style={styles.container}>
             {options.map((op, index) => (
-                <View style={styles.optionContainer} key={op?.id} > 
+                <View style={styles.optionContainer} key={op?.id} >
                     <TouchableOpacity
-                    style={styles.touchable}
-                    onPress={() => toggle(op?.id)}>
-                        { selected.findIndex(i => i=== op?.id) !== -1? (
-                        <Image                             
-                            source={require('../../images/icons/check.png')} 
-                            style={styles.checklogo}/>
-                            
-                    ) : null}
-                                            
+                        style={!pequeno ? styles.touchable : styles.touchablePequeno}
+                        onPress={() => toggle(op?.id)}>
+                        {itensSelecionados.findIndex(i => i === op?.id) !== -1 ? (
+                            <Image
+                                source={require('../../images/icons/check.png')}
+                                style={!pequeno ? styles.checklogo : styles.checklogoPequeno}
+                            />
+
+                        ) : null}
+
                     </TouchableOpacity>
-                    <Text style={styles.optext}>{op.text} </Text>
+                    <Text style={!pequeno ? styles.optext : styles.optextPequeno}>{op.text} </Text>
                 </View>
             ))}
         </View>
@@ -44,23 +32,31 @@ const CheckBox = ({options = [], onchange}) =>{
 };
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         marginLeft: 12,
         marginTop: "5vw",
         marginBottom: "2vw"
     },
-    optionContainer:{
+    optionContainer: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
     },
     touchable: {
         height: 20,
-        width: 20,  
-        borderRadius:4,
+        width: 20,
+        borderRadius: 4,
         justifyContent: 'center',
         borderColor: '#3EBD93',
         borderWidth: 2
+    },
+    touchablePequeno: {
+        height: 11,
+        width: 11,
+        borderRadius: 2,
+        justifyContent: 'center',
+        borderColor: '#3EBD93',
+        borderWidth: 1
     },
     optext: {
         marginLeft: 12,
@@ -68,9 +64,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '600',
     },
-    checklogo:{
+    optextPequeno: {
+        marginLeft: 9,
+        color: '#555',
+        fontSize: 10,
+        fontWeight: '400',
+    },
+    checklogo: {
         width: 19,
         height: 19
+    },
+    checklogoPequeno: {
+        width: 10,
+        height: 10
     }
 });
 

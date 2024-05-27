@@ -7,7 +7,7 @@ const AuthService = {
         await AsyncStorage.setItem("@jwt", token);
     },
     async PegarToken() {
-        return localStorage.getItem("jwt");
+        return AsyncStorage.getItem("@jwt");
     },
     async PegarDadosLogados(){
         const token = await AsyncStorage.getItem("@jwt");

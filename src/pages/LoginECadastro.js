@@ -4,8 +4,60 @@ import { ImageBackground, TouchableOpacity } from 'react-native-web';
 import Botao from '../components/Botao';
 import { useNavigation } from '@react-navigation/native';
 
+import AuthService from '../Services/AuthService';
+import { useEffect } from 'react';
+
 const LoginECadastro = () => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    VerificarLogin();
+  }, []);
+
+  async function VerificarLogin() {
+    const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
+
+
+    if (usuarioEstaLogado) {
+      try {
+        const dadosUsuarioLogado = await AuthService.PegarDadosLogados();
+    
+        switch (dadosUsuarioLogado.Tipo) {
+          case "Corretor":
+              
+  
+            navigation.navigate("TelaPrincipal1")
+  
+            break;
+  
+          case "Imobiliaria":
+            
+            navigation.navigate("TelaPrincipal1")
+  
+            break;
+          
+          case "Pj":
+  
+            navigation.navigate("TelaPrincipal2");
+  
+            break;
+  
+          case "PF":
+  
+            navigation.navigate("TelaPrincipal2");
+  
+            break;
+        
+          default:
+  
+            break;
+        }
+      } catch (error) {
+          console.log(error) 
+      }
+     
+    }
+  }
 
   return (
     <View style={styles.container}>

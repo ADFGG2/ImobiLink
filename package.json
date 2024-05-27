@@ -16,6 +16,7 @@
     "@react-navigation/native-stack": "^6.9.22",
     "axios": "^1.6.8",
     "expo": "^49.0.22",
+    "expo-image-picker": "^15.0.5",
     "expo-status-bar": "~1.11.1",
     "i": "^0.3.7",
     "jwt-decode": "^4.0.0",
@@ -27,16 +28,20 @@
     "react-native-datepicker-modal": "^1.3.0",
     "react-native-gesture-handler": "^2.15.0",
     "react-native-mask-input": "^1.2.3",
+    "react-native-masked-text": "^1.13.0",
     "react-native-neat-date-picker": "^1.4.12",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
+    "react-native-simple-dialogs": "^2.0.3",
+    "react-native-svg": "^15.3.0",
     "react-native-toast-message": "^2.2.0",
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
     "react-navigation": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "react-native-svg-transformer": "^1.4.0"
   },
   "private": true
 }

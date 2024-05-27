@@ -35,6 +35,8 @@ const TelaPrincipal1 = () => {
       navigation.navigate("LoginECadastro.js");
     }
   }
+
+  
   return (
     <View style={styles.container}>
 
@@ -43,14 +45,16 @@ const TelaPrincipal1 = () => {
         style={styles.imagemFundo}
       >
         <View style={styles.perfil}>
-          <View style={styles.portaImg}>
-            <Image source={foto} style={styles.foto}/>
-          </View>
-          
-          <View style={styles.dados}>
-            <Text style={styles.nome}>{dados.Tipo == "Corretor"? dados.Nome : dados.RazaoSocial}</Text>
-            <Text style={styles.tipo}>{dados.Tipo}</Text>
-          </View>
+            <Pressable style={ styles.irPerfil} onPress={()=>{navigation.navigate("Perfil")}}>
+              <View style={styles.portaImg}>
+                <Image source={foto} style={styles.foto}/>
+              </View>
+              
+              <View style={styles.dados}>
+                <Text style={styles.nome}>{dados.Tipo == "Corretor"? dados.Nome : dados.RazaoSocial}</Text>
+                <Text style={styles.tipo}>{dados.Tipo}</Text>
+              </View>
+            </Pressable>
           <View style={styles.portaModal}>
             <ModalTelaPrincipal />
           </View>
@@ -138,6 +142,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between'
   }, 
+  irPerfil:{
+    display: 'flex',
+    flexDirection: 'row',
+  },
   dados: {
     width: '65%',
     height: '100%',

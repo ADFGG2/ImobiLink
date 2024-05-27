@@ -14,6 +14,9 @@ import AuthService from '../../../Services/AuthService';
 const CadastroImobiliaria = () => {
     const navigation = useNavigation()
 
+    
+   const [Observacoes, setObservacoes] = useState([]);
+
     const [RazaoSocial, setRazaoSocial] = useState("");
     const [CNPJ, setCNPJ] = useState("");
     const [CRECI, setCRECI] = useState("");
@@ -66,6 +69,22 @@ const CadastroImobiliaria = () => {
             ToastService.Error("Erro ao realizar login", "Houve um erro no servidor ao realizar o seu login\r\nTente novamente mais tarde.");
         }
     }
+
+    
+  function HandleCheckBox(id) {
+    const index = Observacoes.indexOf(id);
+
+    if (index !== -1) {
+      // Se o número estiver na lista, remova-o
+      const novaLista = [...Observacoes];
+      novaLista.splice(Observacoes, 1);
+      setObservacoes(Observacoes);
+    } else {
+      // Se o número não estiver na lista, adicione-o
+      setObservacoes([...Observacoes, id]);
+    }
+  }
+
 
   return (
       <View style={styles.container}>
@@ -142,7 +161,7 @@ const CadastroImobiliaria = () => {
 
                 <CepInput
                 cepPai={CEP}
-                setCepPai={setCEP} 
+                setCEPPai={setCEP} 
                 setBairro={setBairro}
                 setCidade={setCidade}/>
 
@@ -153,7 +172,7 @@ const CadastroImobiliaria = () => {
                 placeholder="Bairro" />
             
             </View>
-            <CheckBox options={options2} onChange={op => alert(op)} />
+        <CheckBox options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
             <Pressable 
               style={styles.botao}
               onPress={RealizarCadastro}>

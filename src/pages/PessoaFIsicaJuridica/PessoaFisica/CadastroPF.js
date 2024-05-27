@@ -29,6 +29,7 @@ const CadastroPessoaFisica = () => {
     const [CEP, setCEP] = useState("");
     const [Bairro, setBairro] = useState("");
     const options2 = [{text: 'Concordo com os termos e condições de uso', id:1}];
+    const [Observacoes, setObservacoes] = useState([]);
 
     const [showDatePicker, setShowDatePicker] = useState(false)
     const [date, setDate] = useState('');
@@ -44,6 +45,20 @@ const CadastroPessoaFisica = () => {
       setDate(output.dateString)
     }
 
+    
+  function HandleCheckBox(id) {
+    const index = Observacoes.indexOf(id);
+
+    if (index !== -1) {
+      // Se o número estiver na lista, remova-o
+      const novaLista = [...Observacoes];
+      novaLista.splice(Observacoes, 1);
+      setObservacoes(Observacoes);
+    } else {
+      // Se o número não estiver na lista, adicione-o
+      setObservacoes([...Observacoes, id]);
+    }
+  }
 
     async function RealizarCadastro() {      
         try {
@@ -60,7 +75,7 @@ const CadastroPessoaFisica = () => {
                 rg,
                 Email,
                 Telefone,
-                date,
+                "Nascimento":date,
                 Senha,
                 Cidade,
                 CEP,
@@ -161,7 +176,7 @@ const CadastroPessoaFisica = () => {
 
             <CepInput
                 cepPai={CEP}
-                setCepPai={setCEP} 
+                setCEPPai={setCEP}
                 setBairro={setBairro}
                 setCidade={setCidade}/>
 
@@ -181,7 +196,7 @@ const CadastroPessoaFisica = () => {
             colorOptions={{ headerColor: '#000', selectedDateBackgroundColor: "#000" }}
             />
 
-            <CheckBox options={options2} onChange={op => alert(op)} />
+            <CheckBox options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
             <Pressable 
               style={styles.botao}
               onPress={RealizarCadastro}

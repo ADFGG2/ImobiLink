@@ -4,19 +4,19 @@ import MaskInput from 'react-native-mask-input';
 import validarCEP from '../../Services/FoundCep';
 
 
-const CepInput = ({cepPai, setCepPai, setBairro, setCidade, setRua }) => {
+const CepInput = ({CEPPai, setCEPPai, setBairro, setCidade, setRua }) => {
 
-  const [cep, setCep] = useState("");
+  const [CEP, setCEP] = useState("");
 
   return (
     
     <MaskInput
-    value={cep}
+    value={CEP}
     style={styles.inputs2}
-    placeholder='cep'
+    placeholder='CEP'
     onChangeText={(masked, unmasked) => {
-      setCep(masked); // you can use the unmasked value as well
-      setCepPai(unmasked);
+      setCEP(masked); // you can use the unmasked value as well
+      setCEPPai(unmasked);
       
       setRua? validarCEP(unmasked, setBairro, setCidade, setRua) : validarCEP(unmasked, setBairro, setCidade)
     }}
