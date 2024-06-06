@@ -1,12 +1,14 @@
-import LoginECadastro from './src/pages/LoginECadastro'; 
-import {NavigationContainer} from '@react-navigation/native';
-
+import MyStack from './src/ReactNavigation/ReactNavigation';
+import TelaPrincipal2 from './src/pages/PessoaFIsicaJuridica/TelaPrincipal2';
+import { NavigationContainer } from '@react-navigation/native';
 const App = () => {
   return (
+
     <NavigationContainer>
-      {<LoginECadastro />}
+      <MyStack></MyStack>
     </NavigationContainer>
   );
 };
 
 export default App;
+

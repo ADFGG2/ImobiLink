@@ -1,134 +1,92 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
-import { ImageBackground, TouchableOpacity } from 'react-native-web';
+import { ImageBackground, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import OpcaoCadastro from '../components/opcaoCadastro/OpcaoCadastro';
+import LogoCompleto from '../assets/Svg/Logo/Logo_Full';
+import ButtonVoltar from '../assets/Svg/Buttons/Bnt_Voltar';
 
 
+const SelecaoCadastro = () => {  
 
+  const navigation = useNavigation();  
 
-const SelecaoCadastro = ({ navigation }) =>{
   return(
     <View style={styles.container}>
+
+      
         <ImageBackground
-            source={require("../images/back3.png")}
-            style={styles.back}
-        >
-            <View style={styles.espaco}></View>
-            <View style={styles.pTexto}>
-                <Text style={styles.titulo}>Agora ja falta pouco</Text>
-                <Text style={styles.texto}>Selecione qual o perdfil de cadastro</Text> 
+            source={require('../assets/Images/BackGround/Back_cadastro.png')}
+            style={styles.backgraud_image}
+        > 
+            <TouchableOpacity onPress={() => navigation.navigate('LoginECadastro')} >
+                 <ButtonVoltar />
+            </TouchableOpacity>
+
+            <View style={styles.espaco} >
+              <LogoCompleto/>
             </View>
             
-            <View style={styles.espaco2}></View>
 
-            <View style={styles.menu}>
-                <View style={styles.linha}>
-                    <TouchableOpacity style={styles.coluna} onPress={() => navigation.navigate('CadastroPessoaFisica')} >
-                        <Image source={require("../images/u3.png")} style={styles.imagem}/>
-                        <Text style={styles.user}>Pessoa Física</Text>
-                    </TouchableOpacity>
+            
+            <View style={styles.centraliza}>
 
-                    <TouchableOpacity style={styles.coluna} onPress={() => navigation.navigate('CadastroPessoaJuridica')} >
-                        <Image source={require("../images/u2.png")} style={styles.imagem}/>
-                        <Text style={styles.user}>Pessoa Jurídica</Text>
-                    </TouchableOpacity>
-                </View>
+            <Text style={{  fontSize: '2.4em', fontWeight: 'bold',textAlign: 'center', color: '#999EA9', marginBottom: 10, marginTop: 110} }> PERFIL DE ACESSO</Text>
 
-                <View style={styles.linha}>
-                    <TouchableOpacity style={styles.coluna} onPress={() => navigation.navigate('CadastroCorretora')}>
-                        <Image source={require("../images/u1.png")} style={styles.imagem} />
-                        <Text style={styles.user}>Corretor de Imóveis</Text>                        
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity style={styles.coluna} onPress={() => navigation.navigate('CadastroImobiliaria')} >
-                        <Image source={require("../images/u4.png")} style={styles.imagem} />
-                        <Text style={styles.user}>Imobiliaria</Text>                        
-                    </TouchableOpacity>
-                </View>
+
+              <TouchableOpacity onPress={()=>{navigation.navigate("CadastroPessoaFisica")}}>
+                <OpcaoCadastro tipoUsuario={"Pessoa Fisica"}  />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>{navigation.navigate("CadastroPessoaJuridica")}}>
+                <OpcaoCadastro tipoUsuario={"Pessoa Jurídica"} />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>{navigation.navigate("CadastroCorretor")}}>                
+                <OpcaoCadastro tipoUsuario={"Corretor(a)"} />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>{navigation.navigate("CadastroImobiliaria")}}>
+                  <OpcaoCadastro tipoUsuario={"Imobiliaria"} />
+              </TouchableOpacity> 
+              
             </View>
 
+            
         </ImageBackground>
+        
     </View>
   ); 
 }
 
-SelecaoCadastro.navigationOptions = {
-  title: 'Home',
-}
 
 export default SelecaoCadastro;
 
+
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    height: '100%'
   },
   espaco:{
-    width: '100%',
-    height: '20%'
+    marginTop: 5
   },
-  back: {
-    flex:1,
-    resizeMode: "cover",
-    height:"100%",
-    width: "100%"
-  },
-  pTexto:{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%'
-  },
-  titulo:{
-    display: 'flex',
-    fontWeight: 'bold',
-    fontSize: '2em'
-  },
-  texto:{
-    display: 'flex',
-    fontSize: '1em'
- },
-    espaco2:{
-        width: '100%',
-        height: '3%'
-    },
-  menu:{
-    display: 'flex',
-    width: '100%',
-    height: '50vh',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column'
-  },
-  linha:{
-    display: 'flex',
-    width: '70vw',
-    height: '20vh',
-    justifyContent: 'space-between',
-    alignItems: 'stretch',
-    flexDirection: 'row'
-  },
-  coluna:{
-    display: 'flex',
-    width: '30vw',
-    height: '15vh',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#707070',
-    borderRadius: '2vh'
-  },
-  imagem:{
-    display: 'flex',
-    width: '16vw',
-    height: '8vh'
-  },
-  descricao:{
-    display: 'flex'
-  }
+  backgraud_image: {
+    flex: 1,
+    marginTop: -15,
+    height: "70vh",
+    width: "100%",
 
+  },
+  centraliza:{
+    width: '100%',
+    display:'flex',
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
