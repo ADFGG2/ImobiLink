@@ -13,6 +13,7 @@ import BarraDePesquisa from '../../components/Pesquisa/BarraDePesquisa';
 const AcessoMeusImoveis = () => {
   const navigation = useNavigation();
   const [imoveis, setImoveis] = useState([]);
+  const [imoveisFiltrados, setImoveisFiltrados] = useState([]);
   const [pesquisa, setPesquisa] = useState("");
   let tipo;
 
@@ -37,8 +38,6 @@ const AcessoMeusImoveis = () => {
   async function buscarImoveis() {
     const dadosUser2 = await AuthService.PegarDadosLogados();
 
-
-
     try {
       let response
       if (dadosUser2.Tipo == "PJ") {
@@ -53,8 +52,6 @@ const AcessoMeusImoveis = () => {
       ToastService.Error("Erro ao buscar Imóveis");
     }
   }
-
-
 
   return (
     <View style={styles.centro}>
@@ -73,11 +70,11 @@ const AcessoMeusImoveis = () => {
       </ImageBackground>
 
       <View style={styles.portaPesquisa}>
-        <BarraDePesquisa pesquisa={pesquisa} setPesquisa={setPesquisa} />
+        <BarraDePesquisa key={1} imoveis={imoveis} setImoveis={setImoveisFiltrados} />
       </View>
 
 
-      {imoveis.map((imovel, key) => (
+      {imoveisFiltrados.map((imovel, key) => (
         <CardImovel key={key} imovel={imovel} />
       )
       )}
@@ -88,7 +85,7 @@ const AcessoMeusImoveis = () => {
 export default AcessoMeusImoveis;
 
 const styles = StyleSheet.create({
-  centro:{
+  centro: {
     display: 'flex',
     alignItems: 'center'
   },

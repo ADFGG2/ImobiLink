@@ -5,7 +5,7 @@ import favAtivo from "../../images/icons/favAtivo.png"
 import favDesativo from "../../images/icons/favDesativo.png"
 import { useState } from "react";
 
-const PortaImagem = ({link, descricao, setLink, id, setConfirmDialogVisible, setIdImovelAtual, fav, favoritar, imovelId})=>{
+const PortaImagem = ({link, descricao, setLink, id, setConfirmDialogVisible, setIdImovelAtual, fav, favoritar, imovelId, tipo})=>{
   
     return(
         <View style={styles.retangulo}>          
@@ -15,16 +15,22 @@ const PortaImagem = ({link, descricao, setLink, id, setConfirmDialogVisible, set
               <Pressable onPress={()=>setLink(link) } >
                 <Maximize />
               </Pressable>
+              {
+                tipo == "PJ" || tipo=="PF"?
               <Pressable onPress={()=>{setIdImovelAtual(id), setConfirmDialogVisible(true)}}>
                 <Excluir />
-              </Pressable>
+              </Pressable>:
+              null}
             </View>
           </View>
           <View style={styles.textinicon}>
             <Text style={styles.textdescrition}> {descricao} </Text>
-            <Pressable onPress={()=>{favoritar(id, imovelId)} }>
+           {
+           tipo == "PJ" || tipo=="PF"? 
+           <Pressable onPress={()=>{favoritar(id, imovelId)} }>
                 <Image source={fav? favAtivo : favDesativo} style={styles.favorito} />
-            </Pressable> 
+            </Pressable> :
+            null}
             
           </View>
         </View>

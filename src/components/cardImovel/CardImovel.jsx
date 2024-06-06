@@ -21,7 +21,6 @@ const cardImovel = ({ imovel }) => {
     try{
         let valor = imovel.codigo;      
         const response = await ApiService.Get(`/imoveis/PegaImagemFav/${valor}`);
-        console.log("data: "+response.data)
         setImg(response.data);
       }
       catch(erro){

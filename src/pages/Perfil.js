@@ -139,7 +139,42 @@ const Perfil = () => {
           source={require('../images/fundos/back9.png')}
           style={styles.imagemFundo}
         >
-  
+          <View style={styles.topo}>
+            <TouchableOpacity onPress={() => navigation.goBack()} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
+            <View style={styles.portaModal}>
+              <ModalTelaPrincipal />
+            </View>
+          </View>
+            <View style={styles.portaImg}>
+                <Image source={foto} style={styles.foto}/>
+            </View>
+
+            <View style={styles.portaDados}>
+              <Text style={styles.titleName}>{dados.nome_completo}</Text>
+              <View style={styles.portaEdit}><Image style={styles.edit} source={edit}/></View>
+                
+                <View style={styles.duplinha}>
+                  <Text style={styles.tipo} >CPF: </Text>
+                  <Text style={styles.dado}>{dados.CPF}</Text>
+                </View>      
+
+                <View style={styles.duplinha}>
+                  <Text style={styles.tipo}>CRECI: </Text>
+                  <Text style={styles.dado}>{dados.CRECI}</Text>
+                </View>
+
+                <View style={styles.duplinha}>
+                  <Text style={styles.tipo} >Email:</Text>
+                  <Text style={styles.dado}>{dados.Email}</Text>
+                </View>
+
+                <View style={styles.duplinha}>
+                  <Text style={styles.tipo} >Telefone:</Text>
+                  <Text style={styles.dado}>{dados.Telefone}</Text>
+                </View>
+
+
+              </View>
         </ImageBackground>
       </View>
     );
@@ -177,7 +212,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     flexDirection: 'column'
   },
   menu: {
@@ -185,7 +220,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: 'center',
     width: '100%',
-    height: '25%'
+    height: '20%'
   },
   portaImg:{
     width: '100%',
@@ -193,7 +228,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '5%'
+    marginTop: '10%'
   },
   foto: {
     width: '15vh',
@@ -206,14 +241,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   portaDados:{
-    width: '75%',
-    height: '65%',
+    width: '75%',    
     display: 'flex',
     justifyContent: 'space-around',
     backgroundColor: 'rgba(200, 200, 200, 1)',
     borderRadius: '10%',
     padding: '3vh',
     shadowColor: 'rgb(150,150,150)',
+    marginTop: '10%',
     shadowOffset: {
       width: 2,
       height: 2,
@@ -222,7 +257,7 @@ const styles = StyleSheet.create({
   },
   duplinha:{
     width: '100%',
-    marginBottom: '2vh',
+    marginTop: '2vh',
   },
   tipo:{
     color: 'rgba(153, 158, 169, 1)',
@@ -246,7 +281,7 @@ const styles = StyleSheet.create({
 },
 topo: {
     width: '100%',
-    height: '5vh',
+    height: '3vh',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

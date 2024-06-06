@@ -145,12 +145,14 @@ const styles = StyleSheet.create({
   irPerfil:{
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   dados: {
     width: '65%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     paddingLeft: '2vh'
   },
   nome: {

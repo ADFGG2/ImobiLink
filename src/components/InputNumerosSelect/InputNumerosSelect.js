@@ -11,7 +11,6 @@ const InputNumerosSelect = ({ options, onSelect, defaultValue, placeHold, numero
         setSelectedOption(option);
         setModalVisible(false);
         onSelect(option);
-        console.log(option);
     };
     
 

@@ -11,70 +11,78 @@ import ModalTelaPrincipal from '../../components/modalTelaPrincipal/ModalTelaPri
 import BarraDePesquisa from '../../components/Pesquisa/BarraDePesquisa';
 
 const AcessoAlugueis = () => {
-    const navigation = useNavigation();
-    const [imoveis, setImoveis] = useState([]);
-    const [pesquisa, setPesquisa] = useState("");
-    async function verificarLogin() {
+  const navigation = useNavigation();
+  const [imoveis, setImoveis] = useState([]);
+  const [imoveisShow, setImoveisShow] = useState(imoveis)
+  const [pesquisa, setPesquisa] = useState("");
+  async function verificarLogin() {
 
-      const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
-    
-      if (!usuarioEstaLogado) {
-        navigation.navigate("LoginECadastro.js");       
-      }
-      else{
-        buscarImoveis();
-      }
+    const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
+
+    if (!usuarioEstaLogado) {
+      navigation.navigate("LoginECadastro.js");
     }
+    else {
+      buscarImoveis();
+    }
+  }
 
-    useEffect(()=>{verificarLogin()}, [])
+  useEffect(() => { verificarLogin() }, [])
 
 
   async function buscarImoveis() {
     console.log("cheguei aqui")
-    try{
-      
+    try {
+
       const response = await ApiService.Get('/Imoveis/ListarImoveisAlugaveis');
       console.log(response)
       setImoveis(response.data);
+      setImoveisShow(response.data);
+      console.log(imoveisShow);
     }
-    catch(erro){
+    catch (erro) {
       console.log(erro)
       ToastService.Error("Erro ao buscar Imóveis");
     }
   }
 
-  
+
 
   return (
     <View>
- <ImageBackground
-      source={require('../../images/fundos/Ondas.png')}
-      style={styles.imagemFundo}
-    >
-      <View style={styles.topo}>
-        <TouchableOpacity onPress={() => navigation.navigate("TelaPrincipal1")} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity> 
-        <View style={styles.portaModal}>
-                <ModalTelaPrincipal />
+      <ImageBackground
+        source={require('../../images/fundos/Ondas.png')}
+        style={styles.imagemFundo}
+      >
+        <View style={styles.topo}>
+          <TouchableOpacity onPress={() => navigation.navigate("TelaPrincipal1")} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
+          <View style={styles.portaModal}>
+            <ModalTelaPrincipal />
+          </View>
         </View>
-      </View>
-      <Text  style={styles.title}>Imoveis Alugáveis</Text>
-      
-    </ImageBackground>
+        <Text style={styles.title}>Imoveis Alugáveis</Text>
 
-    <View style={styles.portaPesquisa}>
-          <BarraDePesquisa pesquisa={pesquisa} setPesquisa={setPesquisa} key={1} />
+      </ImageBackground>
+
+      <View style={styles.portaPesquisa}>
+        <BarraDePesquisa key={1} setImoveisShow={setImoveisShow} imoveisShow={imoveisShow} imoveis={imoveis} />
       </View>
-      
-    <View style={styles.portaCards}>
-    {imoveis.map(
-        imovel => (
-          <CardImovel key={imovel.Codigo} imovel={imovel}/>
+
+      <View style={styles.portaCards}>
+        {imoveisShow ? imoveisShow.map(
+          (imovel, key) => (
+            <CardImovel key={key} imovel={imovel} />
+          )
         )
-      )}
+          :
+          imoveis.map((imovel, key) => (
+            <CardImovel key={key} imovel={imovel} />
+          ))
+        }
+      </View>
+
     </View>
-     
-    </View>
-  );   
+  );
 }
 
 export default AcessoAlugueis;
@@ -86,7 +94,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: 'center'
   },
-  title:{
+  title: {
     fontSize: '3em',
     fontWeight: 'bold',
     color: 'white',
@@ -94,15 +102,15 @@ const styles = StyleSheet.create({
     marginBottom: '15%',
     textAlign: 'center'
   },
-  portaCards:{
+  portaCards: {
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
-  topo:{
+  topo: {
     width: '100%',
-    height:'5vh',
+    height: '5vh',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -111,14 +119,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 25
   },
-  return:{  
+  return: {
     textAlign: 'left',
     fontWeight: 'bold',
     fontSize: '2em',
     paddingTop: '1vh',
     color: 'rgb(255,255,255)'
   },
-  portaPesquisa:{
+  portaPesquisa: {
     width: "100%",
     height: '2em',
     display: 'flex',

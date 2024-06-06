@@ -9,6 +9,7 @@ import { ScrollView } from 'react-native-web';
 import ApiService from '../Services/ApiService.js';
 import Certeza from '../components/certezaSair/Certeza.js';
 import ToastService from '../Services/ToastService.js';
+import AuthService from '../Services/AuthService.js';
 
 const EditarImovel = () => {
   const navigation = useNavigation();
@@ -19,11 +20,26 @@ const EditarImovel = () => {
   const [link, setLink] = useState("");  
   const [imagens, setImagens] = useState([]);
   const [fav, setFav] = useState("");
+  const [dados, setDados] = useState("");
   const route = useRoute();
   const { imovel } = route.params;
 
   useEffect(() => { buscarImagens() }, [])
+  useEffect(() => { VerificarLogin() }, [])
 
+  async function VerificarLogin() {
+
+    const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
+
+    if (usuarioEstaLogado) {
+      const dadosUser = await AuthService.PegarDadosLogados();
+      setDados(dadosUser);
+    }
+    else {
+      console.log("passei aqui1")
+      await navigation.navigate("LoginECadastro.js");
+    }
+  }
   const handleMaximizeClick = () => {
     setModalIsOpen(true);
   };
@@ -33,7 +49,6 @@ const EditarImovel = () => {
       let valor = imovel.codigo;      
       const response = await ApiService.Get(`/imoveis/ListarImagens/${valor}`);
       setImagens(response.data);
-      console.log(response.data[0].urlImage);
     }
     catch(erro){
       console.log(erro);
@@ -65,7 +80,7 @@ const EditarImovel = () => {
       console.log(erro)
     }
   }
-  async function sair(){
+  function sair(){
     try{
     if(imagens.length >=5) {
       navigation.goBack()
@@ -94,7 +109,7 @@ const EditarImovel = () => {
             funcao={()=>{ExcluirImagem(id)}}
         />
       <View style={styles.topo}>
-        <Pressable onPress={() => sair} >
+        <Pressable onPress={sair} >
           <Text style={styles.return}> {`<`} </Text>
         </Pressable>
         <View style={styles.portaModal}>
@@ -107,7 +122,7 @@ const EditarImovel = () => {
         <View style={styles.linha}></View>
       </View> 
       
-
+      
       <ModelImage 
         isVisible={modalIsOpen} 
         adiciona={adiciona} 
@@ -121,21 +136,26 @@ const EditarImovel = () => {
 
       <ScrollView contentContainerStyle={styles.area}>
 
-      <View style={styles.retanguloAdd}>
-          <View style={styles.addImageContainer}>
-            <Pressable onPress={() => { setAdiciona(true); setModalIsOpen(true); Ver() }}>
-              <Image 
-                style={styles.imageAdd}
-                source={Mais}
-              />
-              <Text style={styles.textadddescrition}> Adicionar img </Text>
-            </Pressable>
+        {
+          dados.Tipo == "PJ" || dados.Tipo == "PF"? 
+          <View style={styles.retanguloAdd}>
+            <View style={styles.addImageContainer}>
+              <Pressable onPress={() => { setAdiciona(true); setModalIsOpen(true); Ver() }}>
+                <Image 
+                  style={styles.imageAdd}
+                  source={Mais}
+                />
+                <Text style={styles.textadddescrition}> Adicionar img </Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
+          : null
+        }
 
         {imagens.map((imagem, key) => (
           <Pressable key={key}  onPress={async()=>{setAdiciona(false), await setModalIsOpen(true), setLink({uri:imagem.urlImage})}}>
             <PortaImagem 
+            tipo={dados.Tipo}
             link={{uri:imagem.urlImage}} 
             descricao={imagem.descricao} 
             setLink={setLink} 
