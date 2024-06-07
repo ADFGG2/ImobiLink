@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
-import { ImageBackground, TextInput, TouchableOpacity } from 'react-native-web';
+import { ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import ToastService from '../../Services/ToastService';
 import ApiService from '../../Services/ApiService';

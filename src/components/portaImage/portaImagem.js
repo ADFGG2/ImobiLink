@@ -1,31 +1,25 @@
-import { StyleSheet, View, Image, Text, Pressable  } from "react-native-web"
+import { StyleSheet, View, Image, TouchableOpacity, Text  } from "react-native"
 import Maximize from "../../images/icons/Maximize"
 import Excluir from "../../images/icons/Excluir"
-import favAtivo from "../../images/icons/favAtivo.png"
-import favDesativo from "../../images/icons/favDesativo.png"
 import { useState } from "react";
 
-const PortaImagem = ({link, descricao, setLink, id, setConfirmDialogVisible, setIdImovelAtual, fav, favoritar, imovelId})=>{
-  
+const PortaImagem = ({link, descricao, setLink, idImage, ExcluirImagem})=>{
+    
     return(
         <View style={styles.retangulo}>          
           <Image source={link} style={styles.imageimovel} />
           <View style={styles.bnt_area}>
             <View style={styles.bnt_max_exclud}>
-              <Pressable onPress={()=>setLink(link) } >
+              <TouchableOpacity onClick={()=>setLink(link) } >
                 <Maximize />
-              </Pressable>
-              <Pressable onPress={()=>{setIdImovelAtual(id), setConfirmDialogVisible(true)}}>
+              </TouchableOpacity>
+              <TouchableOpacity onClick={()=>ExcluirImagem(idImage)}>
                 <Excluir />
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.textinicon}>
             <Text style={styles.textdescrition}> {descricao} </Text>
-            <Pressable onPress={()=>{favoritar(id, imovelId)} }>
-                <Image source={fav? favAtivo : favDesativo} style={styles.favorito} />
-            </Pressable> 
-            
           </View>
         </View>
     );
@@ -36,7 +30,7 @@ export default PortaImagem;
     const styles = StyleSheet.create({
         retangulo: {
             width: 175,
-            height: 140,
+            height: 136,
             alignItems: 'center',
             backgroundColor: "#BEBEBE",
             marginBottom: '1.5vh',
@@ -85,8 +79,4 @@ export default PortaImagem;
             fontStyle: 'italic'
         
         },
-        favorito:{
-          width: '1em',
-          height: '1em'
-        }
     })

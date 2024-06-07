@@ -13,6 +13,7 @@ const PhoneInput = ({ telefonePai, setTelefonePai, tamanhoCompleto }) => {
       value={telefone}
       style={tamanhoCompleto ? styles.inputCompleto : styles.input}
       placeholder='Telefone'
+      placeholderTextColor = "rgba(0, 0, 0, 0.5)"
       onChangeText={(masked, unmasked) => {
         setTelefone(masked); // you can use the unmasked value as well
         setTelefonePai(unmasked);
@@ -30,18 +31,18 @@ const styles = StyleSheet.create({
     height: '5vh',
     borderWidth: '1px',
     borderRadius: '2vw',
-    borderColor: '#707070',
+    borderColor: '#9FA0A1',
     padding: '1vh'
   }
   ,
   inputCompleto: {
-    width: '90%',
+    width: '90vw',
     height: '5vh',
     borderWidth: '1px',
     borderRadius: '2vw',
-    borderColor: '#707070',
-    padding: '1vh',
-    marginBottom: '1vh'
+    marginBottom: '1vh',
+    borderColor: '#9FA0A1',
+    padding: '1vh'
   }
 });
 

@@ -9,7 +9,23 @@ import AuthService from '../Services/AuthService';
 import { useEffect } from 'react';
 import ToastService from '../Services/ToastService';
 
+import ButtonVoltar from '../assets/Svg/Buttons/Bnt_Voltar';
+import LogoCompleto from '../assets/Svg/Logo/Logo_Full';
+import PessoaUser from '../assets/Svg/Diversos/User_pessoa';
+import SenhaUser from '../assets/Svg/Diversos/Unlock_senha';
+
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Você pode usar qualquer conjunto de ícones
+
+
+
 const Login = () => {
+
+
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+
+  const togglePasswordVisibility = () => {
+    setSecureTextEntry(!secureTextEntry);
+  };
 
   const navigation = useNavigation();
   const [user, setUser] = useState('');
@@ -25,21 +41,21 @@ const Login = () => {
 
     if (usuarioEstaLogado) {
       const dadosUsuarioLogado = await AuthService.PegarDadosLogados();
-    
+
       switch (dadosUsuarioLogado.Tipo) {
         case "Corretor":
-            
+
 
           navigation.navigate("TelaPrincipal1")
 
           break;
 
         case "Imobiliaria":
-          
+
           navigation.navigate("TelaPrincipal1")
 
           break;
-        
+
         case "Pj":
 
           navigation.navigate("TelaPrincipal2");
@@ -51,9 +67,9 @@ const Login = () => {
           navigation.navigate("TelaPrincipal2");
 
           break;
-      
+
         default:
-          
+
 
 
           break;
@@ -80,7 +96,7 @@ const Login = () => {
 
     }
     catch (error) {
-      console.log("erro: "+error)
+      console.log("erro: " + error)
       if (error.response?.status === 401) {
         ToastService.Error("Erro ao realizar login", "E-mail e/ou senha inválidos!");
         console.log("Erro ao realizar login", "E-mail e/ou senha inválidos!")
@@ -97,16 +113,27 @@ const Login = () => {
     <View style={styles.container}>
 
       <ImageBackground
-        source={require('../images/fundos/back2.png')}
-        style={styles.imagemFundo}
+        source={require('../assets/Images/BackGround/Back_Login.png')}
+        style={styles.backgraud_image}
       >
-        <TouchableOpacity onPress={() => navigation.navigate('LoginECadastro')} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('LoginECadastro')} >
+          <ButtonVoltar />
+        </TouchableOpacity>
+
+        <View style={styles.space_logo} >
+          <LogoCompleto />
+        </View>
+
       </ImageBackground>
+
+
+
       <View style={styles.menu}>
 
         <View style={styles.view}>
 
-          <Image style={styles.img} source={require("../images/icons/pessoinha.png")} />
+          <PessoaUser />
 
           <TextInput
             style={styles.Input}
@@ -118,19 +145,27 @@ const Login = () => {
 
         <View style={styles.view}>
 
-          <Image style={styles.img} source={require("../images/icons/cadeado.png")} />
+          <SenhaUser />
 
           <TextInput
             style={styles.Input}
             value={senha}
-            onChangeText={(text) => { setSenha(text) }}
-            secureTextEntry={true}
-            placeholder="senha"
+            onChangeText={(text) => setSenha(text)}
+            secureTextEntry={secureTextEntry}
+            placeholder="Senha"
           />
+
+          <TouchableOpacity onPress={togglePasswordVisibility} style={styles.icon_eye}>
+            <Icon name={secureTextEntry ? "visibility-off" : "visibility"} size={24} color="grey" />
+          </TouchableOpacity>
+        
         </View>
 
         <Botao labelbutton="Logar" aoclicar={RealizarLogin} />
-        <Text>Esqueci minha senha</Text>
+
+        <TouchableOpacity style={{ opacity: 0.6, marginTop: -3, fontFamily: 'Arial', fontSize: 12, }}>
+          <Text>Esqueci minha senha</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -147,8 +182,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  imagemFundo: {
+  backgraud_image: {
     flex: 1,
+    marginBottom: 302,
     height: "70vh",
     width: "100%",
   },
@@ -157,40 +193,39 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: 'center',
     width: '100%',
-    height: '30%'
+    height: '30%',
+    marginBottom: 25
   },
   view: {
     backgroundColor: '#D9D9D9',
-    width: '70vw',
-    height: '6vh',
-    borderRadius: '1vh',
+    opacity: 0.5,
+    width: 272,
+    height: 48,
+    borderRadius: 7,
     justifyContent: "space-around",
     alignItems: "center",
     flexDirection: 'row',
-    paddingLeft: '1vw'
+
   },
   Input: {
     width: '55vw',
     height: '5vh',
-    fontSize: '1.4em',
-    fontWeight: 'bold',
+    fontSize: 19,
+    fontFamily: 'Courier New',
+    fontWeight: '800',
     borderLeftWidth: 1,
-    paddingLeft: "3vw",
-    borderColor: "#999EA9",
-    borderTopRightRadius: '1vh',
-    borderBottomRightRadius: '1vh',
-    color: '#999EA9'
+    paddingLeft: 10,
+    paddingRight: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: "#000",
+    color: '#000',
+    opacity: 0.5,
+
   },
-  img: {
-    width: '5.3vw',
-    height: '3vh'
-  },
-  return: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    fontSize: '2em',
-    paddingTop: '1vh',
-    color: 'rgb(255,255,255)'
+  icon_eye: {
+    position:'relative',
+    left: -30
   }
 
 });

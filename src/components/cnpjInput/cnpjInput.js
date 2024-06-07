@@ -16,6 +16,7 @@ const CnpjInput = ({cnpjPai, setCnpjPai }) => {
     value={cnpj}
     style={styles.inputs2}
     placeholder='CNPJ'
+    placeholderTextColor = "rgba(0, 0, 0, 0.5)"
     onChangeText={(masked, unmasked) => {
       setCnpj(masked); // you can use the unmasked value as well
       setCnpjPai(unmasked);
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
         height: '5vh',
         borderWidth: '1px',
         borderRadius: '2vw',
-        borderColor: '#707070',
+        borderColor: '#9FA0A1',
         padding: '1vh'
     }
 

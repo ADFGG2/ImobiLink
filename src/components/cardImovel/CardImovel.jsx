@@ -1,39 +1,20 @@
+
 import { View, Text, Touchable, StyleSheet, Image, Pressable } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { TouchableOpacity } from 'react-native-web'
+import React from 'react'
+import { TouchableOpacity } from 'react-native'
 import imgDisponivel from '../../images/icons/cardImovel/ativado.jpg';
 import imgIndisponivel from '../../images/icons/cardImovel/desativado.jpg';
 import { useNavigation } from '@react-navigation/native';
-import ToastService from '../../Services/ToastService';
-import ApiService from '../../Services/ApiService';
 
 const cardImovel = ({ imovel }) => {
     
   const navigation = useNavigation();
-  const [img, setImg] = useState(""); 
 
-  useEffect(() => {
-    pegaImagem();
-  }, []);
-
-  async function pegaImagem(){
-
-    try{
-        let valor = imovel.codigo;      
-        const response = await ApiService.Get(`/imoveis/PegaImagemFav/${valor}`);
-        console.log("data: "+response.data)
-        setImg(response.data);
-      }
-      catch(erro){
-        console.log(erro);
-        ToastService.Error("Erro ao buscar imagens");
-      }   
-  }
     return (
         <View style={styles.card} key={imovel?.Codigo}>
             <View style={styles.parte1}>
                 <Image
-                    source={{uri: img}}
+                    source={require('../../images/ImagensImoveis/imovelexemplo.png')}
                     style={styles.imagemImovel}
                 />
                 <View style={styles.detalhesPart1}>

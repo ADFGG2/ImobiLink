@@ -13,6 +13,7 @@ const CpfInput = ({cpfPai, setCpfPai }) => {
     value={cpf}
     style={styles.inputs2}
     placeholder='CPF'
+    placeholderTextColor="rgba(0, 0, 0, 0.5)"
     onChangeText={(masked, unmasked) => {
       setCpf(masked); // you can use the unmasked value as well
       setCpfPai(unmasked);
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         height: '5vh',
         borderWidth: '1px',
         borderRadius: '2vw',
-        borderColor: '#707070',
+        borderColor: '#9FA0A1',
         padding: '1vh'
     }
 

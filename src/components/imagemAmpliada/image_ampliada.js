@@ -29,7 +29,7 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
       console.log("faltam dados")
       return;
     }
-      setIdImovel(imovel.idImovel)
+      setIdImovel(imovel)
       const body = {
         idImovel,
         descricao,
@@ -38,9 +38,7 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
       await ApiService.Post("/Imoveis/CadastrarImagem", body);
       ToastService.Success("Usuário cadastrado com sucesso!");
       setVisible(false);
-      setURLImage("");
-      setDescricao("");
-      buscarImagens();
+      buscarImagens()
   }
     catch(erro){
       ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
