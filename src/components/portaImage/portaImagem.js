@@ -1,8 +1,6 @@
-import { StyleSheet, View, Image, Text, Pressable  } from "react-native-web"
+import { StyleSheet, View, Image, TouchableOpacity, Text  } from "react-native"
 import Maximize from "../../images/icons/Maximize"
 import Excluir from "../../images/icons/Excluir"
-import favAtivo from "../../images/icons/favAtivo.png"
-import favDesativo from "../../images/icons/favDesativo.png"
 import { useState } from "react";
 
 const PortaImagem = ({link, descricao, setLink, id, setConfirmDialogVisible, setIdImovelAtual, fav, favoritar, imovelId, tipo})=>{
@@ -12,7 +10,7 @@ const PortaImagem = ({link, descricao, setLink, id, setConfirmDialogVisible, set
           <Image source={link} style={styles.imageimovel} />
           <View style={styles.bnt_area}>
             <View style={styles.bnt_max_exclud}>
-              <Pressable onPress={()=>setLink(link) } >
+              <TouchableOpacity onClick={()=>setLink(link) } >
                 <Maximize />
               </Pressable>
               {
@@ -42,7 +40,7 @@ export default PortaImagem;
     const styles = StyleSheet.create({
         retangulo: {
             width: 175,
-            height: 140,
+            height: 136,
             alignItems: 'center',
             backgroundColor: "#BEBEBE",
             marginBottom: '1.5vh',
@@ -91,8 +89,4 @@ export default PortaImagem;
             fontStyle: 'italic'
         
         },
-        favorito:{
-          width: '1em',
-          height: '1em'
-        }
     })

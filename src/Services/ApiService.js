@@ -22,12 +22,7 @@ const ApiService = {
         const response = await axios.get(baseUrl + endpoint, headers );
         return response;
     },
-    async Delete(endpoint) {
-        const headers = await createHeader();
-        
-        const response = await axios.delete(baseUrl + endpoint, headers );
-        return response;
-    },
+
     async Post(endpoint, body) {
         const headers = await createHeader();
 

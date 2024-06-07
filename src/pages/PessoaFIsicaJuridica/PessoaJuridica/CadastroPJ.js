@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
-import { ImageBackground, TextInput, TouchableOpacity } from 'react-native-web';
+import { ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CepInput from '../../../components/cepInput/cepInput';
 import CheckBox from '../../../components/checkbox/checkbox';
@@ -10,6 +10,9 @@ import CnpjInput from '../../../components/cnpjInput/cnpjInput';
 import ToastService from '../../../Services/ToastService';
 import ApiService from '../../../Services/ApiService';
 import AuthService from '../../../Services/AuthService';
+
+import ButtonVoltar from '../../../assets/Svg/Buttons/Bnt_Voltar';
+import LogoBackground from '../../../assets/Svg/Logo/Logobackground';
 
 const CadastroPessoaJuridica = () => {
   const navigation = useNavigation();
@@ -25,10 +28,10 @@ const CadastroPessoaJuridica = () => {
   const [Bairro, setBairro] = useState("");
   const options2 = [{ text: 'Concordo com os termos e condições de uso', id: 1 }];
   const [Observacoes, setObservacoes] = useState([]);
-  
 
-  
-  
+
+
+
   function HandleCheckBox(id) {
     const index = Observacoes.indexOf(id);
 
@@ -44,14 +47,15 @@ const CadastroPessoaJuridica = () => {
   }
 
   async function RealizarCadastro() {
-    if(!NomeEmpresa || !CNPJ || !InscricaoEstadual || !Email || !Telefone || !Senha || !Cidade || !CEP || !Bairro ){
+    if (!NomeEmpresa || !CNPJ || !InscricaoEstadual || !Email || !Telefone || !Senha || !Cidade || !CEP || !Bairro) {
       ToastService.Error("Erro ao realizar cadastro", "preencha todos os campos");
       console.log("erro");
       return;
     }
-    if(Senha != confirmasenha){       
+    if (Senha != confirmasenha) {
       ToastService.Error("Erro ao realizar cadastro", "confirmar senha esta diferente");
-      return;}
+      return;
+    }
 
     try {
       const body = {
@@ -71,11 +75,11 @@ const CadastroPessoaJuridica = () => {
 
       await AuthService.SalvarToken(token);
       navigation.navigate("TelaPrincipal2");
-      
+
 
     }
     catch (error) {
-      console.log(error+ "esse é o erro")
+      console.log(error + "esse é o erro")
       if (error.response?.status === 401) {
         ToastService.Error("Erro ao realizar cadastro", "Dados invalidos!");
         return;
@@ -88,89 +92,102 @@ const CadastroPessoaJuridica = () => {
 
   return (
     <View style={styles.container}>
+
       <ImageBackground
-        source={require("../../../images/fundos/back6.png")}
+        source={require('../../../assets/Images/BackGround/Back_Cadastrar.png')}
         style={styles.back}
       >
-        <View style={styles.duplinha}>
-          <TouchableOpacity onPress={() => navigation.navigate('SelecaoCadastro')} style={styles.Esquerda} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
-          <View style={styles.Esquerda}></View>
-        </View>
+
+        <LogoBackground />
+
+        <TouchableOpacity
+          style={{ marginTop: 235, }}
+          onPress={() => navigation.navigate('SelecaoCadastro')} >
+          <ButtonVoltar />
+        </TouchableOpacity>
 
         <Text style={styles.titulo}>CADASTRO</Text>
-        <View style={styles.portaInputs}>
+      </ImageBackground >
 
-          <TextInput
-            style={styles.inputs}
-            value={NomeEmpresa}
-            onChangeText={(texto) => setNome(texto)}
-            placeholder="Nome Completo" />
+      <View style={styles.portaInputs}>
 
-          <View style={styles.duplinha}>
-
-            <CnpjInput
-              cnpjPaiPai={CNPJ}
-              setCnpjPai={setCNPJ} />
+        <TextInput
+          style={styles.inputs}
+          value={NomeEmpresa}
+          onChangeText={(texto) => setNome(texto)}
+          placeholder="Nome Completo"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)"
+        />
 
 
-            <TextInput
-              style={styles.inputs2}
-              value={InscricaoEstadual}
-              onChangeText={(texto) => setInscricaoEstadual(texto)}
-              placeholder="Inscricao Estadual"
-              maxLength={6} />
+        <View style={styles.duplinha}>
 
-          </View>
+          <CnpjInput
+            cnpjPaiPai={CNPJ}
+            setCnpjPai={setCNPJ} />
 
 
           <TextInput
-            style={styles.inputs}
-            value={Email}
-            onChangeText={(texto) => setEmail(texto)}
-            placeholder="E-mail" />
+            style={styles.inputs2}
+            value={InscricaoEstadual}
+            onChangeText={(texto) => setInscricaoEstadual(texto)}
+            placeholder="Inscricao Estadual"
+            placeholderTextColor="rgba(0, 0, 0, 0.5)"
+            maxLength={6} />
+
+        </View>
+
+
+        <TextInput
+          style={styles.inputs}
+          value={Email}
+          onChangeText={(texto) => setEmail(texto)}
+          placeholder="E-mail"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
 
 
-          <PhoneInput
-            telefonePai={Telefone}
-            setTelefonePai={setTelefone}
-            tamanhoCompleto={true}
-          />
+        <PhoneInput
+          telefonePai={Telefone}
+          setTelefonePai={setTelefone}
+          tamanhoCompleto={true}
+        />
+
+        <TextInput
+          style={styles.inputs}
+          value={Senha}
+          onChangeText={(texto) => setSenha(texto)}
+          placeholder="Senha"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
+
+        <TextInput
+          style={styles.inputs}
+          value={confirmasenha}
+          onChangeText={(texto) => setconfirmasenha(texto)}
+          placeholder="Repita a senha"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
+
+        <TextInput
+          style={styles.inputs}
+          value={Cidade}
+          onChangeText={(texto) => setCidade(texto)}
+          placeholder="Cidade"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
+
+        <View style={styles.duplinha}>
+
+          <CepInput
+            cepPai={CEP}
+            setCEPPai={setCEP}
+            setBairro={setBairro}
+            setCidade={setCidade} />
 
           <TextInput
-            style={styles.inputs}
-            value={Senha}
-            onChangeText={(texto) => setSenha(texto)}
-            placeholder="Senha" />
-
-          <TextInput
-            style={styles.inputs}
-            value={confirmasenha}
-            onChangeText={(texto) => setconfirmasenha(texto)}
-            placeholder="Repita a senha" />
-
-          <TextInput
-            style={styles.inputs}
-            value={Cidade}
-            onChangeText={(texto) => setCidade(texto)}
-            placeholder="Cidade" />
-
-          <View style={styles.duplinha}>
-
-            <CepInput
-              cepPai={CEP}
-              setCEPPai={setCEP}
-              setBairro={setBairro}
-              setCidade={setCidade} />
-
-            <TextInput
-              style={styles.inputs2}
-              value={Bairro}
-              onChangeText={(texto) => setBairro(texto)}
-              placeholder="Bairro" />
-
-          </View>
-
+            style={styles.inputs2}
+            value={Bairro}
+            onChangeText={(texto) => setBairro(texto)}
+            placeholder="Bairro"
+            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
         </View>
 
@@ -182,8 +199,7 @@ const CadastroPessoaJuridica = () => {
           <Text style={styles.textobtn}>Cadastrar</Text>
         </Pressable>
 
-
-      </ImageBackground >
+      </View>
     </View >
   );
 };
@@ -204,12 +220,9 @@ const styles = StyleSheet.create({
   },
   back: {
     flex: 1,
-    resizeMode: "cover",
-    height: "100%",
+    marginTop: -250,
+    height: "70vh",
     width: "100%",
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   return: {
     textAlign: 'left',
@@ -231,13 +244,10 @@ const styles = StyleSheet.create({
     marginTop: '5vh'
   },
   portaInputs: {
-    width: '100%',
-    height: '50%',
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '18vh'
+    marginBottom: 24
   },
   inputs: {
     width: '90vw',
@@ -245,7 +255,7 @@ const styles = StyleSheet.create({
     borderWidth: '1px',
     borderRadius: '2vw',
     marginBottom: '1vh',
-    borderColor: '#707070',
+    borderColor: '#9FA0A1',
     padding: '1vh'
   },
   duplinha: {
@@ -254,29 +264,37 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: '1vh'
+    marginBottom: '1vh',
+    borderColor: '#9FA0A1',
   },
   inputs2: {
     width: '44vw',
     height: '5vh',
     borderWidth: '1px',
     borderRadius: '2vw',
-    borderColor: '#707070',
+    borderColor: '#9FA0A1',
     padding: '1vh'
   },
   botao: {
-    width: '43vw',
-    height: '6vh',
-    borderRadius: '3vh',
     backgroundColor: '#999EA9',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    width: 230,
+    height: 57,
+    marginTop: -10,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowOffset: {
+      width: 3, // deslocamento horizontal da sombra
+      height: 3, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.2, // opacidade da sombra
+    shadowRadius: 4, // raio da sombra
+    elevation: 1, // elevação da sombra (apenas 
   },
   textobtn: {
-    fontSize: '1.6em',
-    fontWeight: '500',
-    color: '#FFFFFF'
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#FEFEFE'
   }
 
 });

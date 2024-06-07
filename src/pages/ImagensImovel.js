@@ -5,7 +5,7 @@ import PortaImagem from '../components/portaImage/portaImagem.js';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import ModalTelaPrincipal from '../components/modalTelaPrincipal/ModalTelaPrincipal.js';
 import Mais from '../images/icons/Mais.svg';
-import { ScrollView } from 'react-native-web';
+import { ScrollView } from 'react-native';
 import ApiService from '../Services/ApiService.js';
 import Certeza from '../components/certezaSair/Certeza.js';
 import ToastService from '../Services/ToastService.js';
@@ -13,9 +13,7 @@ import AuthService from '../Services/AuthService.js';
 
 const EditarImovel = () => {
   const navigation = useNavigation();
-  const [modalIsOpen, setModalIsOpen] = useState(false);  
-  const [confirmDialogVisible, setConfirmDialogVisible] = useState(false);
-  const [id, setIdImovelAtual] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [adiciona, setAdiciona] = useState(false);
   const [link, setLink] = useState("");  
   const [imagens, setImagens] = useState([]);
@@ -23,6 +21,7 @@ const EditarImovel = () => {
   const [dados, setDados] = useState("");
   const route = useRoute();
   const { imovel } = route.params;
+
 
   useEffect(() => { buscarImagens() }, [])
   useEffect(() => { VerificarLogin() }, [])
@@ -46,7 +45,7 @@ const EditarImovel = () => {
 
   async function buscarImagens() {
     try{
-      let valor = imovel.codigo;      
+      let valor = imovel.codigo;
       const response = await ApiService.Get(`/imoveis/ListarImagens/${valor}`);
       setImagens(response.data);
     }
@@ -56,12 +55,11 @@ const EditarImovel = () => {
     }    
   }
 
-  async function ExcluirImagem(){
-    try{      
-     await ApiService.Delete(`/imoveis/ApagarImagem/${id}`);      
-     buscarImagens();     
-     setConfirmDialogVisible(false);
-     ToastService.Success("Imagem apagada com sucesso!");
+  async function ExcluirImagem(id){
+    try{
+      
+      const response = await ApiService.Post(`/imoveis/ApagarImagem`, {id});
+      
     }
     catch(erro){
       console.log(erro);
@@ -97,17 +95,9 @@ const EditarImovel = () => {
   }
   
 
+
   return (
     <View style={styles.container}>
-       <Certeza
-            status={confirmDialogVisible}
-            setStatus={setConfirmDialogVisible}
-            titulo="apagar imagem" 
-            descricao="deseja realmente apagar esta imagem?"
-            condicao1="sim"
-            condicao2="não"
-            funcao={()=>{ExcluirImagem(id)}}
-        />
       <View style={styles.topo}>
         <Pressable onPress={sair} >
           <Text style={styles.return}> {`<`} </Text>

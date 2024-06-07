@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, React } from 'react';
 import { ImageBackground, Pressable, StyleSheet, Text, View, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-web';
+import { TouchableOpacity } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
 
@@ -9,7 +9,7 @@ const slides =[
   {key:'1',
   title: 'O que você \nPrecisa',
   text: 'Melhor e mais completa plataforma \nde capitação para o seguimentos \nimobiliário ',
-  image: require('../images/fundos/back4.1.png')
+  
 },
 { key:'2',
   title: 'O Imobilink Ajuda Você',

@@ -108,18 +108,17 @@ export default BarraDePesquisa;
 
 const styles = StyleSheet.create({
     BarraDePesquisa: {
-        width: "75%",
-        height: "3em",
+        width: 265,
+        height: 40,
         borderRadius: '1.5em',
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
         backgroundColor: '#ECECEC',
-        borderWidth: 1,
         borderColor: '#B0B0B0',
         padding: '0.3em',
         boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+
     },
     lupa: {
         width: '1em',

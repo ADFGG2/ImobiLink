@@ -1,0 +1,38 @@
+<svg width="430" height="421" viewBox="0 0 430 421" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.2">
+<mask id="mask0_829_568" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-89" y="-238" width="641" height="659">
+<path d="M-89 252.491C-89 252.491 7.69785 390.089 112.591 390.089C217.484 390.089 273.208 338.287 356.794 338.287C440.381 338.287 479.715 420.845 551.829 420.845V-238H-89V252.491Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_829_568)">
+<path d="M547.786 -288.118L-141.817 -233.844L-84.9548 470.96L604.648 416.685L547.786 -288.118Z" fill="url(#paint0_linear_829_568)"/>
+</g>
+</g>
+<g opacity="0.5">
+<mask id="mask1_829_568" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-106" y="-278" width="642" height="659">
+<path d="M535.004 -278H-105.824V380.843H535.004V-278Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_829_568)">
+<mask id="mask2_829_568" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-106" y="-279" width="642" height="660">
+<path d="M535.004 212.489C535.004 212.489 438.307 350.087 333.414 350.087C228.521 350.087 172.797 298.286 89.2103 298.286C5.62383 298.286 -33.7104 380.843 -105.824 380.843V-278.002H535.004V212.489Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_829_568)">
+<path d="M535.005 -278.002H-105.824V380.843H535.005V-278.002Z" fill="url(#paint1_linear_829_568)"/>
+</g>
+</g>
+</g>
+<path d="M-111 190.831C-111 190.831 -19.7365 320.695 79.263 320.695C178.263 320.695 230.856 271.804 309.746 271.804C388.636 271.804 425.761 349.723 493.823 349.723V-272.102H-111V190.831Z" fill="black"/>
+<defs>
+<linearGradient id="paint0_linear_829_568" x1="-207.368" y1="760.05" x2="-207.368" y2="760.05" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A0A7B3"/>
+<stop offset="0.636" stop-color="#3A3D42"/>
+<stop offset="1" stop-color="#050506"/>
+</linearGradient>
+<linearGradient id="paint1_linear_829_568" x1="-283.975" y1="726.736" x2="-283.975" y2="726.736" gradientUnits="userSpaceOnUse">
+<stop stop-color="#454E61"/>
+<stop offset="0.176" stop-color="#404859"/>
+<stop offset="0.436" stop-color="#323846"/>
+<stop offset="0.744" stop-color="#1B1E26"/>
+<stop offset="1" stop-color="#050506"/>
+</linearGradient>
+</defs>
+</svg>

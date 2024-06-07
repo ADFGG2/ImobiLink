@@ -1,3 +1,4 @@
+
 import { View, Text, Touchable, StyleSheet, Image, Pressable } from 'react-native'
 import React from 'react'
 import Duvidas from '../../images/icons/telaInicio/duvidas.png';

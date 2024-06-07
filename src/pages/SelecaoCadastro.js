@@ -1,10 +1,12 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
-import { ImageBackground, TouchableOpacity } from 'react-native-web';
+import { ImageBackground, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import OpcaoCadastro from '../components/opcaoCadastro/OpcaoCadastro';
-
+import LogoCompleto from '../assets/Svg/Logo/Logo_Full';
+import ButtonVoltar from '../assets/Svg/Buttons/Bnt_Voltar';
 
 
 const SelecaoCadastro = () => {  
@@ -13,14 +15,26 @@ const SelecaoCadastro = () => {
 
   return(
     <View style={styles.container}>
+
+      
         <ImageBackground
-            source={require("../images/fundos/back3.png")}
-            style={styles.back}
+            source={require('../assets/Images/BackGround/Back_cadastro.png')}
+            style={styles.backgraud_image}
         > 
-            <TouchableOpacity onPress={() => navigation.navigate('LoginECadastro')} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
-            <View style={styles.espaco}></View>
-            <Text style={styles.titulo}> PERFIL DE ACESSO</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginECadastro')} >
+                 <ButtonVoltar />
+            </TouchableOpacity>
+
+            <View style={styles.espaco} >
+              <LogoCompleto/>
+            </View>
+            
+
+            
             <View style={styles.centraliza}>
+
+            <Text style={{  fontSize: '2.4em', fontWeight: 'bold',textAlign: 'center', color: '#999EA9', marginBottom: 10, marginTop: 110} }> PERFIL DE ACESSO</Text>
+
 
               <TouchableOpacity onPress={()=>{navigation.navigate("CadastroPessoaFisica")}}>
                 <OpcaoCadastro tipoUsuario={"Pessoa Fisica"}  />
@@ -36,10 +50,13 @@ const SelecaoCadastro = () => {
 
               <TouchableOpacity onPress={()=>{navigation.navigate("CadastroImobiliaria")}}>
                   <OpcaoCadastro tipoUsuario={"Imobiliaria"} />
-              </TouchableOpacity>
-             
+              </TouchableOpacity> 
+              
             </View>
+
+            
         </ImageBackground>
+        
     </View>
   ); 
 }
@@ -50,40 +67,25 @@ export default SelecaoCadastro;
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    height: '100%'
   },
   espaco:{
-    width: '100%',
-    height: '50%'
+    marginTop: 5
   },
-  back: {
-    flex:1,
-    resizeMode: "cover",
-    height:"100%",
-    width: "100%"
-  },
-  return:{  
-    textAlign: 'left',
-    fontWeight: 'bold',
-    fontSize: '2em',
-    paddingTop: '1vh',
-    color: 'white'
-  },
-  titulo:{
-    fontSize: '2.4em',
-    fontWeight: '50',
-    textAlign: 'center',
-    color: '#999EA9',
-    marginBottom: '5vh'
+  backgraud_image: {
+    flex: 1,
+    marginTop: -15,
+    height: "70vh",
+    width: "100%",
+
   },
   centraliza:{
     width: '100%',
     display:'flex',
+    marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center'
   }

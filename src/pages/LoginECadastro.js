@@ -1,11 +1,14 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { ImageBackground, TouchableOpacity } from 'react-native-web';
+import { ImageBackground, TouchableOpacity } from 'react-native';
 import Botao from '../components/Botao';
 import { useNavigation } from '@react-navigation/native';
-
 import AuthService from '../Services/AuthService';
 import { useEffect } from 'react';
+import LogoCompleto from '../assets/Svg/Logo/Logo_Full';
+
+
 
 const LoginECadastro = () => {
   const navigation = useNavigation();
@@ -21,58 +24,66 @@ const LoginECadastro = () => {
     if (usuarioEstaLogado) {
       try {
         const dadosUsuarioLogado = await AuthService.PegarDadosLogados();
-    
+
         switch (dadosUsuarioLogado.Tipo) {
           case "Corretor":
-              
-  
+
+
             navigation.navigate("TelaPrincipal1")
-  
+
             break;
-  
+
           case "Imobiliaria":
-            
+
             navigation.navigate("TelaPrincipal1")
-  
+
             break;
-          
+
           case "Pj":
-  
+
             navigation.navigate("TelaPrincipal2");
-  
+
             break;
-  
+
           case "PF":
-  
+
             navigation.navigate("TelaPrincipal2");
-  
+
             break;
-        
+
           default:
-  
+
             break;
         }
       } catch (error) {
-          console.log(error) 
+        console.log(error)
       }
-     
+
     }
   }
 
   return (
     <View style={styles.container}>
 
-      <ImageBackground
-        source={require('../images/fundos/back1.png')}
-        style={styles.imagemFundo}
-      >
-        <View style={styles.espaco} ></View>
+      
 
+      <ImageBackground
+        source={require('../assets/Images/BackGround/Back_Login_Cadastro.png')}
+        style={styles.backgraud_image}
+      >
+        <View style={styles.espaco} >
+        <LogoCompleto/>
+        </View>
+        
         <View style={styles.menu}>
           <Botao labelbutton="Login" aoclicar={() => navigation.navigate('Login')} />
+
           <Botao labelbutton="Cadastrar" aoclicar={() => navigation.navigate('SelecaoCadastro')} />
-          <TouchableOpacity onPress={() => navigation.navigate('Duvidas')}><Text>Precisa de ajuda?</Text></TouchableOpacity>
         </View>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Duvidas')}>
+            <Text style={{ opacity: 0.6,}}>Precisa de ajuda?</Text>
+          </TouchableOpacity>
 
       </ImageBackground>
     </View>
@@ -95,22 +106,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  imagemFundo: {
+  backgraud_image: {
     flex: 1,
     resizeMode: "cover",
-    height: "100%",
+    height: "70vh",
     width: "100%",
+    marginBottom:302,
+    alignItems:'center',
+    
   },
   espaco: {
-    height: '70%'
+    marginTop: 70,
+    
   },
   menu: {
+    
+    marginTop:200,
     display: 'flex',
     justifyContent: "space-around",
     alignItems: 'center',
     width: '100%',
-    height: '25%'
-
+    height: '30%',
+    margin:5
   }
 
 });

@@ -2,7 +2,7 @@ import react from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { View, Text, StyleSheet, Image, ScrollView, Pressable } from 'react-native';
 import Fundo from "../images/fundos/Fundo.png"
-import { ImageBackground, TouchableOpacity } from "react-native-web";
+import { ImageBackground, TouchableOpacity } from "react-native";
 import AuthService from "../Services/AuthService";
 import Cama from '../images/icons/CamaCinza.png';
 import Chuveiro from '../images/icons/ChuveiroCinza.png';
@@ -11,8 +11,9 @@ import Sofa from '../images/icons/SofaCinza.png';
 import { useState, useEffect } from "react";
 import ModalTelaPrincipal from "../components/modalTelaPrincipal/ModalTelaPrincipal";
 
-import image from '../images/icons/img.png'
-import edit from '../images/icons/editar.png'
+
+
+import edit from '../images/icons/editar.png';
 import imgDisponivel from '../images/icons/cardImovel/ativado.jpg';
 import imgIndisponivel from '../images/icons/cardImovel/desativado.jpg';
 

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
-import { ImageBackground, TouchableOpacity } from 'react-native-web';
+import { ImageBackground, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MenuTelaPrincipal from '../../components/menuTelaPrincipal/MenuTelaPrincipal';
 import ModalTelaPrincipal from '../../components/modalTelaPrincipal/ModalTelaPrincipal';

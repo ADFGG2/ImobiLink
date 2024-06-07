@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
-import { ImageBackground, TextInput, TouchableOpacity, View, Text } from 'react-native-web';
+import { ImageBackground, TextInput, TouchableOpacity, View, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import CardImovel from '../../components/cardImovel/CardImovel'

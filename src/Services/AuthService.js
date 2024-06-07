@@ -11,6 +11,9 @@ const AuthService = {
     },
     async PegarDadosLogados(){
         const token = await AsyncStorage.getItem("@jwt");
+
+        if(!token) return null;
+
         const userData = jwtDecode(token);
         return userData;
     },

@@ -1,6 +1,6 @@
 import { View, Text, Touchable, StyleSheet } from 'react-native'
 import React from 'react'
-import { TouchableOpacity } from 'react-native-web'
+import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -30,28 +30,43 @@ export default OpcaoCadastro;
 
 const styles = StyleSheet.create({
     botao:{
-        width:'90vw',
-        height: '5vh',
+        width: 309,
+        height: 49,
         backgroundColor: '#D9D9D9',
-        borderRadius: '2.5vh',
+        borderRadius: 49/2,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        marginBottom: '2vh'
+        marginBottom: '2vh',
+        shadowOffset: {
+            width: 3, // deslocamento horizontal da sombra
+            height: 3, // deslocamento vertical da sombra
+        },
+        shadowOpacity: 0.3, // opacidade da sombra
+        shadowRadius: 4, // raio da sombra
+        elevation: 1, // elevação da sombra (apenas Android)
     },
     portabolinha:{
         width:'10%',
         height:'100%',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     bolinha:{
-        width: '4.5vw',
-        height: '4.5vw',
-        borderRadius: '2.25vw', 
-        backgroundColor: '#999EA9'
+        width:40 ,
+        height:40,
+        borderRadius:40/2 , 
+        backgroundColor: '#999EA9',
+        marginLeft: 20,
+        shadowOffset: {
+            width: 2, // deslocamento horizontal da sombra
+            height: 2, // deslocamento vertical da sombra
+        },
+        shadowOpacity: 0.3, // opacidade da sombra
+        shadowRadius: 1, // raio da sombra
+        elevation: 1, // elevação da sombra (apenas Android)
     },
     portaTexto:{
         width: '90%',
@@ -61,6 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     texto:{
-        fontSize: '1.5em'
+        fontSize: 24,
+        color: '#999EA9'
     }
 })
