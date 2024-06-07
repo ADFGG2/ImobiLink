@@ -1,3 +1,14 @@
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet } from 'react-native';
+import { ImageBackground, TextInput, TouchableOpacity, View, Text } from 'react-native-web';
+import { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import CardImovel from '../../components/cardImovel/CardImovel'
+import ApiService from '../../Services/ApiService';
+import ToastService from '../../Services/ToastService';
+import AuthService from '../../Services/AuthService';
+import ModalTelaPrincipal from '../../components/modalTelaPrincipal/ModalTelaPrincipal';
+import BarraDePesquisa from '../../components/Pesquisa/BarraDePesquisa';
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
