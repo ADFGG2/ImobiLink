@@ -10,6 +10,8 @@ import Expansao from '../images/icons/ExpansaoCinza.png';
 import Sofa from '../images/icons/SofaCinza.png';
 import { useState, useEffect } from "react";
 import ModalTelaPrincipal from "../components/modalTelaPrincipal/ModalTelaPrincipal";
+import ApiService from "../Services/ApiService";
+import Imagem from "../assets/Icons/Imagem";
 
 
 
@@ -25,7 +27,24 @@ const AcessoDetalhesImovel = () => {
     const { imovel } = route.params;
 
 
+    const [img, setImg] = useState(""); 
 
+  useEffect(() => {
+    pegaImagem();
+  }, []);
+
+  async function pegaImagem(){
+
+    try{
+        let valor = imovel.codigo;      
+        const response = await ApiService.Get(`/imoveis/PegaImagemFav/${valor}`);
+        setImg(response.data);
+      }
+      catch(erro){
+        console.log(erro);
+        ToastService.Error("Erro ao buscar imagens");
+      }   
+  }
     useEffect(() => {
         VerificarLogin();
     }, []);
@@ -48,7 +67,7 @@ const AcessoDetalhesImovel = () => {
     }
         return (
         <View style={styles.container}>
-            <ImageBackground style={styles.background} source={Fundo}>
+            <ImageBackground style={styles.background} source={{uri: img}}>
 
                 <View style={styles.topo}>
                     <TouchableOpacity onPress={() => navigation.goBack()} style={styles.portaBack}><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
@@ -64,7 +83,7 @@ const AcessoDetalhesImovel = () => {
                             </Pressable>: 
                             null}
                         <Pressable onPress={()=>{navigation.navigate("ImagensImovel", {imovel})}}>
-                            <Image source={image} style={styles.button}/>
+                            <IconImage  style={styles.button}/>
                         </Pressable>
                         <Pressable style={styles.button}>
                                 <Image
