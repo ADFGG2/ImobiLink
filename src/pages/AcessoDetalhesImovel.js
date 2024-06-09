@@ -11,7 +11,7 @@ import Sofa from '../images/icons/SofaCinza.png';
 import { useState, useEffect } from "react";
 import ModalTelaPrincipal from "../components/modalTelaPrincipal/ModalTelaPrincipal";
 import ApiService from "../Services/ApiService";
-import Imagem from "../assets/Icons/Imagem";
+import IconImage from "../assets/Icons/Imagem";
 
 
 
@@ -79,11 +79,11 @@ const AcessoDetalhesImovel = () => {
                     <View style={styles.trippleButtons}>
                         { dados.Tipo=="PJ" || dados.Tipo=="PF"? 
                             <Pressable onPress={()=>{navigation.navigate("EditarImovel", {imovel})}}>
-                                <Image source={edit} style={styles.button}/>
+                                <edit source={edit} style={styles.button}/>
                             </Pressable>: 
                             null}
-                        <Pressable onPress={()=>{navigation.navigate("ImagensImovel", {imovel})}}>
-                            <IconImage  style={styles.button}/>
+                        <Pressable style={styles.button} onPress={()=>{navigation.navigate("ImagensImovel", {imovel})}}>
+                            <IconImage  />
                         </Pressable>
                         <Pressable style={styles.button}>
                                 <Image

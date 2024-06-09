@@ -83,11 +83,6 @@ const TelaPrincipal1 = () => {
         </View>
 
       </ImageBackground>
-      <MenuTelaPrincipal 
-      func1="AcessoVendas"
-      func2="AcessoAlugueis"
-      func3="Duvidas"
-      func4="Imobilink" />
     </View>
   );
 
@@ -100,7 +95,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    height: '90%'
+    height: '100%'
   },
   imagemFundo: {
     display: 'flex',
