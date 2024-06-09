@@ -33,7 +33,20 @@ export default function Footer({ exibirTab, tipoLogin }) {
         else if (action == "perfil") {
             pagina = "Perfil"
         }
-        else if (action == "new") {
+        else if (action == "new imovel") {
+            switch (tipoLogin) {
+                case "Pj":
+                    pagina = "CadastrarImovel"
+                    break;
+                case "PF":
+                    pagina = "CadastrarImovel"
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        else if (action == "imovel") {
             switch (tipoLogin) {
                 case "Pj":
                     pagina = "AcessoMeusImoveis"
@@ -45,6 +58,12 @@ export default function Footer({ exibirTab, tipoLogin }) {
                     break;
             }
         }
+        
+        else if (action == "duvidas") {
+            pagina = "Duvidas"
+        }
+        
+        
 
 
 
@@ -61,21 +80,26 @@ export default function Footer({ exibirTab, tipoLogin }) {
             {
                 exibirTab && (tipoLogin == "PF" || tipoLogin == "PJ") ? (
                     <View style={styles.container} >
+
                         <Pressable style={styles.button} onPress={() => click("home")}>
                             <Entypo name="home" size={25} color={"#999EA9"} />
                             <Text style={styles.texto}>Home</Text>
                         </Pressable>
+
                         <Pressable style={styles.button} onPress={() => click("perfil")}>
                             <MaterialCommunityIcons name="file-document-edit" size={25} color={"#999EA9"} />
                             <Text style={styles.texto}>Perfil</Text>
                         </Pressable>
-                        <Pressable style={styles.button} onPress={() => click("new")}>
+
+                        <Pressable style={styles.button} onPress={() => click("new imovel")}>
                             <ButtonNewImovel size={25} />
                         </Pressable>
-                        <Pressable style={styles.button} onPress={() => click("imoveis")}>
+
+                        <Pressable style={styles.button} onPress={() => click("imovel")}>
                             <Entypo name="home" size={25} color={"#999EA9"} />
                             <Text style={styles.texto}>Meus Imoveis</Text>
                         </Pressable>
+
                         <Pressable style={styles.button} onPress={() => click("duvidas")}>
                             <FontAwesome5 name="question" size={25} color={"#999EA9"} />
                             <Text style={styles.texto}>Dúvidas</Text>
@@ -92,7 +116,7 @@ export default function Footer({ exibirTab, tipoLogin }) {
                                 <MaterialCommunityIcons name="file-document-edit" size={25} color={"#999EA9"} />
                                 <Text style={styles.texto}>Perfil</Text>
                             </Pressable>
-        
+
                             <Pressable style={styles.button} onPress={() => click("imoveis")}>
                                 <Entypo name="home" size={25} color={"#999EA9"} />
                                 <Text style={styles.texto}>Meus Imoveis</Text>

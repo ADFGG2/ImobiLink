@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TelaPrincipal2 from './pages/PessoaFIsicaJuridica/TelaPrincipal2';
 import EditarImovel from './pages/ImagensImovel'
@@ -85,5 +85,4 @@ export default function Routes() {
 
       />
     </Tab.Navigator>
-  )
-}
+  )*/

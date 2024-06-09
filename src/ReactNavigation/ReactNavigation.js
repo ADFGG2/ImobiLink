@@ -1,4 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginECadastro from "../pages/LoginECadastro";
 import Login from "../pages/Login";
@@ -23,7 +22,6 @@ import Perfil from "../pages/Perfil";
 import EditarPerfil from "../pages/EditarPerfil";
 import Tutorial from "../pages/Tutorial";
 import ImagensImovel from "../pages/ImagensImovel"
-import Routes from "../routes";
 import Footer from "../Components/Footer/Footer";
 import { View } from "react-native";
 import { StyleSheet } from "react-native";

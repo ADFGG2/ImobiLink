@@ -1,3 +1,7 @@
+import react from "react";
+
+
+const IconImage= () => {
 <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M23.7778 4H6.47222C5.10685 4 4 5.14785 4 6.56379V24.5103C4 25.9262 5.10685 27.0741 6.47222 27.0741H23.7778C25.1432 27.0741 26.25 25.9262 26.25 24.5103V6.56379C26.25 5.14785 25.1432 4 23.7778 4Z" fill="white" stroke="#BEBEBE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 <path d="M25.8889 1H4.11111C2.39289 1 1 2.44264 1 4.22222V26.7778C1 28.5574 2.39289 30 4.11111 30H25.8889C27.6071 30 29 28.5574 29 26.7778V4.22222C29 2.44264 27.6071 1 25.8889 1Z" fill="white" stroke="#BEBEBE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -5,3 +9,5 @@
 <path d="M26.2499 19.3826L20.0694 12.9731L6.47217 27.074" fill="white"/>
 <path d="M26.2499 19.3826L20.0694 12.9731L6.47217 27.074" stroke="#BEBEBE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
+}
+export default IconImage;

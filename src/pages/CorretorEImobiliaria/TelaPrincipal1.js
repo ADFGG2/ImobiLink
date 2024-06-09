@@ -2,20 +2,16 @@ import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 import { ImageBackground, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import MenuTelaPrincipal from '../../components/menuTelaPrincipal/MenuTelaPrincipal';
 import ModalTelaPrincipal from '../../components/modalTelaPrincipal/ModalTelaPrincipal';
-import foto from '../../images/exemplo/fotoExemplo.jpg'
-import btn1 from '../../images/icons/telaPrincipal/btn1.png'
-import btn2 from '../../images/icons/telaPrincipal/btn2.png'
-import btn3 from '../../images/icons/telaPrincipal/btn3.png'
+import foto from '../../assets/Images/Terra Ville.png'
 import { useEffect, useState } from 'react';
 import AuthService from '../../Services/AuthService';
 
 const TelaPrincipal1 = () => {
 
   const navigation = useNavigation();
-  const[dados, setDados] = useState("");
-  
+  const [dados, setDados] = useState("");
+
 
 
   useEffect(() => {
@@ -23,71 +19,104 @@ const TelaPrincipal1 = () => {
   }, []);
 
   async function VerificarLogin() {
-    
+
     const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
-    
+
 
     if (usuarioEstaLogado) {
       const dadosUser = await AuthService.PegarDadosLogados();
       setDados(dadosUser);
     }
-    else{
+    else {
       navigation.navigate("LoginECadastro.js");
     }
   }
 
-  
+  const getPrimeiroENome = (nomeCompleto) => {
+    if (!nomeCompleto) return "";
+    const partes = nomeCompleto.split(" ");
+    if (partes.length < 2) return nomeCompleto; // Retorna o nome completo se houver menos de duas partes
+    return `${partes[0]} ${partes[1]}`; // Retorna o primeiro nome e o sobrenome
+  };
+
   return (
     <View style={styles.container}>
 
       <ImageBackground
-        source={require('../../images/fundos/back7.png')}
+        source={require('../../assets/Images/BackGround/Back_Tela_Principal.jpg')}
         style={styles.imagemFundo}
       >
         <View style={styles.perfil}>
-            <Pressable style={ styles.irPerfil} onPress={()=>{navigation.navigate("Perfil")}}>
-              <View style={styles.portaImg}>
-                <Image source={foto} style={styles.foto}/>
-              </View>
-              
-              <View style={styles.dados}>
-                <Text style={styles.nome}>{dados.Tipo == "Corretor"? dados.Nome : dados.RazaoSocial}</Text>
-                <Text style={styles.tipo}>{dados.Tipo}</Text>
-              </View>
+
+          <View style={styles.circuloExternoPerfil}>
+            <Pressable style={styles.circuloInternoPerfil} onPress={() => { navigation.navigate("Perfil") }}>
+              <Image
+                source={foto} style={styles.imagemPerfil}
+              />
             </Pressable>
-          <View style={styles.portaModal}>
-            <ModalTelaPrincipal />
           </View>
-          
+
+          <View style={styles.dados}>
+            <Text style={styles.nome}>{dados.Tipo == "Corretor" ? getPrimeiroENome(dados.nome) : dados.RazaoSocial}</Text>
+            <Text style={styles.tipo}>{dados.Tipo}</Text>
+          </View>
+
+          <ModalTelaPrincipal />
+
         </View>
+
         <View style={styles.portaBotoes}>
 
-          <Pressable style={styles.poertaBtn} onPress={()=>{navigation.navigate("AcessoVendas")}}>
-            <ImageBackground source={btn1} style={styles.btn}>
-              <Text style={styles.btnTxt}>Imoveis À Venda</Text>  
-            </ImageBackground> 
+          <Pressable style={styles.button_1} onPress={() => { navigation.navigate("AcessoVendas") }}>
+            <ImageBackground source={require('../../assets/Images/Imovel.jpeg')} resizeMode='contain'>
+              <View style={{
+                width: 250,
+                height: 200,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+              }}>
+                <Text style={styles.btnTxt}>Imoveis À Venda</Text>
+              </View>
+            </ImageBackground>
           </Pressable>
 
-          <Pressable style={styles.poertaBtn} onPress={()=>{navigation.navigate("AcessoAlugueis")}}>
-            <ImageBackground source={btn2} style={styles.btn}>
-              <Text style={styles.btnTxt}>Imoveis À Alugar</Text>  
-            </ImageBackground> 
+          <Pressable style={styles.button_2} onPress={() => { navigation.navigate("AcessoAlugueis") }}>
+
+            <ImageBackground source={require('../../assets/Images/Cadastrando.jpeg')} resizeMode='center'>
+              <View style={{
+                width: 250,
+                height: 200,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+              }}>
+                <Text style={styles.btnTxt}>Imoveis À Alugar</Text>
+              </View>
+
+            </ImageBackground>
           </Pressable>
 
-          <Pressable style={styles.poertaBtn} onPress={()=>{navigation.navigate("AcessoFavoritos")}}>
-            <ImageBackground source={btn3} style={styles.btn}>
-              <Text style={styles.btnTxt}>Imoveis Favoritos</Text>  
-            </ImageBackground> 
+          <Pressable style={styles.button_3} onPress={() => { navigation.navigate("AcessoFavoritos") }}>
+
+            <ImageBackground source={require('../../assets/Images/Editar Imovel.jpeg')} resizeMode='center' >
+              <View style={{
+                width: 250,
+                height: 200,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+              }}>
+
+              <Text style={styles.btnTxt}>Imoveis Favoritos</Text>
+
+              </View>
+            </ImageBackground>
           </Pressable>
 
         </View>
 
       </ImageBackground>
-      <MenuTelaPrincipal 
-      func1="AcessoVendas"
-      func2="AcessoAlugueis"
-      func3="Duvidas"
-      func4="Imobilink" />
     </View>
   );
 
@@ -97,10 +126,13 @@ const TelaPrincipal1 = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
+    flex: 1,
     width: '100%',
-    height: '90%'
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+ 
   },
   imagemFundo: {
     display: 'flex',
@@ -116,48 +148,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: '25%'
+
   },
-  portaImg:{
-    width: '20%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  foto: {
-    width: '10vh',
+
+  perfil: {
+    marginTop: 15,
+    width: '80%',
     height: '10vh',
-    borderWidth: '1vh',
-    borderColor: '#E3E9F2',
-    borderRadius: '5vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  perfil:{
-    width: '75%',
-    height: '13vh',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between'
-  }, 
-  irPerfil:{
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   dados: {
     width: '65%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingLeft: '2vh'
   },
   nome: {
-    fontSize: '1.1em',
-    fontWeight: '900',
+    fontSize: 25,
+    fontFamily: 'sans-serif',
+    fontWeight: '600',
     color: '#FFF'
   },
   tipo: {
@@ -165,35 +177,113 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     color: '#FFF'
   },
-  portaModal:{
-    width: '3.5vh',
-    height: '13vh',
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: '1vh'
-  },
-  portaBotoes:{
-    width: '100%',
-    height: '19.5vh',
-    display: 'flex',
+
+  portaBotoes: {
+    width: '60%',
+    height: '22vh',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    marginTop: '5vh'
+
   },
-  btn:{
-    width: '25vh',
-    height: '6.5vh',
-    display: 'flex',
-    alignItems: 'center',
+  circuloExternoPerfil: {
+    width: 80,
+    height: 80,
+    borderRadius: 80 / 2, // Metade da largura/altura
+    backgroundColor: '#E3E9F2', // Cor de fundo do círculo
     justifyContent: 'center',
-    marginTop: '0.5vh',
-    marginBottom: '0.5vh'
+    alignItems: 'center',
+    shadowOffset: {
+      width: 2, // deslocamento horizontal da sombra
+      height: 2, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.3, // opacidade da sombra
+    shadowRadius: 5, // raio da sombra
+    elevation: 2, // elevação da sombra (apenas Android)
+
   },
-  btnTxt:{
-    fontSize: '1.2em',
-    fontWeight: 'bold',
-    color: '#FFF'
+  circuloInternoPerfil: {
+    width: 67,
+    height: 67,
+    borderRadius: 67 / 2, // Metade da largura/altura
+    backgroundColor: '#E3E9F2', // Cor de fundo do círculo interno
+
+    overflow: 'hidden',
+    shadowOffset: {
+      width: 0, // deslocamento horizontal da sombra
+      height: 0, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.3, // opacidade da sombra
+    shadowRadius: 2, // raio da sombra
+    elevation: 0, // elevação da sombra (apenas Android)
+
+  },
+  imagemPerfil: {
+    width: 67,
+    height: 67,
+    borderRadius: 67 / 2, // Metade da largura/altura
+  },
+  button_1: {
+    backgroundColor: '#999EA9',
+    width: 230,
+    height: 50,
+    borderRadius: 64,
+    borderWidth: 2,
+    borderColor: "#999EA9",
+    marginTop: 13,
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: 'hidden',
+    shadowOffset: {
+      width: 3, // deslocamento horizontal da sombra
+      height: 3, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.2, // opacidade da sombra
+    shadowRadius: 4, // raio da sombra
+    elevation: 1, // elevação da sombra (apenas Android)
+  },
+  button_2: {
+    backgroundColor: '#999EA9',
+    width: 230,
+    height: 50,
+    borderRadius: 64,
+    borderWidth: 2,
+    borderColor: "#999EA9",
+    marginTop: 13,
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: 'hidden',
+    shadowOffset: {
+      width: 3, // deslocamento horizontal da sombra
+      height: 3, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.2, // opacidade da sombra
+    shadowRadius: 4, // raio da sombra
+    elevation: 1, // elevação da sombra (apenas Android)
+  },
+  button_3: {
+    backgroundColor: '#999EA9',
+    width: 230,
+    height: 50,
+    borderRadius: 64,
+    borderWidth: 2,
+    borderColor: "#999EA9",
+    marginTop: 13,
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: 'hidden',
+    shadowOffset: {
+      width: 3, // deslocamento horizontal da sombra
+      height: 3, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.2, // opacidade da sombra
+    shadowRadius: 4, // raio da sombra
+    elevation: 1, // elevação da sombra (apenas Android)
+  },
+  btnTxt: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#fff'
   }
 
 });

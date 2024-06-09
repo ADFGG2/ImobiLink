@@ -33,9 +33,8 @@ const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: 12,
-        marginTop: "5vw",
-        marginBottom: "2vw"
+        marginLeft: '-11%',
+        marginBottom: 47
     },
     optionContainer: {
         display: 'flex',
@@ -43,26 +42,27 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     touchable: {
-        height: 20,
-        width: 20,
+        height: 17,
+        width: 17,
         borderRadius: 4,
         justifyContent: 'center',
-        borderColor: '#3EBD93',
+        alignItems:'center',
+        borderColor: '#707070',
         borderWidth: 2
     },
     touchablePequeno: {
-        height: 11,
-        width: 11,
-        borderRadius: 2,
+        height: 10,
+        width: 10,
+        borderRadius: 1,
         justifyContent: 'center',
-        borderColor: '#3EBD93',
+        borderColor: '#707070',
         borderWidth: 1
     },
     optext: {
-        marginLeft: 12,
+        marginLeft:5,
         color: '#555',
-        fontSize: 16,
-        fontWeight: '600',
+        fontSize: 14,
+        fontWeight: '400',
     },
     optextPequeno: {
         marginLeft: 9,

@@ -51,8 +51,6 @@ const TelaPrincipal2 = () => {
         source={require('../../assets/Images/BackGround/Back_Tela_Principal.jpg')}
         style={styles.imagemFundo}
       >
-
-
         <View style={styles.perfil}>
 
           <View style={styles.circuloExternoPerfil}>
@@ -77,6 +75,7 @@ const TelaPrincipal2 = () => {
         <View style={styles.portaBotoes}>
 
           <TouchableOpacity style={styles.button_1} onPress={() => { navigation.navigate("AcessoMeusImoveis") }}>
+            
             <ImageBackground source={require('../../assets/Images/Imovel.jpeg')} resizeMode='contain'>
               <View style={{
                 width: 250,
@@ -125,7 +124,7 @@ const TelaPrincipal2 = () => {
         </View>
 
       </ImageBackground>
-    
+
     </View>
   );
 
@@ -136,8 +135,8 @@ const TelaPrincipal2 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width:'100%',
-    height:'100%',
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },

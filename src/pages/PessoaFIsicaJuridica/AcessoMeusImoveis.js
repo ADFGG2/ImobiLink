@@ -17,6 +17,7 @@ const AcessoMeusImoveis = () => {
   const navigation = useNavigation();
   const [imoveis, setImoveis] = useState([]);
   const [imoveisFiltrados, setImoveisFiltrados] = useState([]);
+  const [imoveisShow, setImoveisShow] = useState(imoveis);
   const [pesquisa, setPesquisa] = useState("");
   let tipo;
 
@@ -76,7 +77,7 @@ const AcessoMeusImoveis = () => {
 
 
       <View style={styles.portaPesquisa}>
-        <BarraDePesquisa key={1} imoveis={imoveis} setImoveis={setImoveisFiltrados} />
+        <BarraDePesquisa key={1} imoveis={imoveis} setImoveis={setImoveisFiltrados} setImoveisShow={setImoveisShow} />
       </View>
 
 
