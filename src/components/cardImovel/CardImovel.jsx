@@ -62,7 +62,10 @@ const cardImovel = ({ imovel }) => {
         <View style={styles.card} key={imovel?.Codigo}>
 
             <View style={styles.parte1}>
-                <Image style={styles.imagemImovel} source={require('../../assets/Images/Imovel.jpeg')} />
+            <Image
+                    source={{uri: img}}
+                    style={styles.imagemImovel}
+                />
 
                 <View style={styles.valorendereço}>
                     <View style={styles.primeirosTxts}>
