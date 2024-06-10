@@ -91,7 +91,7 @@ export default function Footer({ exibirTab, tipoLogin }) {
                             <Text style={styles.texto}>Perfil</Text>
                         </Pressable>
 
-                        <Pressable style={styles.button} onPress={() => click("new imovel")}>
+                        <Pressable style={styles.buttonNew} onPress={() => click("new imovel")}>
                             <ButtonNewImovel size={25} />
                         </Pressable>
 
@@ -147,6 +147,11 @@ const styles = StyleSheet.create({
     },
     button: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonNew: {
+       height:60,
         justifyContent: 'center',
         alignItems: 'center'
     },

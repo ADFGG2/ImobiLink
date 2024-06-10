@@ -19,7 +19,7 @@
       }
 
       .cls-4 {
-        clip-path: url(#clippath);
+        clipPath: url(#clippath);
       }
     </style>
     <clipPath id="clippath">

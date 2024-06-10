@@ -91,10 +91,6 @@ const AcessoMeusImoveis = () => {
 }
 
 const styles = StyleSheet.create({
-  centro: {
-    display: 'flex',
-    alignItems: 'center'
-  },
   backgraud_image: {
     flex: 1,
     marginTop: -250,

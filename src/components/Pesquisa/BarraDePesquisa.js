@@ -4,6 +4,8 @@ import lupa from '../../images/icons/Lupa.png';
 import filtro from '../../images/icons/Filtro.png';
 import InputFlatList from "../inputFlatList/inputFlatList";
 
+import { Octicons, MaterialCommunityIcons } from '@expo/vector-icons'
+
 const BarraDePesquisa = ({ imoveis, imoveisShow, setImoveisShow }) => {
     const [modalVisible2, setModalVisible2] = useState(false);
 
@@ -46,60 +48,64 @@ const BarraDePesquisa = ({ imoveis, imoveisShow, setImoveisShow }) => {
 
     return (
         <>
-            <Modal
-                transparent={true}
-                visible={modalVisible2}
-                style={styles.Modal}
-                onRequestClose={() => {
-                    setModalVisible2(!modalVisible2);
-                }}>
-                <View
-                    style={styles.Modal}>
-                    <View style={styles.content}>
-                        <Text>Filtro</Text>
-                        <View style={styles.valores}>
-                            <TextInput
-                                style={styles.inputsValor}
-                                value={filtroDeValorMinimo}
-                                onChangeText={(texto) => setFiltroDeValorMinimo(texto.replace(/[^0-9]/g, ''))}
-                                placeholder="valor Minimo" />
+            <View style={{ flex:1,alignItems:'center', justifyContent:'center', marginHorizontal:10,}}>
+                <Modal
+                    transparent={true}
+                    visible={modalVisible2}
+                    style={styles.Modal}
+                    onRequestClose={() => {
+                        setModalVisible2(!modalVisible2);
+                    }}>
+                    <View
+                        style={styles.Modal}>
+                        <View style={styles.content}>
+                            <Text>Filtro</Text>
+                            <View style={styles.valores}>
+                                <TextInput
+                                    style={styles.inputsValor}
+                                    value={filtroDeValorMinimo}
+                                    onChangeText={(texto) => setFiltroDeValorMinimo(texto.replace(/[^0-9]/g, ''))}
+                                    placeholder="valor Minimo" />
 
-                            <TextInput
-                                style={styles.inputsValor}
-                                value={filtroDeValorMaximo}
-                                onChangeText={(texto) => setFiltroDeValorMaximo(texto.replace(/[^0-9]/g, ''))}
-                                placeholder="valor Maximo" />
-                        </View>
-                        <View
-                            style={styles.valores}
-                        >
-                            <InputFlatList
-                                options={cidadesDisponiveis}
-                                onSelect={setFiltroDeCidade}
-                                defaultValue={filtroDeCidade}
-                                placeHold="Cidades" />
-                        </View>
+                                <TextInput
+                                    style={styles.inputsValor}
+                                    value={filtroDeValorMaximo}
+                                    onChangeText={(texto) => setFiltroDeValorMaximo(texto.replace(/[^0-9]/g, ''))}
+                                    placeholder="valor Maximo" />
+                            </View>
+                            <View
+                                style={styles.valores}
+                            >
+                                <InputFlatList
+                                    options={cidadesDisponiveis}
+                                    onSelect={setFiltroDeCidade}
+                                    defaultValue={filtroDeCidade}
+                                    placeHold="Cidades" />
+                            </View>
 
-                        <View>
-                            <InputFlatList
-                                options={bairrosDisponiveis}
-                                onSelect={setFiltroDeBairro}
-                                defaultValue={filtroDeBairro}
-                                placeHold="Bairros" />
+                            <View>
+                                <InputFlatList
+                                    options={bairrosDisponiveis}
+                                    onSelect={setFiltroDeBairro}
+                                    defaultValue={filtroDeBairro}
+                                    placeHold="Bairros" />
+                            </View>
                         </View>
                     </View>
+                </Modal>
                 </View>
-            </Modal>
-            <View style={styles.BarraDePesquisa} key={1}>
-                <Image source={lupa} style={styles.lupa} />
-                <TextInput
-                    style={styles.textoPesquisa}
-                    placeholder="Busque Por..."
-                    onChange={(texto) => { setPesquisaPai(texto) }} />
-                <Pressable style={styles.filtro} onPress={() => { setModalVisible2(true) }}>
-                    <Image source={filtro} style={styles.filtro} />
-                </Pressable>
-            </View>
+
+                <View style={styles.BarraDePesquisa} key={1}>
+                    <MaterialCommunityIcons name="magnify" size={20} color="black" />
+                    <TextInput
+                        placeholder="Busque Por..."
+                        placeholderTextColor="#B0B0B0"
+                        onChange={(texto) => { setPesquisaPai(texto) }} />
+                    <Pressable style={styles.filtro} onPress={() => { setModalVisible2(true) }}>
+                        <Octicons name="filter" size={20} color="black" />
+                    </Pressable>
+                </View>
+            
         </>
     );
 }
@@ -120,10 +126,6 @@ const styles = StyleSheet.create({
         boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
 
     },
-    lupa: {
-        width: '1em',
-        height: '1.1em'
-    },
     textoPesquisa: {
         width: '70%',
         height: '2.5em',
@@ -131,22 +133,17 @@ const styles = StyleSheet.create({
         marginRight: '3%',
         fontSize: '1em'
     },
-    filtro: {
-        width: '1.2em',
-        height: '1.2em'
-    },
     content: {
         width: '25em',
         height: '25em',
         backgroundColor: 'rgb(200,200,200)',
-        display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center'
     },
     Modal: {
-        width: '100%',
+        flex:1,
+        width: '90%',
         height: '100%',
-        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     },

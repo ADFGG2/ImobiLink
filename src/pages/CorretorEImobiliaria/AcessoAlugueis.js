@@ -10,6 +10,10 @@ import AuthService from '../../Services/AuthService';
 import ModalTelaPrincipal from '../../components/modalTelaPrincipal/ModalTelaPrincipal';
 import BarraDePesquisa from '../../components/Pesquisa/BarraDePesquisa';
 
+import ButtonVoltar from '../../assets/Svg/Buttons/Bnt_Voltar';
+import LogoBackground from '../../assets/Svg/Logo/Logobackground';
+
+
 const AcessoAlugueis = () => {
   const navigation = useNavigation();
   const [imoveis, setImoveis] = useState([]);
@@ -49,90 +53,78 @@ const AcessoAlugueis = () => {
 
 
   return (
-    <View>
-      <ImageBackground
-        source={require('../../images/fundos/Ondas.png')}
-        style={styles.imagemFundo}
-      >
-        <View style={styles.topo}>
-          <TouchableOpacity onPress={() => navigation.navigate("TelaPrincipal1")} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
-          <View style={styles.portaModal}>
-            <ModalTelaPrincipal />
-          </View>
-        </View>
-        <Text style={styles.title}>Imoveis Alugáveis</Text>
 
+    <View style={styles.container}>
+
+      <ImageBackground
+        source={require('../../assets/Images/BackGround/Back_Cadastrar.png')}
+        style={styles.backgraud_image}>
+        <LogoBackground />
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginTop: 235, }}  >
+          <ButtonVoltar />
+        </TouchableOpacity>
+        <Text style={styles.titulo}>Imoveis á alugar</Text>
       </ImageBackground>
+
 
       <View style={styles.portaPesquisa}>
         <BarraDePesquisa key={1} setImoveisShow={setImoveisShow} imoveisShow={imoveisShow} imoveis={imoveis} />
       </View>
 
-      <View style={styles.portaCards}>
-        {imoveisShow ? imoveisShow.map(
-          (imovel, key) => (
-            <CardImovel key={key} imovel={imovel} />
+     
+        <View style={styles.portaCards}>
+          {imoveisShow ? imoveisShow.map(
+            (imovel, key) => (
+              <CardImovel key={key} imovel={imovel} />
+            )
           )
-        )
-          :
-          imoveis.map((imovel, key) => (
-            <CardImovel key={key} imovel={imovel} />
-          ))
-        }
+            :
+            imoveis.map((imovel, key) => (
+              <CardImovel key={key} imovel={imovel} />
+            ))
+          }
+        </View>
+
       </View>
 
-    </View>
   );
 }
 
 export default AcessoAlugueis;
 
 const styles = StyleSheet.create({
-  imagemFundo: {
+  container: {
     flex: 1,
-    height: '25em',
-    width: "100%",
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: '3em',
-    fontWeight: 'bold',
-    color: 'white',
-    marginTop: '10%',
-    marginBottom: '15%',
-    textAlign: 'center'
-  },
-  portaCards: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  topo: {
-    width: '100%',
-    height: '5vh',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: '1vh',
-    paddingRight: '1vh',
     alignItems: 'center',
-    marginTop: 25
   },
-  return: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    fontSize: '2em',
-    paddingTop: '1vh',
-    color: 'rgb(255,255,255)'
-  },
-  portaPesquisa: {
-    width: "100%",
-    height: '2em',
-    display: 'flex',
+  header: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '1em',
+  
+  },
+  backgraud_image: {
+    flex: 1,
+    marginTop: -250,
+    height: "70vh",
+    width: "100%",
+  },
+  titulo: {
+    fontSize: '2em',
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginTop: 50
+  },
+  portaPesquisa: {
+    position: 'fixed',
+    top: 250
+  },
+  portaCards:{
+    width:'90%',
+    alignItems:'center',
+    justifyContent:'center',
+    marginBottom: 270,
+    
   }
 })
 

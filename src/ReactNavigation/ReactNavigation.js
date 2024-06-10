@@ -22,7 +22,7 @@ import Perfil from "../pages/Perfil";
 import EditarPerfil from "../pages/EditarPerfil";
 import Tutorial from "../pages/Tutorial";
 import ImagensImovel from "../pages/ImagensImovel"
-import Footer from "../Components/Footer/Footer";
+import Footer from "../components/Footer/Footer"
 import { View } from "react-native";
 import { StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
