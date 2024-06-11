@@ -1,4 +1,4 @@
-import { Entypo, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign,Entypo, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import ButtonNewImovel from '../Buttons/Button_New_Imovel';
 import { useNavigation } from '@react-navigation/native';
@@ -48,6 +48,12 @@ export default function Footer({ exibirTab, tipoLogin }) {
 
         else if (action == "imovel") {
             switch (tipoLogin) {
+                case "Corretor":
+                    pagina = "AcessoFavoritos"
+                    break;
+                case "Imobiliaria":
+                    pagina = "AcessoFavoritos"
+                    break;
                 case "Pj":
                     pagina = "AcessoMeusImoveis"
                     break;
@@ -117,9 +123,9 @@ export default function Footer({ exibirTab, tipoLogin }) {
                                 <Text style={styles.texto}>Perfil</Text>
                             </Pressable>
 
-                            <Pressable style={styles.button} onPress={() => click("imoveis")}>
-                                <Entypo name="home" size={25} color={"#999EA9"} />
-                                <Text style={styles.texto}>Meus Imoveis</Text>
+                            <Pressable style={styles.button} onPress={() => click("imovel")}>
+                                <AntDesign name="staro" size={25} color={"#999EA9"} />
+                                <Text style={styles.texto}>Imoveis Favoritos</Text>
                             </Pressable>
                             <Pressable style={styles.button} onPress={() => click("duvidas")}>
                                 <FontAwesome5 name="question" size={25} color={"#999EA9"} />
