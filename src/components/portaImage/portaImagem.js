@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native"
+import { StyleSheet, View, Image, TouchableOpacity, Text, Pressable } from "react-native"
 import Maximize from "../../images/icons/Maximize"
 import Excluir from "../../images/icons/Excluir"
 import { useState } from "react";

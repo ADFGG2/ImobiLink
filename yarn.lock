@@ -8936,6 +8936,11 @@ react-native-neat-date-picker@^1.4.12:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
+react-native-simple-dialogs@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/react-native-simple-dialogs/-/react-native-simple-dialogs-2.1.0.tgz"
+  integrity sha512-k8vlV6Id1spId/BQLy4tGzcq1jB2c/y0Yi0XGnadBqpLBiACGlBMgXZ8gH5JiBuRntdk3AREgppA7aqrM5frsQ==
+
 react-native-svg-transformer@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/react-native-svg-transformer/-/react-native-svg-transformer-1.4.0.tgz"
@@ -8995,7 +9000,7 @@ react-native-web@~0.19.6:
     postcss-value-parser "^4.2.0"
     styleq "^0.1.3"
 
-react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", react-native@>=0.59.0, react-native@>=0.63.0, react-native@>=0.65.0, react-native@0.72.10:
+react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", react-native@>=0.44, react-native@>=0.59.0, react-native@>=0.63.0, react-native@>=0.65.0, react-native@0.72.10:
   version "0.72.10"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.72.10.tgz"
   integrity sha512-AjVA1+hCm2VMk3KE9Ve5IeDR3aneEhhQJmBAM9xP3i2WqqS3GksxCz8+JdB83bV6x9mBLv5qPMP71vCged3USw==

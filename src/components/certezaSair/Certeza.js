@@ -1,60 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
-import Dialog from "react-native-dialog";
+import { ConfirmDialog } from 'react-native-simple-dialogs';
 
 
-const Certeza = (status, setStatus, descricao, condicao1, condicao2, funcao) => {
+
+const Certeza = ({ status, setStatus, titulo, descricao, condicao1, condicao2, funcao }) => {
+
 
   return (
 
-    <View>
-      <Dialog.Container visible={status}>
-        <Dialog.Title>Account delete</Dialog.Title>
-        <Dialog.Description>
-          Do you want to delete this account? You cannot undo this action.
-        </Dialog.Description>
-        <Dialog.Button label="Cancel" />
-        <Dialog.Button label="Delete" />
-      </Dialog.Container>
-    </View>
+    <ConfirmDialog
+      title={titulo}
+      message={descricao}
+      visible={status}
+      onTouchOutside={() => setStatus(false)}
+      positiveButton={{
+        title: condicao1,
+        onPress: () => { funcao() }
+      }}
+      negativeButton={{
+        title: condicao2,
+        onPress: () => setStatus(false)
+      }}
+    />
 
 
-    // <Modal
-    //   transparent={false}
-    //   visible={status}
-    //   onRequestClose={() => {
-    //     setStatus(false);
-    //   }}>
-    //   <View style={styles.centeredView}>
-    //     <View style={styles.centeredView2}>
-    //       <View style={styles.modalView2}>
-
-    //         <Text style={styles.modalText2}>{descricao}</Text>
-
-    //         <View style={styles.portaBotoes2}>
-
-    //           <Pressable
-    //             onPress={() => { funcao() }}>
-    //             <View style={styles.buttonSair}>
-    //               <Text style={styles.textStyle}>{condicao1}</Text>
-    //             </View>
-
-    //           </Pressable>
-
-    //           <Pressable
-    //             onPress={() => { setStatus(false) }}>
-    //             <View
-    //               style={styles.buttonCancelar}>
-    //               <Text style={styles.textStyle}>{condicao2}</Text>
-    //             </View>
-    //           </Pressable>
-
-    //         </View>
-
-    //       </View>
-    //     </View>
-    //   </View>
-    // </Modal>
   );
 };
 

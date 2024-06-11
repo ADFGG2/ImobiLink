@@ -12,11 +12,11 @@ import AuthService from '../Services/AuthService.js';
 
 const EditarImovel = () => {
   const navigation = useNavigation();
-  const [modalIsOpen, setModalIsOpen] = useState(false);  
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [confirmDialogVisible, setConfirmDialogVisible] = useState(false);
   const [id, setIdImovelAtual] = useState(0);
   const [adiciona, setAdiciona] = useState(false);
-  const [link, setLink] = useState("");  
+  const [link, setLink] = useState("");
   const [imagens, setImagens] = useState([]);
   const [fav, setFav] = useState("");
   const [dados, setDados] = useState("");
@@ -44,69 +44,69 @@ const EditarImovel = () => {
   };
 
   async function buscarImagens() {
-    try{
-      let valor = imovel.codigo;      
+    try {
+      let valor = imovel.codigo;
       const response = await ApiService.Get(`/imoveis/ListarImagens/${valor}`);
       setImagens(response.data);
     }
-    catch(erro){
+    catch (erro) {
       console.log(erro);
       ToastService.Error("Erro ao buscar imagens");
-    }    
+    }
   }
 
-  async function ExcluirImagem(){
-    try{      
-     await ApiService.Delete(`/imoveis/ApagarImagem/${id}`);      
-     buscarImagens();     
-     setConfirmDialogVisible(false);
-     ToastService.Success("Imagem apagada com sucesso!");
+  async function ExcluirImagem() {
+    try {
+      await ApiService.Delete(`/imoveis/ApagarImagem/${id}`);
+      buscarImagens();
+      setConfirmDialogVisible(false);
+      ToastService.Success("Imagem apagada com sucesso!");
     }
-    catch(erro){
+    catch (erro) {
       console.log(erro);
       ToastService.Error("Erro ao buscar imagens");
-    }    
+    }
   }
   async function favoritar(id, idImovel) {
-    try{
-      await ApiService.Post(`/imoveis/AdicionarImagemFavorita`, {id, idImovel});      
-      buscarImagens();     
+    try {
+      await ApiService.Post(`/imoveis/AdicionarImagemFavorita`, { id, idImovel });
+      buscarImagens();
       setConfirmDialogVisible(false);
       setFav("true")
       ToastService.Success("Imagem apagada com sucesso!");
     }
-    catch(erro){
+    catch (erro) {
       console.log(erro)
     }
   }
-  function sair(){
-    try{
-    if(imagens.length >=5) {
-      navigation.goBack()
-      //fav? navigation.goBack() : ToastService.Error("defina uma imagem favorita")
-    }
-    else{
+  function sair() {
+    try {
+      if (imagens.length >= 5) {
+        navigation.goBack()
+        //fav? navigation.goBack() : ToastService.Error("defina uma imagem favorita")
+      }
+      else {
         ToastService.Error("necessario pelo menos 5 imagens")
         console.log("necessario pelo menos 5 imagens")
-    } 
+      }
+    }
+    catch (erro) {
+      console.log(erro)
+    }
   }
-  catch(erro){
-    console.log(erro)
-  }
-  }
-  
+
 
   return (
     <View style={styles.container}>
-       <Certeza
-            status={confirmDialogVisible}
-            setStatus={setConfirmDialogVisible}
-            titulo="apagar imagem" 
-            descricao="deseja realmente apagar esta imagem?"
-            condicao1="sim"
-            condicao2="não"
-            funcao={()=>{ExcluirImagem(id)}}
-        />
+      <Certeza
+        status={confirmDialogVisible}
+        setStatus={setConfirmDialogVisible}
+        titulo="apagar imagem"
+        descricao="deseja realmente apagar esta imagem?"
+        condicao1="sim"
+        condicao2="não"
+        funcao={() => { ExcluirImagem(id) }}
+      />
       <View style={styles.topo}>
         <Pressable onPress={sair} >
           <Text style={styles.return}> {`<`} </Text>
@@ -119,60 +119,60 @@ const EditarImovel = () => {
       <View style={styles.textline}>
         <Text style={styles.text}> Imagens </Text>
         <View style={styles.linha}></View>
-      </View> 
-      
-      
-      <ModelImage 
-        isVisible={modalIsOpen} 
-        adiciona={adiciona} 
-        setLink={setLink} 
-        setVisible={setModalIsOpen} 
-        link={link} 
-        imovel={imovel} 
+      </View>
+
+
+      <ModelImage
+        isVisible={modalIsOpen}
+        adiciona={adiciona}
+        setLink={setLink}
+        setVisible={setModalIsOpen}
+        link={link}
+        imovel={imovel}
         buscarImagens={buscarImagens}
-        setFav={setFav}  
+        setFav={setFav}
       />
 
       <ScrollView contentContainerStyle={styles.area}>
 
         {
-          dados.Tipo == "PJ" || dados.Tipo == "PF"? 
-          <View style={styles.retanguloAdd}>
-            <View style={styles.addImageContainer}>
-              <Pressable onPress={() => { setAdiciona(true); setModalIsOpen(true); Ver() }}>
-                <Image 
-                  style={styles.imageAdd}
-                  source={Mais}
-                />
-                <Text style={styles.textadddescrition}> Adicionar img </Text>
-              </Pressable>
+          dados.Tipo == "PJ" || dados.Tipo == "PF" ?
+            <View style={styles.retanguloAdd}>
+              <View style={styles.addImageContainer}>
+                <Pressable onPress={() => { setAdiciona(true); setModalIsOpen(true); Ver() }}>
+                  <Image
+                    style={styles.imageAdd}
+                    source={Mais}
+                  />
+                  <Text style={styles.textadddescrition}> Adicionar img </Text>
+                </Pressable>
+              </View>
             </View>
-          </View>
-          : null
+            : null
         }
 
         {imagens.map((imagem, key) => (
-          <Pressable key={key}  onPress={async()=>{setAdiciona(false), await setModalIsOpen(true), setLink({uri:imagem.urlImage})}}>
-            <PortaImagem 
-            tipo={dados.Tipo}
-            link={{uri:imagem.urlImage}} 
-            descricao={imagem.descricao} 
-            setLink={setLink} 
-            id={imagem.id} 
-            setConfirmDialogVisible={setConfirmDialogVisible}
-            setIdImovelAtual={setIdImovelAtual} 
-            fav={imagem.fav}
-            imovelId = {imovel.codigo}
-            favoritar={favoritar}
+          <Pressable key={key} onPress={async () => { setAdiciona(false), await setModalIsOpen(true), setLink({ uri: imagem.urlImage }) }}>
+            <PortaImagem
+              tipo={dados.Tipo}
+              link={{ uri: imagem.urlImage }}
+              descricao={imagem.descricao}
+              setLink={setLink}
+              id={imagem.id}
+              setConfirmDialogVisible={setConfirmDialogVisible}
+              setIdImovelAtual={setIdImovelAtual}
+              fav={imagem.fav}
+              imovelId={imovel.codigo}
+              favoritar={favoritar}
             />
           </Pressable>
         )
 
         )}
-        
-       
 
-      </ScrollView> 
+
+
+      </ScrollView>
     </View>
   )
 }
