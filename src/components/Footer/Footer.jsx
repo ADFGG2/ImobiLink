@@ -58,12 +58,12 @@ export default function Footer({ exibirTab, tipoLogin }) {
                     break;
             }
         }
-        
+
         else if (action == "duvidas") {
             pagina = "Duvidas"
         }
-        
-        
+
+
 
 
 
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonNew: {
-       height:60,
+        height: 40,
         justifyContent: 'center',
         alignItems: 'center'
     },

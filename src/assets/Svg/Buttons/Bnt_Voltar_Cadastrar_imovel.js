@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 
-const ButtonVoltarEditarPerfil = () => {
+const ButtonVoltar = () => {
   return (
-    <View style={{ position:'relative', top: 31 , left: -150  }}>
+    <View style={{ flex: 1, position: 'relative', top: 108, left: 31 }}>
 
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_b_1045_908)">
@@ -23,4 +23,4 @@ const ButtonVoltarEditarPerfil = () => {
   )
 }
 
-export default ButtonVoltarEditarPerfil;
+export default ButtonVoltar;

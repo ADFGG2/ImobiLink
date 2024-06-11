@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, Image } from 'react-native';
 import seta from '../../images/icons/downSeta.png';
+import { AntDesign } from '@expo/vector-icons'
 
 const InputNumerosSelect = ({ options, onSelect, defaultValue, placeHold, numero, boolean }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -12,18 +13,18 @@ const InputNumerosSelect = ({ options, onSelect, defaultValue, placeHold, numero
         setModalVisible(false);
         onSelect(option);
     };
-    
+
 
     return (
         <View>
             <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.inputs2}>
-                {numero? <Text>{placeHold+" | "+selectedOption || placeHold }</Text>:<Text>{selectedOption || placeHold }</Text> } 
-                <Image source={seta} style={styles.seta} />
+                {numero ? <Text style={styles.text}>{placeHold + "         " + selectedOption || placeHold}</Text> : <Text style={styles.text}>{selectedOption || placeHold}</Text>}
+                <AntDesign name="down" size={10} color="#999EA9" />
             </TouchableOpacity>
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}  
+                visible={modalVisible}
                 onRequestClose={() => setModalVisible(false)}
             >
                 <View style={styles.modal}>
@@ -34,7 +35,7 @@ const InputNumerosSelect = ({ options, onSelect, defaultValue, placeHold, numero
                                 onPress={() => handleSelect(option)}
                                 style={styles.option}
                             >
-                                <Text>{option}</Text>
+                                <Text style={styles.modalText}>{option}</Text>
                             </TouchableOpacity>
                         ))}
                     </View>
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+
     },
     modalContent: {
         backgroundColor: '#00000',
@@ -69,20 +70,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         borderRadius: 5
     },
-    inputs2:{
+    inputs2: {
         width: '44vw',
         height: '5vh',
         borderWidth: '1px',
         borderRadius: '2vw',
         borderColor: '#707070',
         padding: '1vh',
-        display: 'flex',
-        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         flexDirection: 'row'
-      },
-    seta:{
-        width: '3vw',
-        height: '2.5vh'
+
+    },
+    text: {
+        color: 'rgba(0, 0, 0, 0.5)', // Change this color to your desired color
+    },
+    modalText: {
+        color: 'rgba(0, 0, 0, 0.5)',
     }
 });
 

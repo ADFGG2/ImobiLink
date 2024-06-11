@@ -35,7 +35,7 @@ const AcessoVendas = () => {
     try {
 
       const response = await ApiService.Get('/Imoveis/ListarImoveisAVenda');
-    
+
       setImoveis(response.data);
       setImoveisShow(response.data);
     }
@@ -64,18 +64,20 @@ const AcessoVendas = () => {
         <BarraDePesquisa key={1} setImoveisShow={setImoveisShow} imoveisShow={imoveisShow} imoveis={imoveis} />
       </View>
 
-      <ScrollView style={styles.portaCards}>
-      {imoveisShow? imoveisShow.map(
-        (imovel, key) => (
-          <CardImovel key={key} imovel={imovel}/>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        style={styles.portaCards}>
+        {imoveisShow ? imoveisShow.map(
+          (imovel, key) => (
+            <CardImovel key={key} imovel={imovel} />
+          )
         )
-       )
-       :
-       imoveis.map((imovel, key) => (
-        <CardImovel key={key} imovel={imovel}/>
-      ))
-    }
-    </ScrollView>
+          :
+          imoveis.map((imovel, key) => (
+            <CardImovel key={key} imovel={imovel} />
+          ))
+        }
+      </ScrollView>
     </View>
   );
 }
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     justifyContent: 'center',
-  
+
   },
   backgraud_image: {
     flex: 1,
@@ -109,10 +111,10 @@ const styles = StyleSheet.create({
     position: 'fixed',
     top: 250
   },
-  portaCards:{
+  portaCards: {
     marginTop: '143%',
-    width:'90%',
-   
+    width: '90%',
+
   }
 })
 

@@ -17,6 +17,9 @@ import RgInput from '../../components/rgInput/rgInput';
 import InputNumerosSelect from '../../components/InputNumerosSelect/InputNumerosSelect';
 import RealInput from '../../components/RealInput/RealInput';
 
+import ButtonVoltar from '../../assets/Svg/Buttons/Bnt_Voltar_Cadastrar_imovel';
+import LogoBackground from '../../assets/Svg/Logo/Logobackground';
+
 
 const CadastrarImovel = () => {
   
@@ -177,12 +180,25 @@ async function VerificarLogin() {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require("../../images/fundos/back6.png")}
-        style={styles.back}
+
+       <ImageBackground
+        source={require('../../assets/Images/BackGround/Back_Cadastrar.png')}
+        style={styles.backgraud_image}
       >
-        <TouchableOpacity onPress={() => navigation.goBack()} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
+
+        <LogoBackground />
+
+        <TouchableOpacity
+          style={{ marginTop: 235, }}
+          onPress={() => navigation.goBack()} >
+          <ButtonVoltar />
+        </TouchableOpacity>
+
         <Text style={styles.titulo}>CADASTRAR IMÓVEL</Text>
+      </ImageBackground>
+
+
+
         <View style={styles.portaInputs}>
 
           <View style={styles.duplinha}>
@@ -191,9 +207,13 @@ async function VerificarLogin() {
               style={styles.inputs2}
               value={NumMatricula}
               onChangeText={(texto) => setNumMatricula(texto.replace(/[^0-9]/g, ''))}
-              placeholder="Número de Matrícula" />
+              placeholder="Número de Matrícula"
+              placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
-            <InputNumerosSelect options={["ALUGUEL", "VENDA"]} onSelect={setFinalidade} defaultValue='' placeHold="Aluguel ou Venda" />
+            <InputNumerosSelect 
+            options={["Aluguel", "Venda"]}
+            onSelect={setFinalidade} defaultValue='' 
+            placeHold="Aluguel ou Venda" />
 
 
           </View>
@@ -203,7 +223,8 @@ async function VerificarLogin() {
             style={styles.inputs}
             value={Endereco}
             onChangeText={(texto) => setEndereco(texto)}
-            placeholder="Endereço" />
+            placeholder="Endereço"
+            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
           <View style={styles.duplinha}>
 
@@ -219,7 +240,8 @@ async function VerificarLogin() {
               style={styles.inputs2}
               value={Bairro}
               onChangeText={(texto) => setBairro(texto)}
-              placeholder="Bairro" />
+              placeholder="Bairro" 
+              placeholderTextColor="rgba(0, 0, 0, 0.5)"/>
 
           </View>
 
@@ -227,17 +249,20 @@ async function VerificarLogin() {
             style={styles.inputs}
             value={Cidade}
             onChangeText={(texto) => setCidade(texto)}
-            placeholder="Cidade" />
+            placeholder="Cidade"
+            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
           <View style={styles.duplinha}>
             <InputNumerosSelect
               options={["Chácara", "Terreno", "Casa", "Sítio", "Fazenda", "Área Comercial", "Area Residencial"]}
               onSelect={setTipo}
-              placeHold="Tipo de Imóvel" />
+              placeHold="Tipo de Imóvel"
+               />
             <InputNumerosSelect
               options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
               onSelect={setAndares}
               placeHold="Andares"
+              
               numero={true} />
           </View>
 
@@ -246,11 +271,13 @@ async function VerificarLogin() {
               options={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
               onSelect={setDorms}
               placeHold="Dorms"
+              
               numero={true} />
             <InputNumerosSelect
               options={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
               onSelect={setSuites}
               placeHold="Suites"
+              
               numero={true} />
           </View>
 
@@ -259,12 +286,14 @@ async function VerificarLogin() {
               options={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
               onSelect={setSalas}
               placeHold="Salas"
+              
               numero={true} />
 
             <InputNumerosSelect
               options={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
               onSelect={setGaragem}
               placeHold="Garagens"
+              
               numero={true} />
           </View>
 
@@ -275,12 +304,14 @@ async function VerificarLogin() {
             style={styles.inputs2}
             value={AreaUtil}
             onChangeText={(texto) => setAreaUtil(texto.replace(/[^0-9]/g, ''))}
-            placeholder="Tamanho em m²" />
+            placeholder="Tamanho em m²"
+            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
             <InputNumerosSelect
               options={["sim", "não"]}
               onSelect={setCondominioFechado}
               placeHold="Cond. Fechado"
+              
               numero={true} />
           </View>
 
@@ -288,12 +319,14 @@ async function VerificarLogin() {
             
             <RealInput
               placeholder="Valor Cond."
+              
               valor={ValorCondominio}
               setValor={(texto) => setValorCondominio(texto)}
             />
             
             <RealInput
               placeholder="Valor IPTU."
+              
               valor={ValorIPTU}
               setValor={(texto) => setValorIPTU(texto)}
             />            
@@ -303,13 +336,15 @@ async function VerificarLogin() {
           <View style={styles.duplinha}>
           <RealInput
               placeholder="Valor Imovel"
+              
               valor={ValorDoImovel}
               setValor={(texto) => setValorDoImovel(texto)}
             />
             <InputNumerosSelect
-              options={["Disponível", "Habitado"]}
+              options={["Disponível", "Indisponivel"]}
               onSelect={setStatus}
-              placeHold="Status" />
+              placeHold="Status"
+               />
           </View>
 
 
@@ -326,7 +361,7 @@ async function VerificarLogin() {
 
 
 
-      </ImageBackground>
+      
     </View>
   );
 };
@@ -337,42 +372,31 @@ async function VerificarLogin() {
 export default CadastrarImovel;
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    height: '100%'
+
   },
-  back: {
+  backgraud_image: {
     flex: 1,
-    resizeMode: "cover",
-    height: "100%",
+    marginTop: -300,
+    height: "70vh",
     width: "100%",
-    display: 'flex'
-  },
-  return: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    fontSize: '2em',
-    paddingTop: '1vh',
-    color: 'rgb(255,255,255)'
+
   },
   titulo: {
     fontSize: '2em',
     fontWeight: 'bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginTop: '5vh'
+    marginTop: 140
   },
   portaInputs: {
-    width: '100%',
-    height: '50%',
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '18vh'
+    marginBottom: -10
   },
   inputs: {
     width: '90vw',
@@ -389,6 +413,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    borderColor: '#707070',
     marginBottom: '1vh'
   },
   inputs2: {
@@ -400,18 +425,25 @@ const styles = StyleSheet.create({
     padding: '1vh'
   },
   botao: {
-    width: '43vw',
-    height: '6vh',
-    borderRadius: '3vh',
     backgroundColor: '#999EA9',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    width: 230,
+    height: 57,
+    borderRadius: 20,
+    marginBottom: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowOffset: {
+      width: 3, // deslocamento horizontal da sombra
+      height: 3, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.2, // opacidade da sombra
+    shadowRadius: 4, // raio da sombra
+    elevation: 1, // elevação da sombra (apenas Android)
   },
   textobtn: {
-    fontSize: '1.6em',
-    fontWeight: '500',
-    color: '#FFFFFF'
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#FEFEFE'
   }
 
 });

@@ -16,6 +16,7 @@ const RealInput = ({ valor, setValor, placeholder, tamanhoCompleto }) => {
       value={valorFormatado}
       style={tamanhoCompleto ? styles.inputCompleto : styles.input}
       placeholder={placeholder}
+      placeholderTextColor="rgba(0, 0, 0, 0.5)"
       onChangeText={(valor) => {
         setValorFormatado(valor);
         valor = valor.replace("R$", "");

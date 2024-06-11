@@ -58,63 +58,17 @@ const Perfil = () => {
     return (
       <View style={styles.container}>
 
-        <ImageBackground
-          source={require('../images/fundos/back9.png')}
-          style={styles.imagemFundo}
-        >
-          <View style={styles.topo}>
-            <TouchableOpacity onPress={() => navigation.goBack()} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
-            <View style={styles.portaModal}>
-              <ModalTelaPrincipal />
-            </View>
-          </View>
-          <View style={styles.portaImg}>
-            <Image source={foto} style={styles.foto} />
-          </View>
-
-          <View style={styles.portaDados}>
-            <Text style={styles.titleName}>{dados.nome}</Text>
-            <View style={styles.portaEdit}><Image style={styles.edit} source={edit} /></View>
-
-            <View style={styles.duplinha}>
-              <Text style={styles.tipo} >Email:</Text>
-              <Text style={styles.dado}>{dados.email}</Text>
-            </View>
-
-            <View style={styles.duplinha}>
-              <Text style={styles.tipo} >Endereco: </Text>
-              <Text style={styles.dado}>{dados.bairro}, {dados.cidade}</Text>
-            </View>
-
-            <View style={styles.duplinha}>
-              <Text style={styles.tipo} >Telefone:</Text>
-              <Text style={styles.dado}>{dados.telefone}</Text>
-            </View>
-
-
-            <View style={styles.duplinha}>
-              <Text style={styles.tipo}>RG: </Text>
-              <Text style={styles.dado}>{dados.rg}</Text>
-            </View>
-
-          </View>
-        </ImageBackground>
-      </View>
-    );
-
-  }
-  else if (dados.Tipo == "PF") {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
 
           <ImageBackground >
             < LogoBackgroundPerfil />
           </ImageBackground>
 
+
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <ButtonVoltarEditarPerfil />
           </TouchableOpacity>
+
 
           <View style={styles.ellipse}>
             <Pressable style={styles.circuloInternoPerfil} >
@@ -159,46 +113,221 @@ const Perfil = () => {
 
             <View style={styles.duplinha}>
               <Text style={styles.text_dados} >Senha </Text>
-              <View style={{alignContent:'center', alignItems:'center', flexDirection:'row',}}>
-              <Text style={styles.text_senha}> * * * * * * * * * * * * </Text>
-              <Feather name="eye-off" size={20} color="black" style={{marginLeft:5}}/>
+              <View style={{ alignContent: 'center', alignItems: 'center', flexDirection: 'row', }}>
+                <Text style={styles.text_senha}> * * * * * * * * * * * * </Text>
+                <Feather name="eye-off" size={20} color="black" style={{ marginLeft: 5 }} />
               </View>
             </View>
-
-            
-
           </View>
-
         </View>
       </View>
+    );
+
+  }
+  else if (dados.Tipo == "PF") {
+    return (
+      <View style={styles.container}>
+
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+
+          <ImageBackground >
+            < LogoBackgroundPerfil />
+          </ImageBackground>
+
+
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <ButtonVoltarEditarPerfil />
+          </TouchableOpacity>
+
+
+          <View style={styles.ellipse}>
+            <Pressable style={styles.circuloInternoPerfil} >
+              <Image
+                source={foto} style={styles.imagemPerfil} />
+            </Pressable>
+
+            <View style={styles.area_bnt_editar}>
+              <TouchableOpacity style={styles.button_editar}>
+                <Feather name="edit-2" size={18} color="black" />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.portaDados}>
+            <Text style={styles.titleName}>{getPrimeiroENome(dados.nome)}</Text>
+
+            <TouchableOpacity >
+              <Text style={styles.text_editar_perfil}> Editar Perfil </Text>
+            </TouchableOpacity>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Email</Text>
+              <Text style={styles.text_info}>{dados.email}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Endereco </Text>
+              <Text style={styles.text_info}>{dados.bairro}, {dados.cidade}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Telefone</Text>
+              <Text style={styles.text_info}>{formatPhoneNumber(dados.telefone)}</Text>
+            </View>
+
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados}>RG </Text>
+              <Text style={styles.text_info}>{formatRG(dados.rg)}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Senha </Text>
+              <View style={{ alignContent: 'center', alignItems: 'center', flexDirection: 'row', }}>
+                <Text style={styles.text_senha}> * * * * * * * * * * * * </Text>
+                <Feather name="eye-off" size={20} color="black" style={{ marginLeft: 5 }} />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+
     );
   }
   else if (dados.Tipo == "Corretor") {
     return (
       <View style={styles.container}>
 
-        <ImageBackground
-          source={require('../images/fundos/back9.png')}
-          style={styles.imagemFundo}>
-        </ImageBackground>
-      </View>
+          <ImageBackground >
+            < LogoBackgroundPerfil />
+          </ImageBackground>
+
+
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <ButtonVoltarEditarPerfil />
+          </TouchableOpacity>
+
+
+          <View style={styles.ellipse}>
+            <Pressable style={styles.circuloInternoPerfil} >
+              <Image
+                source={foto} style={styles.imagemPerfil} />
+            </Pressable>
+
+            <View style={styles.area_bnt_editar}>
+              <TouchableOpacity style={styles.button_editar}>
+                <Feather name="edit-2" size={18} color="black" />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.portaDadosImobi}>
+            <Text style={styles.titleName}>{getPrimeiroENome(dados.nome)}</Text>
+
+            <TouchableOpacity >
+              <Text style={styles.text_editar_perfil}> Editar Perfil </Text>
+            </TouchableOpacity>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Email</Text>
+              <Text style={styles.text_info}>{dados.email}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Endereco </Text>
+              <Text style={styles.text_info}>{dados.bairro}, {dados.cidade}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Telefone</Text>
+              <Text style={styles.text_info}>{formatPhoneNumber(dados.telefone)}</Text>
+            </View>
+
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados}>RG </Text>
+              <Text style={styles.text_info}>{formatRG(dados.rg)}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Senha </Text>
+              <View style={{ alignContent: 'center', alignItems: 'center', flexDirection: 'row', }}>
+                <Text style={styles.text_senha}> * * * * * * * * * * * * </Text>
+                <Feather name="eye-off" size={20} color="black" style={{ marginLeft: 5 }} />
+              </View>
+            </View>
+          </View>
+        </View>
+     
+
     );
   }
   else if (dados.Tipo == "Imobiliaria") {
     return (
       <View style={styles.container}>
 
-        <ImageBackground
-          source={require('../images/fundos/back9.png')}
-          style={styles.imagemFundo}
-        >
-          <View style={styles.portaImg}>
-            <Image source={foto} style={styles.foto} />
+          <ImageBackground >
+            < LogoBackgroundPerfil />
+          </ImageBackground>
+
+
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <ButtonVoltarEditarPerfil />
+          </TouchableOpacity>
+
+
+          <View style={styles.ellipse}>
+            <Pressable style={styles.circuloInternoPerfil} >
+              <Image
+                source={foto} style={styles.imagemPerfil} />
+            </Pressable>
+
+            <View style={styles.area_bnt_editar}>
+              <TouchableOpacity style={styles.button_editar}>
+                <Feather name="edit-2" size={18} color="black" />
+              </TouchableOpacity>
+            </View>
           </View>
 
-        </ImageBackground>
+          <View style={styles.portaDadosImobi}>
+            <Text style={styles.titleName}>{getPrimeiroENome(dados.nome)}</Text>
 
-      </View>
+            <TouchableOpacity >
+              <Text style={styles.text_editar_perfil}> Editar Perfil </Text>
+            </TouchableOpacity>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Email</Text>
+              <Text style={styles.text_info}>{dados.email}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Endereco </Text>
+              <Text style={styles.text_info}>{dados.bairro}, {dados.cidade}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Telefone</Text>
+              <Text style={styles.text_info}>{formatPhoneNumber(dados.telefone)}</Text>
+            </View>
+
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados}>RG </Text>
+              <Text style={styles.text_info}>{formatRG(dados.rg)}</Text>
+            </View>
+
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >Senha </Text>
+              <View style={{ alignContent: 'center', alignItems: 'center', flexDirection: 'row', }}>
+                <Text style={styles.text_senha}> * * * * * * * * * * * * </Text>
+                <Feather name="eye-off" size={20} color="black" style={{ marginLeft: 5 }} />
+              </View>
+            </View>
+          </View>
+        </View>
+     
+
     );
   }
 
@@ -211,8 +340,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 54,
-    paddingVertical: 15,
     backgroundColor: "#BEBEBE"
   },
   ellipse: {
@@ -256,7 +383,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.30)',
     top: '30%',
-    right:'19%'
+    right: '19%'
   },
   text_editar_perfil: {
     marginTop: 30,
@@ -301,13 +428,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   portaDados: {
-    width: 335,
-    height: 575,
+    width: '95%',
+    height: 526,
     alignItems: 'center',
     backgroundColor: "#BEBEBE",
     borderRadius: 40,
-    marginTop: 10,
-    marginBottom: 80,
+    marginTop: 20,
+    marginBottom: 35,
+    shadowOffset: {
+      width: 2, // deslocamento horizontal da sombra
+      height: 2, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.2, // opacidade da sombra
+    shadowRadius: 5, // raio da sombra
+    elevation: 2, // elevação da sombra (apenas Android)
+
+  },
+  portaDadosImobi: {
+    width: '83%',
+    height: 526,
+    alignItems: 'center',
+    backgroundColor: "#BEBEBE",
+    borderRadius: 40,
+    marginTop: 20,
+    marginBottom: 35,
     shadowOffset: {
       width: 2, // deslocamento horizontal da sombra
       height: 2, // deslocamento vertical da sombra
@@ -319,7 +463,7 @@ const styles = StyleSheet.create({
   },
   duplinha: {
     width: '100%',
-    
+
   },
   tipo: {
     color: 'rgba(153, 158, 169, 1)',
@@ -375,7 +519,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: "#000",
     opacity: 0.4,
-    
+
   },
   text_info: {
     marginTop: 5,
