@@ -50,6 +50,7 @@ const AcessoMeusImoveis = () => {
         response = await ApiService.Get('/Imoveis/ListarMeusImoveisCpf');
       }
       setImoveis(response.data);
+      setImoveisShow(response.data);
     }
     catch (erro) {
       console.log(erro)
@@ -77,14 +78,20 @@ const AcessoMeusImoveis = () => {
 
 
       <View style={styles.portaPesquisa}>
-        <BarraDePesquisa key={1} imoveis={imoveis} setImoveis={setImoveisFiltrados} setImoveisShow={setImoveisShow} />
+      <BarraDePesquisa key={1} setImoveisShow={setImoveisShow} imoveisShow={imoveisShow} imoveis={imoveis} />
       </View>
 
 
-      {imoveisFiltrados.map((imovel, key) => (
-        <CardImovel key={key} imovel={imovel} />
-      )
-      )}
+      {imoveisShow? imoveisShow.map(
+        (imovel, key) => (
+          <CardImovel key={key} imovel={imovel}/>
+        )
+       )
+       :
+       imoveis.map((imovel, key) => (
+        <CardImovel key={key} imovel={imovel}/>
+      ))
+    }
        
     </View>
   );
