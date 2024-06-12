@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
-import { ImageBackground, TextInput, TouchableOpacity, View, Text } from 'react-native';
+import { ImageBackground, ScrollView, TouchableOpacity, View, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import CardImovel from '../../components/cardImovel/CardImovel'
@@ -81,23 +81,29 @@ const AcessoMeusImoveis = () => {
       <BarraDePesquisa key={1} setImoveisShow={setImoveisShow} imoveisShow={imoveisShow} imoveis={imoveis} />
       </View>
 
-
-      {imoveisShow? imoveisShow.map(
-        (imovel, key) => (
-          <CardImovel key={key} imovel={imovel}/>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        style={styles.portaCards}>
+        {imoveisShow ? imoveisShow.map(
+          (imovel, key) => (
+            <CardImovel key={key} imovel={imovel} />
+          )
         )
-       )
-       :
-       imoveis.map((imovel, key) => (
-        <CardImovel key={key} imovel={imovel}/>
-      ))
-    }
-       
+          :
+          imoveis.map((imovel, key) => (
+            <CardImovel key={key} imovel={imovel} />
+          ))
+        }
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
   backgraud_image: {
     flex: 1,
     marginTop: -250,
@@ -110,7 +116,15 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     marginTop: 50
-
+  },
+  portaPesquisa: {
+    position: 'fixed',
+    top: 250
+  },
+  portaCards: {
+    marginTop: '143%',
+    width: '90%',
+    paddingBottom: 20
   }
 })
 

@@ -1,4 +1,4 @@
-import { AntDesign,Entypo, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign,Entypo, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import ButtonNewImovel from '../Buttons/Button_New_Imovel';
 import { useNavigation } from '@react-navigation/native';
@@ -102,7 +102,7 @@ export default function Footer({ exibirTab, tipoLogin }) {
                         </Pressable>
 
                         <Pressable style={styles.button} onPress={() => click("imovel")}>
-                            <Entypo name="home" size={25} color={"#999EA9"} />
+                            <MaterialIcons name="maps-home-work" size={25} color={"#999EA9"} />
                             <Text style={styles.texto}>Meus Imoveis</Text>
                         </Pressable>
 

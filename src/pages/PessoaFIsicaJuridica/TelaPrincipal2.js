@@ -104,23 +104,6 @@ const TelaPrincipal2 = () => {
             </ImageBackground>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button_3} onPress={() => { navigation.navigate("EditarImovel") }}>
-
-            <ImageBackground source={require('../../assets/Images/Editar Imovel.jpeg')} resizeMode='center' >
-              <View style={{
-                width: 250,
-                height: 200,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-              }}>
-
-                <Text style={styles.btnTxt}>Editar Imoveis</Text>
-
-              </View>
-            </ImageBackground>
-          </TouchableOpacity>
-
         </View>
 
       </ImageBackground>
@@ -250,25 +233,6 @@ const styles = StyleSheet.create({
     elevation: 1, // elevação da sombra (apenas Android)
   },
   button_2: {
-    backgroundColor: '#999EA9',
-    width: 230,
-    height: 50,
-    borderRadius: 64,
-    borderWidth: 2,
-    borderColor: "#999EA9",
-    marginTop: 13,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: 'hidden',
-    shadowOffset: {
-      width: 3, // deslocamento horizontal da sombra
-      height: 3, // deslocamento vertical da sombra
-    },
-    shadowOpacity: 0.2, // opacidade da sombra
-    shadowRadius: 4, // raio da sombra
-    elevation: 1, // elevação da sombra (apenas Android)
-  },
-  button_3: {
     backgroundColor: '#999EA9',
     width: 230,
     height: 50,

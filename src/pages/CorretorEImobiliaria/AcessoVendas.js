@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   portaCards: {
     marginTop: '143%',
     width: '90%',
-
+    paddingBottom: 20
   }
 })
 
