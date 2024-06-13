@@ -1,4 +1,5 @@
 import { StyleSheet, View, Image, TouchableOpacity, Text, Pressable } from "react-native"
+import { AntDesign } from '@expo/vector-icons';
 import Maximize from "../../images/icons/Maximize"
 import Excluir from "../../images/icons/Excluir"
 import { useState } from "react";
@@ -26,7 +27,7 @@ const PortaImagem = ({ link, descricao, setLink, id, setConfirmDialogVisible, se
         {
           tipo == "PJ" || tipo == "PF" ?
             <Pressable onPress={() => { favoritar(id, imovelId) }}>
-              <Image source={fav ? favAtivo : favDesativo} style={styles.favorito} />
+              {fav ? <AntDesign name="star" size={10} color="black" /> : <AntDesign name="staro" size={10} color="black" />}
             </Pressable> :
             null}
 

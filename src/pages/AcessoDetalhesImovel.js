@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import ModalTelaPrincipal from "../components/modalTelaPrincipal/ModalTelaPrincipal";
 import ApiService from "../Services/ApiService";
 import IconImage from "../assets/Icons/Imagem";
+import { FontAwesome } from '@expo/vector-icons';
 
 
 
@@ -83,7 +84,7 @@ const AcessoDetalhesImovel = () => {
                             </Pressable>: 
                             null}
                         <Pressable style={styles.button} onPress={()=>{navigation.navigate("ImagensImovel", {imovel})}}>
-                            <IconImage  />
+                            <FontAwesome name="image" size={24} color="black" />
                         </Pressable>
                         <Pressable style={styles.button}>
                                 <Image

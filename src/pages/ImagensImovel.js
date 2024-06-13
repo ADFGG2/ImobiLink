@@ -1,4 +1,5 @@
 import { Text, Image, StyleSheet, View, Pressable, Modal, ScrollView } from 'react-native';
+import { FontAwesome6 } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { ModelImage } from "../components/imagemAmpliada/image_ampliada";
 import PortaImagem from '../components/portaImage/portaImagem.js';
@@ -139,11 +140,8 @@ const EditarImovel = () => {
           dados.Tipo == "PJ" || dados.Tipo == "PF" ?
             <View style={styles.retanguloAdd}>
               <View style={styles.addImageContainer}>
-                <Pressable onPress={() => { setAdiciona(true); setModalIsOpen(true); Ver() }}>
-                  <Image
-                    style={styles.imageAdd}
-                    source={Mais}
-                  />
+                <Pressable style={styles.PortaAdicionarImagem } onPress={() => { setAdiciona(true); setModalIsOpen(true); Ver() }}>
+                  <FontAwesome6 name="plus" size={85} color="rgba(150,150, 105, 0.4)" />
                   <Text style={styles.textadddescrition}> Adicionar img </Text>
                 </Pressable>
               </View>
@@ -238,6 +236,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: "rgb(220,220,220)",
     borderRadius: 12,
+  },
+  PortaAdicionarImagem:{
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   imageAdd: {
     width: 100,
