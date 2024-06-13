@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import ModalTelaPrincipal from "../components/modalTelaPrincipal/ModalTelaPrincipal";
 import ApiService from "../Services/ApiService";
 import IconImage from "../assets/Icons/Imagem";
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Feather  } from '@expo/vector-icons';
 
 
 
@@ -79,8 +79,8 @@ const AcessoDetalhesImovel = () => {
                 <View style={styles.portaDados}>
                     <View style={styles.trippleButtons}>
                         { dados.Tipo=="PJ" || dados.Tipo=="PF"? 
-                            <Pressable onPress={()=>{navigation.navigate("EditarImovel", {imovel})}}>
-                                <edit source={edit} style={styles.button}/>
+                            <Pressable style={styles.button} onPress={()=>{navigation.navigate("EditarImovel", {imovel})}}>
+                                <Feather name="edit-2" size={24} color="black" />
                             </Pressable>: 
                             null}
                         <Pressable style={styles.button} onPress={()=>{navigation.navigate("ImagensImovel", {imovel})}}>
