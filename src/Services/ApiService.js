@@ -33,7 +33,7 @@ const ApiService = {
     async Delete(endpoint, body) {
         const headers = await createHeader();
 
-        const response = await axios.delete(baseUrl + endpoint, body, headers);
+        const response = await axios.delete(baseUrl + endpoint, headers,  body);
         return response;
     }
 };
