@@ -189,7 +189,7 @@ async function VerificarLogin() {
         <LogoBackground />
 
         <TouchableOpacity
-          style={{ marginTop: 235, right: 180}}
+          style={{ marginTop: 235, }}
           onPress={() => navigation.goBack()} >
           <ButtonVoltar />
         </TouchableOpacity>
@@ -356,6 +356,11 @@ async function VerificarLogin() {
             <Text style={styles.textobtn}>Continuar</Text>
           </Pressable>
         </View>
+
+
+
+
+
       
     </View>
   );
@@ -368,6 +373,7 @@ export default CadastrarImovel;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
 
@@ -375,10 +381,8 @@ const styles = StyleSheet.create({
   backgraud_image: {
     flex: 1,
     marginTop: -300,
-    resizeMode: "cover",
     height: "70vh",
     width: "100%",
-    alignItems:'center',
 
   },
   titulo: {

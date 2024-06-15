@@ -1,4 +1,5 @@
 import { Text, Image, StyleSheet, View, Pressable, Modal, ScrollView } from 'react-native';
+import { FontAwesome6 } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { ModelImage } from "../components/imagemAmpliada/image_ampliada";
 import PortaImagem from '../components/portaImage/portaImagem.js';
@@ -64,7 +65,7 @@ const EditarImovel = () => {
     }
     catch (erro) {
       console.log(erro);
-      ToastService.Error("Erro ao buscar imagens");
+      ToastService.Error("Erro ao deletar imagem");
     }
   }
   async function favoritar(id, idImovel) {
@@ -139,14 +140,11 @@ const EditarImovel = () => {
           dados.Tipo == "PJ" || dados.Tipo == "PF" ?
             <View style={styles.retanguloAdd}>
               <View style={styles.addImageContainer}>
-                <Pressable onPress={() => { setAdiciona(true); setModalIsOpen(true); Ver() }}>
-                  <Image
-                    style={styles.imageAdd}
-                    source={Mais}
-                  />
-                  <Text style={styles.textadddescrition}> Adicionar img </Text>
+                <Pressable style={styles.PortaAdicionarImagem } onPress={() => { setAdiciona(true); setModalIsOpen(true);  }}>
+                  <FontAwesome6 name="plus" size={85} color="rgba(150,150, 105, 0.2)" />                  
                 </Pressable>
               </View>
+              <Text style={styles.textadddescrition}> Adicionar img </Text>
             </View>
             : null
         }
@@ -238,6 +236,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: "rgb(220,220,220)",
     borderRadius: 12,
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  PortaAdicionarImagem:{
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'column',
+    paddingTop: '5%'
   },
   imageAdd: {
     width: 100,
@@ -247,7 +258,6 @@ const styles = StyleSheet.create({
   },
   textadddescrition: {
     fontSize: 12,
-    marginTop: 34,
     fontStyle: 'italic',
     opacity: 0.5,
   },
