@@ -338,7 +338,6 @@ const Perfil = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: "#BEBEBE"
   },
@@ -428,7 +427,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   portaDados: {
-    width: '95%',
+    width: '85%',
     height: 526,
     alignItems: 'center',
     backgroundColor: "#BEBEBE",
@@ -445,7 +444,7 @@ const styles = StyleSheet.create({
 
   },
   portaDadosImobi: {
-    width: '83%',
+    width: '85%',
     height: 526,
     alignItems: 'center',
     backgroundColor: "#BEBEBE",

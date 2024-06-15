@@ -1,24 +1,15 @@
 import react from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { View, Text, StyleSheet, Image, ScrollView, Pressable } from 'react-native';
-import Fundo from "../images/fundos/Fundo.png"
 import { ImageBackground, TouchableOpacity } from "react-native";
 import AuthService from "../Services/AuthService";
-import Cama from '../images/icons/CamaCinza.png';
-import Chuveiro from '../images/icons/ChuveiroCinza.png';
-import Expansao from '../images/icons/ExpansaoCinza.png';
-import Sofa from '../images/icons/SofaCinza.png';
 import { useState, useEffect } from "react";
 import ModalTelaPrincipal from "../components/modalTelaPrincipal/ModalTelaPrincipal";
 import ApiService from "../Services/ApiService";
-import IconImage from "../assets/Icons/Imagem";
-import { FontAwesome, Feather  } from '@expo/vector-icons';
 
-
-
-import edit from '../images/icons/editar.png';
-import imgDisponivel from '../images/icons/cardImovel/ativado.jpg';
-import imgIndisponivel from '../images/icons/cardImovel/desativado.jpg';
+import ButtonVoltar from "../assets/Svg/Buttons/Bnt_Voltar";
+import { BlurView } from 'expo-blur';
+import { Feather, Ionicons, FontAwesome } from '@expo/vector-icons'
 
 
 const AcessoDetalhesImovel = () => {
@@ -28,34 +19,34 @@ const AcessoDetalhesImovel = () => {
     const { imovel } = route.params;
 
 
-    const [img, setImg] = useState(""); 
+    const [img, setImg] = useState("");
 
-  useEffect(() => {
-    pegaImagem();
-  }, []);
+    useEffect(() => {
+        pegaImagem();
+    }, []);
 
-  async function pegaImagem(){
+    async function pegaImagem() {
 
-    try{
-        let valor = imovel.codigo;      
-        const response = await ApiService.Get(`/imoveis/PegaImagemFav/${valor}`);
-        setImg(response.data);
-      }
-      catch(erro){
-        console.log(erro);
-        ToastService.Error("Erro ao buscar imagens");
-      }   
-  }
+        try {
+            let valor = imovel.codigo;
+            const response = await ApiService.Get(`/imoveis/PegaImagemFav/${valor}`);
+            setImg(response.data);
+        }
+        catch (erro) {
+            console.log(erro);
+            ToastService.Error("Erro ao buscar imagens");
+        }
+    }
     useEffect(() => {
         VerificarLogin();
     }, []);
-   
+
 
     async function VerificarLogin() {
 
-        
+
         const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
-        
+
 
         if (usuarioEstaLogado) {
             const dadosUser = await AuthService.PegarDadosLogados();
@@ -66,100 +57,83 @@ const AcessoDetalhesImovel = () => {
             navigation.navigate("LoginECadastro.js");
         }
     }
-        return (
+
+    const getColorByStatus = (status) => {
+        switch (status) {
+            case "Habitado":
+                return "green"; // verde para disponível
+            case "Desabilitado":
+                return "red"; // vermelho para Indisponivel
+            case "Pausado":
+                return "yellow"; // amarelo para pausado
+            default:
+                return "black"; // cor padrão
+        }
+    }
+
+    return (
         <View style={styles.container}>
-            <ImageBackground style={styles.background} source={{uri: img}}>
+
+            <ImageBackground style={styles.background} source={require('../assets/Images/Imovel.jpeg')}>
+
+                {/*<ImageBackground style={styles.background} source={{uri: img}}></ImageBackground> */}
 
                 <View style={styles.topo}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.portaBack}><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
-                    <View style={styles.portaModal}>
-                        <ModalTelaPrincipal />
-                    </View>
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginTop: -20 }}  >
+                        <ButtonVoltar />
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.portaDados}>
-                    <View style={styles.trippleButtons}>
-                        { dados.Tipo=="PJ" || dados.Tipo=="PF"? 
-                            <Pressable style={styles.button} onPress={()=>{navigation.navigate("EditarImovel", {imovel})}}>
-                                <Feather name="edit-2" size={24} color="black" />
-                            </Pressable>: 
-                            null}
-                        <Pressable style={styles.button} onPress={()=>{navigation.navigate("ImagensImovel", {imovel})}}>
-                            <FontAwesome name="image" size={24} color="black" />
+
+
+                <View style={styles.trippleButtons}>
+                    {dados.Tipo == "PJ" || dados.Tipo == "PF" ?
+
+                        <BlurView intensity={70} tint={"dark"} style={styles.btn}>
+                            <Pressable onPress={() => { navigation.navigate("EditarImovel", { imovel }) }}>
+                                <Feather name="edit-2" size={16} color="white" style={{}} />
+                            </Pressable>
+                        </BlurView> : null}
+
+                    <BlurView intensity={70} tint={"dark"} style={styles.btn}>
+                        <Pressable onPress={() => { navigation.navigate("ImagensImovel", { imovel }) }}>
+                            <Ionicons name="image-outline" size={20} color="white" />
                         </Pressable>
-                        <Pressable style={styles.button}>
-                                <Image
-                                    source={imovel.status=="Disponível" ? imgDisponivel : imgIndisponivel}
-                                    style={styles.circulo} />
+                    </BlurView>
+
+                    <BlurView intensity={70} tint={"dark"} style={styles.btn}>
+                        <Pressable >
+                            <FontAwesome name="circle" size={24} color="#1CD62F" />
                         </Pressable>
-                    </View>
+                    </BlurView>
 
-                    <View style={styles.data}>
-                        <View style={styles.infos}>
-                            <View style={styles.btns}>
-                                <View style={styles.buttonTl}>
-                                    <Text style={styles.seta}>{'<'}</Text>
-                                </View>
-                                <Text style={styles.title}>{imovel.bairro + ", " + imovel.cidade}</Text>
-                                <View style={styles.buttonTl}>
-                                    <Text style={styles.seta}>{'>'}</Text>
-                                </View>
-                            </View>
-                            <View style={styles.content}>
-                                <View style={styles.text}>
-                                    <Text style={styles.descricao}>{imovel.descricao}</Text>
-                                </View>
-                                <View style={styles.hr} />
-                                <View style={styles.points}>
-                                {imovel.observacoesNomes.map(                                    
-                                        (Nome, key) => (
-                                            <Text style={styles.observacao} key={key}>{Nome}</Text>
-                                        )
-                                    )
-                                }
-                                                                
-                                </View>
-                                <View style={styles.cilinders}>
-                                    <View style={styles.tamanho}>
-                                        <View style={styles.cilinder}>
-                                            <View style={styles.img}>
-                                                <Image style={styles.img1} source={Expansao} />
-                                            </View>
-                                            <Text style={styles.paragraph2}>{imovel.areaUtil} m²</Text>
-                                        </View>
-                                    </View>
-                                    
-                                    
-                                    <View style={styles.trio}>
-                                        
-                                        <View style={styles.cilinder}>
-                                            <View style={styles.img}>
-                                                <Image style={styles.img2} source={Cama} />
-                                            </View>
-                                            <Text style={styles.paragraph}> {imovel.dormitorios} </Text>
-                                        </View>
-
-                                        <View style={styles.cilinder}>
-                                            <View style={styles.img}>
-                                                <Image style={styles.img3} source={Chuveiro} />
-                                            </View>
-                                            <Text style={styles.paragraph}> {imovel.suites} </Text>
-                                        </View>
-
-                                        <View style={styles.cilinder}>
-                                            <View style={styles.img}>
-                                                <Image style={styles.img4} source={Sofa} />
-                                            </View>
-                                            <Text style={styles.paragraph}> {imovel.salas} </Text>
-                                        </View>
-
-                                    </View>
-                                    
-                                </View>
-                            </View>
-                        </View>
-                    </View>
                 </View>
-                
+
+                <BlurView
+                    intensity={50} tint={"dark"}
+                    style={styles.portaDados}>
+
+                    <View style={{ marginTop: 15, marginBottom: 15, marginHorizontal: 25, alignItems: 'center', flexDirection: 'column' }}>
+                        <Text style={styles.title}>{imovel.bairro} </Text>
+                        <Text style={styles.titlecida}>{imovel.cidade}</Text>
+                        <Text style={styles.descricao}> Com um ambiente acolhedor e funcional, este lar possui dois quartos, incluindo uma suíte e um quarto de hóspedes. Com três banheiros, academia própria, piscina, ampla área de lazer e espaço para churrascos, é ideal para relaxar e entreter com conforto e estilo. </Text>
+                        {/*<Text style={styles.descricao}>{imovel.descricao}</Text>*/}
+                        
+                    </View>
+
+                    <View style={{ width: '80%', height: 1, backgroundColor: '#fff'}} />
+
+                    <View style={styles.points}>
+                        {imovel.observacoesNomes.map(
+                            (Nome, key) => (
+                                <Text style={styles.label} key={key}>{Nome}</Text>
+                            )
+                        )
+                        }
+                    </View>
+
+
+                </BlurView>
+
             </ImageBackground>
             <View style={styles.gray} />
         </View>
@@ -172,7 +146,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         alignItems: 'center',
-        backgroundColor: '#555',
+        justifyContent: 'center'
     },
     background: {
         width: '100%',
@@ -187,30 +161,35 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginTop: '10%',
+
     },
-    button: {
-        width: 40,
-        height: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        backgroundColor: '#777',
-        marginRight: 1.5
-    },
-    portaDados:{
+    portaDados: {
         width: '100%',
-        height: '65%',
-        display: 'flex',
+        height: '55%',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
     trippleButtons: {
-        width: '100%',
-        height: '10%',
+        width: 100,
+        height: 50,
+        padding: 20,
+        alignItems: 'center',
         flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
+        top: 120,
+        left: 120
+
+    },
+    btn: {
+        width: 28,
+        height: 28,
+        borderRadius: 7,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 3,
     },
     data: {
         position: 'absolute',
@@ -219,9 +198,7 @@ const styles = StyleSheet.create({
         height: '90%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgba(100, 100, 100, 0.85)',
-        borderTopRightRadius: '5%',
-        borderTopLeftRadius: '5%'
+
     },
     infos: {
         width: '90%',
@@ -244,7 +221,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#777',
     },
-    circulo:{
+    circulo: {
         width: '80%',
         height: '80%',
         borderRadius: '50%'
@@ -265,18 +242,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     descricao: {
+        marginTop: 15,
         textAlign: 'center',
-        color: 'rgb(255,255,255)'
+        fontSize: 10,
+        fontStyle: 'italic',
+        color: '#FFFFFF',
+        letterSpacing: 1
+
     },
     points: {
-        width: '100%',
-        height: 'auto',
-        flexDirection: 'column',
+        width: 350,
+        backgroundColor:"#fff",
+        height: 100,
+        flexDirection: 'row ',
         justifyContent: 'space-around',
-        marginBottom: '10%',
+        alignItems: 'center',
         flexWrap: 'wrap',
-        alignItems: 'center'
     },
+    label: {
+        fontSize: 10,
+      },
     cilinders: {
         width: '100%',
         height: '35%',
@@ -284,14 +269,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
     },
-    tamanho:{
+    tamanho: {
         display: 'flex',
         height: '50%',
         alignItems: 'center',
         justifyContent: 'center',
-        width: "100%"        
+        width: "100%"
     },
-    trio:{
+    trio: {
         display: 'flex',
         flexDirection: 'row',
         width: "100%",
@@ -333,7 +318,7 @@ const styles = StyleSheet.create({
         fontSize: '2em',
         fontWeight: 'bold',
         color: 'rgb(255,255,255)',
-       
+
     },
     paragraph2: {
         fontSize: '2em',
@@ -363,7 +348,6 @@ const styles = StyleSheet.create({
     topo: {
         width: '100%',
         height: '5vh',
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: '1vh',
@@ -382,12 +366,19 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(100,100,100)'
     },
     title: {
+        marginTop: -5,
         color: 'rgb(255,255,255)',
         fontSize: '1.2em',
         fontWeight: 'bold',
-        width: '70%'
+
+
     },
-    observacao:{
-        color: 'rgb(255,255,255)'
-    }
+    titlecida: {
+        color: 'rgb(255,255,255)',
+        fontSize: '1.2em',
+        fontWeight: 'bold',
+
+
+    },
+
 }); 

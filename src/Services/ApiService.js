@@ -28,13 +28,6 @@ const ApiService = {
 
         const response = await axios.post(baseUrl + endpoint, body, headers);
         return response;
-    },
-
-    async Delete(endpoint, body) {
-        const headers = await createHeader();
-
-        const response = await axios.delete(baseUrl + endpoint, headers,  body);
-        return response;
     }
 };
 

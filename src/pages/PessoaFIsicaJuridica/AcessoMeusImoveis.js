@@ -68,7 +68,7 @@ const AcessoMeusImoveis = () => {
       >
 
         <LogoBackground />
-        <TouchableOpacity onPress={() => navigation.navigate("TelaPrincipal2")} style={{ marginTop: 235, }}  >
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginTop: 235, }}  >
           <ButtonVoltar />
         </TouchableOpacity>
 

@@ -7,7 +7,6 @@ import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import imgDisponivel from '../../images/icons/cardImovel/ativado.jpg';
 import imgIndisponivel from '../../images/icons/cardImovel/desativado.jpg';
 
-
 import IconCama from '../../assets/Svg/Diversos/Cama';
 import IconChuveiro from '../../assets/Svg/Diversos/Chuveiro';
 import IconSofa from '../../assets/Svg/Diversos/Sofa';
@@ -38,9 +37,9 @@ const cardImovel = ({ imovel }) => {
     const getColorByStatus = (status) => {
         switch (status) {
             case "Habitado":
-                return "red"; // verde para disponível
-            case "Disponível":
-                return "green"; // vermelho para Indisponivel
+                return "green"; // verde para disponível
+            case "Desabilitado":
+                return "red"; // vermelho para Indisponivel
             case "Pausado":
                 return "yellow"; // amarelo para pausado
             default:
