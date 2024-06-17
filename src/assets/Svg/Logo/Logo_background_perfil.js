@@ -3,7 +3,7 @@ import { View, } from 'react-native'
 
 const LogoBackgroundPerfil = () => {
   return (
-    <View style = {{position: 'Fixed', left: -55, top: 150 ,}}>
+    <View style = {{position: 'Fixed', left: -55, top: 106 ,}}>
 
 
 <svg width="703" height="695" viewBox="0 0 703 695" fill="none" xmlns="http://www.w3.org/2000/svg">

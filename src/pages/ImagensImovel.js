@@ -1,4 +1,4 @@
-import { Text, Image, StyleSheet, View, Pressable, Modal, ScrollView } from 'react-native';
+import { Text, ImageBackground, StyleSheet, View, Pressable, Modal, ScrollView, TouchableOpacity } from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { ModelImage } from "../components/imagemAmpliada/image_ampliada";
@@ -10,6 +10,9 @@ import ApiService from '../Services/ApiService.js';
 import Certeza from '../components/certezaSair/Certeza.js';
 import ToastService from '../Services/ToastService.js';
 import AuthService from '../Services/AuthService.js';
+
+import LogoBackgroundPerfil from '../assets/Svg/Logo/Logo_background_perfil.js'
+import ButtonVoltar from "../assets/Svg/Buttons/Bnt_Voltar";
 
 const EditarImovel = () => {
   const navigation = useNavigation();
@@ -99,6 +102,15 @@ const EditarImovel = () => {
 
   return (
     <View style={styles.container}>
+
+      <ImageBackground >
+        < LogoBackgroundPerfil />
+      </ImageBackground>
+
+      <TouchableOpacity onPress={() => navigation.goBack()} style={{ position:'relative', left: - 158, top: -59 }}  >
+        <ButtonVoltar />
+      </TouchableOpacity>
+
       <Certeza
         status={confirmDialogVisible}
         setStatus={setConfirmDialogVisible}
@@ -108,14 +120,6 @@ const EditarImovel = () => {
         condicao2="não"
         funcao={() => { ExcluirImagem(id) }}
       />
-      <View style={styles.topo}>
-        <Pressable onPress={sair} >
-          <Text style={styles.return}> {`<`} </Text>
-        </Pressable>
-        <View style={styles.portaModal}>
-          <ModalTelaPrincipal />
-        </View>
-      </View>
 
       <View style={styles.textline}>
         <Text style={styles.text}> Imagens </Text>
@@ -140,11 +144,11 @@ const EditarImovel = () => {
           dados.Tipo == "PJ" || dados.Tipo == "PF" ?
             <View style={styles.retanguloAdd}>
               <View style={styles.addImageContainer}>
-                <Pressable style={styles.PortaAdicionarImagem } onPress={() => { setAdiciona(true); setModalIsOpen(true);  }}>
-                  <FontAwesome6 name="plus" size={85} color="rgba(150,150, 105, 0.2)" />                  
+                <Pressable style={styles.PortaAdicionarImagem} onPress={() => { setAdiciona(true); setModalIsOpen(true); }}>
+                  <FontAwesome6 name="plus" size={55} color='rgba(0, 0, 0, 0.1)'/>
                 </Pressable>
               </View>
-              <Text style={styles.textadddescrition}> Adicionar img </Text>
+              <Text style={styles.textadddescrition}> Descrição </Text>
             </View>
             : null
         }
@@ -182,17 +186,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 31,
     paddingTop: 54,
     paddingVertical: 15,
-  },
-  header: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    backgroundColor:"#BDBDBD"
   },
   textline: {
     width: '100%',
-    marginTop: 10,
-    marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -204,7 +201,8 @@ const styles = StyleSheet.create({
   linha: {
     width: '100%',
     height: 1,
-    marginTop: 15,
+    marginTop: 20,
+    marginBottom:20,
     backgroundColor: 'black',
     opacity: 0.4,
   },
@@ -216,10 +214,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
   },
   retanguloAdd: {
-    width: 175,
-    height: 136,
+    width: 155,
+    height: 116,
     alignItems: 'center',
-    backgroundColor: 'rgb(210,210,210)',
+    backgroundColor: '#BEBEBE',
     borderRadius: 12,
     marginBottom: '1.5vh',
     shadowOffset: {
@@ -231,24 +229,18 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   addImageContainer: {
-    width: '99%',
+    width: '100%',
     height: '80%',
     alignItems: 'center',
-    backgroundColor: "rgb(220,220,220)",
+    backgroundColor: "#C4C4C4",
     borderRadius: 12,
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'column'
   },
-  PortaAdicionarImagem:{
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'column',
-    paddingTop: '5%'
+  PortaAdicionarImagem: {
+   
   },
   imageAdd: {
     width: 100,
@@ -257,6 +249,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   textadddescrition: {
+    marginTop:3,
     fontSize: 12,
     fontStyle: 'italic',
     opacity: 0.5,

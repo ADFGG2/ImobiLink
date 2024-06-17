@@ -116,7 +116,8 @@ const CadastroImobiliaria = () => {
           style={styles.inputs}
           value={RazaoSocial}
           onChangeText={(texto) => setRazaoSocial(texto)}
-          placeholder="Razao Social" />
+          placeholder="Razao Social"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
 
         <View style={styles.duplinha}>
 
@@ -129,7 +130,8 @@ const CadastroImobiliaria = () => {
             value={CRECI}
             onChangeText={(texto) => setCRECI(texto)}
             placeholder="CRECI F"
-            maxLength={7} />
+            maxLength={7}
+            placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
 
         </View>
 
@@ -138,7 +140,8 @@ const CadastroImobiliaria = () => {
           style={styles.inputs}
           value={RepresentanteLegal}
           onChangeText={(texto) => setRepresentanteLegal(texto)}
-          placeholder="Representante Legal" />
+          placeholder="Representante Legal"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
 
         <View style={styles.duplinha}>
 
@@ -146,7 +149,8 @@ const CadastroImobiliaria = () => {
             style={styles.inputs2}
             value={Email}
             onChangeText={(texto) => setEmail(texto)}
-            placeholder="E-mail" />
+            placeholder="E-mail"
+            placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
 
           <PhoneInput
             telefonePai={Telefone}
@@ -158,20 +162,16 @@ const CadastroImobiliaria = () => {
           style={styles.inputs}
           value={Senha}
           onChangeText={(texto) => setSenha(texto)}
-          placeholder="Senha" />
+          placeholder="Senha"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
 
 
         <TextInput
           style={styles.inputs}
           value={confirmasenha}
           onChangeText={(texto) => setconfirmasenha(texto)}
-          placeholder="Repita a senha" />
-
-        <TextInput
-          style={styles.inputs}
-          value={Cidade}
-          onChangeText={(texto) => setCidade(texto)}
-          placeholder="Cidade" />
+          placeholder="Repita a senha"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
 
         <View style={styles.duplinha}>
 
@@ -185,9 +185,16 @@ const CadastroImobiliaria = () => {
             style={styles.inputs2}
             value={Bairro}
             onChangeText={(texto) => setBairro(texto)}
-            placeholder="Bairro" />
-
+            placeholder="Bairro"
+            placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
         </View>
+
+        <TextInput
+          style={styles.inputs}
+          value={Cidade}
+          onChangeText={(texto) => setCidade(texto)}
+          placeholder="Cidade"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
 
         <CheckBox options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
 

@@ -3,21 +3,23 @@ import { AntDesign } from '@expo/vector-icons';
 import Maximize from "../../images/icons/Maximize"
 import Excluir from "../../images/icons/Excluir"
 import { useState } from "react";
+import { MaterialIcons, FontAwesome5, MaterialCommunityIcons} from '@expo/vector-icons'
 
 const PortaImagem = ({ link, descricao, setLink, id, setConfirmDialogVisible, setIdImovelAtual, fav, favoritar, imovelId, tipo }) => {
 
   return (
     <View style={styles.retangulo}>
       <Image source={link} style={styles.imageimovel} />
-      <View style={styles.bnt_area}>
+      < View style={styles.bnt_area}>
         <View style={styles.bnt_max_exclud}>
+
           <Pressable onPress={() => setLink(link)} >
-            <Maximize />
+          <FontAwesome5 name="expand-alt" size={10} color="white" />
           </Pressable>
           {
             tipo == "PJ" || tipo == "PF" ?
               <Pressable onPress={() => { setIdImovelAtual(id), setConfirmDialogVisible(true) }}>
-                <Excluir />
+                <MaterialCommunityIcons name="delete-forever" size={15} color="white" />
               </Pressable> :
               null}
         </View>
@@ -26,8 +28,10 @@ const PortaImagem = ({ link, descricao, setLink, id, setConfirmDialogVisible, se
         <Text style={styles.textdescrition}> {descricao} </Text>
         {
           tipo == "PJ" || tipo == "PF" ?
-            <Pressable onPress={() => { favoritar(id, imovelId) }}>
-              {fav ? <AntDesign name="star" size={10} color="black" /> : <AntDesign name="staro" size={10} color="black" />}
+            <Pressable 
+            onPress={() => { favoritar(id, imovelId) }}
+            style={{position:'relative', left: 65, bottom: 13}}>
+              {fav ? <MaterialIcons name="favorite" size={10} color="#BD0B0B" /> : <MaterialIcons name="favorite-border" size={10} color="#000" />}
             </Pressable> :
             null}
 
@@ -40,8 +44,9 @@ const PortaImagem = ({ link, descricao, setLink, id, setConfirmDialogVisible, se
 export default PortaImagem;
 const styles = StyleSheet.create({
   retangulo: {
-    width: 175,
-    height: 136,
+    width: 155,
+    height: 116,
+    marginLeft: 10,
     alignItems: 'center',
     backgroundColor: "#BEBEBE",
     marginBottom: '1.5vh',
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
     paddingTop: '5%'
   },
   imageimovel: {
-    width: '99%',
+    width: '100%',
     height: '80%',
     alignItems: 'center',
     borderRadius: 12,
@@ -82,12 +87,12 @@ const styles = StyleSheet.create({
   textinicon: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 88
+    marginTop: 73
   },
   textdescrition: {
     fontSize: 12,
-    marginTop: 3,
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+
 
   },
 })

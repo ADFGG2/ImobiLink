@@ -219,15 +219,8 @@ async function VerificarLogin() {
           </View>
 
 
-          <TextInput
-            style={styles.inputs}
-            value={Endereco}
-            onChangeText={(texto) => setEndereco(texto)}
-            placeholder="Endereço"
-            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
           <View style={styles.duplinha}>
-
             <CepInput
               CEPPai={CEP}
               setCEPPai={setCep}
@@ -244,6 +237,13 @@ async function VerificarLogin() {
               placeholderTextColor="rgba(0, 0, 0, 0.5)"/>
 
           </View>
+          
+          <TextInput
+            style={styles.inputs}
+            value={Endereco}
+            onChangeText={(texto) => setEndereco(texto)}
+            placeholder="Endereço"
+            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
           <TextInput
             style={styles.inputs}
