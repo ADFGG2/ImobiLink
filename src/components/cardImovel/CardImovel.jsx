@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     texticons: {
-        fontSize: 6,
+        fontSize: 7,
         color: '121212',
         paddingLeft: '2px',
         fontWeight: '500'

@@ -9,7 +9,7 @@ import ApiService from "../Services/ApiService";
 
 import ButtonVoltar from "../assets/Svg/Buttons/Bnt_Voltar";
 import { BlurView } from 'expo-blur';
-import { Feather, Ionicons, FontAwesome } from '@expo/vector-icons'
+import { Feather, Ionicons, FontAwesome, } from '@expo/vector-icons'
 import IconCamaDetalhes from '../assets/Svg/Diversos/Cama_Detalhes_imovel';
 import IconChuveiroDetalhes from '../assets/Svg/Diversos/Chuveiro_Detalhes_imovel';
 import IconSofaDetalhes from '../assets/Svg/Diversos/Sofa_Detalhes_Imovel'
@@ -19,6 +19,7 @@ const AcessoDetalhesImovel = () => {
     const [dados, setDados] = useState("");
     const route = useRoute();
     const { imovel } = route.params;
+    const [isOpen, setIsOpen] = useState(false);
 
 
     const [img, setImg] = useState("");
@@ -72,17 +73,21 @@ const AcessoDetalhesImovel = () => {
                 return "black"; // cor padrão
         }
     }
-    const translateY = useRef(new Animated.Value(265)).current;
+    const translateY = useRef(new Animated.Value(345)).current;
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleAnimation = () => {
         Animated.timing(translateY, {
-            toValue: isVisible ? 265 : -20, // Ajuste o valor de 300 para a altura desejada
+            toValue: isVisible ? 345 : -20, // Ajuste o valor de 300 para a altura desejada
             duration: 800,
             useNativeDriver: true,
         }).start();
 
         setIsVisible(!isVisible);
+    }
+
+    const toggleIcon = () => {
+        setIsOpen(!isOpen);
     };
 
 
@@ -99,122 +104,130 @@ const AcessoDetalhesImovel = () => {
                         </TouchableOpacity>
                     </View>
 
-                    <Pressable
-                        style={{ width: '100%', }}
-                        onPress={toggleAnimation} >
 
-                        <Animated.View style={[styles.animatedView, { transform: [{ translateY }] }]}>
-                            <View style={styles.trippleButtons}>
-                                {dados.Tipo == "PJ" || dados.Tipo == "PF" ?
 
-                                    <BlurView intensity={70} tint={"dark"} style={styles.btn}>
-                                        <Pressable onPress={() => { navigation.navigate("EditarImovel", { imovel }) }}>
-                                            <Feather name="edit-2" size={16} color="white" style={{}} />
-                                        </Pressable>
-                                    </BlurView> : null}
+                    <Animated.View style={[styles.animatedView, { transform: [{ translateY }] }]}>
+
+                        <View style={styles.trippleButtons}>
+                            {dados.Tipo == "PJ" || dados.Tipo == "PF" ?
 
                                 <BlurView intensity={70} tint={"dark"} style={styles.btn}>
-                                    <Pressable onPress={() => { navigation.navigate("ImagensImovel", { imovel }) }}>
-                                        <Ionicons name="image-outline" size={20} color="white" />
+                                    <Pressable onPress={() => { navigation.navigate("EditarImovel", { imovel }) }}>
+                                        <Feather name="edit-2" size={16} color="white" style={{}} />
                                     </Pressable>
-                                </BlurView>
+                                </BlurView> : null}
 
-                                <BlurView intensity={70} tint={"dark"} style={styles.btn}>
-                                    <Pressable >
-                                        <FontAwesome name="circle" size={24} color="#1CD62F" />
-                                    </Pressable>
-                                </BlurView>
+                            <BlurView intensity={70} tint={"dark"} style={styles.btn}>
+                                <Pressable onPress={() => { navigation.navigate("ImagensImovel", { imovel }) }}>
+                                    <Ionicons name="image-outline" size={20} color="white" />
+                                </Pressable>
+                            </BlurView>
 
-                            </View>
+                            <BlurView intensity={70} tint={"dark"} style={styles.btn}>
+                                <Pressable >
+                                    <FontAwesome name="circle" size={24} color="#1CD62F" />
+                                </Pressable>
+                            </BlurView>
 
-                            <BlurView
-                                intensity={50} tint={"dark"}
-                                style={styles.areainfor}>
+                        </View>
 
-                                <View style={{ marginTop: 10, marginBottom: 10, alignItems: 'center', flexDirection: 'column' }}>
-                                    <Text style={styles.title}>{imovel.bairro} </Text>
-                                    <Text style={styles.titlecida}>{imovel.cidade}</Text>
-                                    <Text style={styles.descricao}>{imovel.descricao}</Text>
+                        <BlurView
+                            intensity={50} tint={"dark"}
+                            style={styles.areainfor}>
 
-                                    <View style={{ width: '80%', height: 1, backgroundColor: '#fff', marginTop: 10 }}
-                                    />
+                            <View style={{ marginTop: 10, marginBottom: 10, alignItems: 'center', flexDirection: 'column' }}>
+                                <Pressable 
+                                style={{ position:'relative', left:-150, top:30,  }}
+                                onPress={() => { toggleIcon(); toggleAnimation(); }}>
+                                    {isOpen ? (
+                                        <FontAwesome name="angle-double-down" size={27} color="white" />
+                                    ) : (
+                                        <FontAwesome name="angle-double-up" size={27} color="white" />
+                                    )}
+                                </Pressable>
+                                <Text style={styles.title}>{imovel.bairro} </Text>
+                                <Text style={styles.titlecida}>{imovel.cidade}</Text>
+                                <Text style={styles.descricao}>{imovel.descricao}</Text>
 
-                                    <View style={styles.points}>
-                                        {imovel.observacoesNomes.map((Nome, key) => (
-                                            <View style={styles.itemContainer} key={key}>
-                                                <Feather name="check" size={15} style={styles.icon} />
-                                                <Text style={styles.label}>{Nome.replace(/([a-z])([A-Z])/g, '$1 $2')}</Text>
-                                            </View>
-                                        ))}
+                                <View style={{ width: '80%', height: 1, backgroundColor: '#fff', marginTop: 10 }}
+                                />
+
+                                <View style={styles.points}>
+                                    {imovel.observacoesNomes.map((Nome, key) => (
+                                        <View style={styles.itemContainer} key={key}>
+                                            <Feather name="check" size={15} style={styles.icon} />
+                                            <Text style={styles.label}>{Nome.replace(/([a-z])([A-Z])/g, '$1 $2')}</Text>
+                                        </View>
+                                    ))}
+                                </View>
+
+                                <View style={{ width: '100%', height: 150, justifyContent: 'center', flexDirection: 'row', }}>
+
+                                    <View style={styles.cilinders}>
+                                        <View style={styles.circulos}>
+                                            <Ionicons name="expand" size={30} color="#999EA9" />
+                                        </View>
+                                        <Text style={styles.metragem}>{imovel.areaUtil.toLocaleString()} m²</Text>
+                                        <Text style={{
+                                            textAlign: 'center',
+                                            fontSize: 7,
+                                            fontStyle: 'italic',
+                                            color: '#FFFFFF',
+                                            letterSpacing: 1,
+                                            margin: 2
+                                        }}> Terreno amplo com espaço para aréa de lazer</Text>
                                     </View>
 
-                                    <View style={{ width: '100%', height: 150, justifyContent: 'center', flexDirection: 'row', }}>
-
-                                        <View style={styles.cilinders}>
-                                            <View style={styles.circulos}>
-                                                <Ionicons name="expand" size={30} color="#999EA9" />
-                                            </View>
-                                            <Text style={styles.metragem}>{imovel.areaUtil} m²</Text>
-                                            <Text style={{
-                                                textAlign: 'center',
-                                                fontSize: 7,
-                                                fontStyle: 'italic',
-                                                color: '#FFFFFF',
-                                                letterSpacing: 1,
-                                                margin: 2
-                                            }}> Terreno amplo com espaço para aréa de lazer</Text>
+                                    <View style={styles.cilinders}>
+                                        <View style={styles.circulos}>
+                                            <IconCamaDetalhes />
                                         </View>
+                                        <Text style={styles.metragem}> {imovel.dormitorios} </Text>
+                                        <Text style={{
+                                            textAlign: 'center',
+                                            fontSize: 7,
+                                            fontStyle: 'italic',
+                                            color: '#FFFFFF',
+                                            margin: 3
+                                        }}> Quarto com otima ventilação e controle de iluminação</Text>
+                                    </View>
 
-                                        <View style={styles.cilinders}>
-                                            <View style={styles.circulos}>
-                                                <IconCamaDetalhes />
-                                            </View>
-                                            <Text style={styles.metragem}> {imovel.dormitorios} </Text>
-                                            <Text style={{
-                                                textAlign: 'center',
-                                                fontSize: 7,
-                                                fontStyle: 'italic',
-                                                color: '#FFFFFF',
-                                                margin: 3
-                                            }}> Quarto com otima ventilação e controle de iluminação</Text>
+                                    <View style={styles.cilinders}>
+                                        <View style={styles.circulos}>
+                                            <IconChuveiroDetalhes />
                                         </View>
+                                        <Text style={styles.metragem}> {imovel.suites}</Text>
+                                        <Text style={{
+                                            textAlign: 'center',
+                                            fontSize: 7,
+                                            fontStyle: 'italic',
+                                            color: '#FFFFFF',
+                                            margin: 3
+                                        }}>Revestimentos de qualidade,iluminação e decoração moderna</Text>
+                                    </View>
 
-                                        <View style={styles.cilinders}>
-                                            <View style={styles.circulos}>
-                                                <IconChuveiroDetalhes />
-                                            </View>
-                                            <Text style={styles.metragem}> {imovel.suites}</Text>
-                                            <Text style={{
-                                                textAlign: 'center',
-                                                fontSize: 7,
-                                                fontStyle: 'italic',
-                                                color: '#FFFFFF',
-                                                margin: 3
-                                            }}>Revestimentos de qualidade,iluminação e decoração moderna</Text>
+                                    <View style={styles.cilinders}>
+                                        <View style={styles.circulos}>
+                                            <IconSofaDetalhes />
                                         </View>
-
-                                        <View style={styles.cilinders}>
-                                            <View style={styles.circulos}>
-                                                <IconSofaDetalhes />
-                                            </View>
-                                            <Text style={styles.metragem}> {imovel.salas}</Text>
-                                            <Text style={{
-                                                textAlign: 'center',
-                                                fontSize: 7,
-                                                fontStyle: 'italic',
-                                                color: '#FFFFFF',
-                                                letterSpacing: 1,
-                                                margin: 2
-                                            }}> Terreno amplo com espaço para aréa de lazer</Text>
-                                        </View>
-
+                                        <Text style={styles.metragem}> {imovel.salas}</Text>
+                                        <Text style={{
+                                            textAlign: 'center',
+                                            fontSize: 7,
+                                            fontStyle: 'italic',
+                                            color: '#FFFFFF',
+                                            letterSpacing: 1,
+                                            margin: 2
+                                        }}> Terreno amplo com espaço para aréa de lazer</Text>
                                     </View>
 
                                 </View>
 
-                            </BlurView>
-                        </Animated.View>
-                    </Pressable>
+                            </View>
+
+                        </BlurView>
+                    </Animated.View>
+
 
                 </ImageBackground>
             </View>
@@ -277,7 +290,7 @@ const styles = StyleSheet.create({
     },
     points: {
         width: 350,
-        height: 100,
+        height: 110,
         marginTop: 10,
         left: 10,
         flexWrap: 'wrap',
@@ -324,7 +337,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4, // raio da sombra
     },
     metragem: {
-        fontSize: 15,
+        fontSize: 10,
         fontWeight: '600',
         color: '#fff',
     },
