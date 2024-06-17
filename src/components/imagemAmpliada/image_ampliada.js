@@ -5,11 +5,11 @@ import upload from '../../images/icons/upload.png';
 import ToastService from '../../Services/ToastService';
 import ApiService from '../../Services/ApiService';
 
-export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imovel, buscarImagens }) {
-  const [idImovel, setIdImovel] = useState(imovel.codigo);
+export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imovel, buscarImagens, id, tipo }) {
+  const [idImovel, setIdImovel] = useState(imovel?.codigo || "");
   const [descricao, setDescricao] = useState("");
   const [URLImage, setURLImage] = useState("");
-
+  
   async function selecionarImagem() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -23,28 +23,79 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
   }
 
   async function enviar(){
-    try{
-    if(!URLImage || !descricao ){
-      ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
-      console.log("faltam dados")
-      return;
+    if(imovel){
+      setIdImovel(imovel.codigo)
+      try{
+        if(!URLImage || !descricao ){
+          ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
+          console.log("faltam dados")
+          return;
+        }
+          setIdImovel(imovel.codigo)
+
+          const body = {
+            idImovel,
+            descricao,
+            URLImage
+          };          
+         
+
+          await ApiService.Post("/Imoveis/CadastrarImagem", body);
+          ToastService.Success("Usuário cadastrado com sucesso!");
+          setVisible(false);
+          buscarImagens();
+      }
+        catch(erro){
+          ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
+          console.log(erro);
+          return;
+        }
+
     }
-      setIdImovel(imovel)
-      const body = {
-        idImovel,
-        descricao,
-        URLImage
-      };
-      await ApiService.Post("/Imoveis/CadastrarImagem", body);
-      ToastService.Success("Usuário cadastrado com sucesso!");
-      setVisible(false);
-      buscarImagens()
-  }
-    catch(erro){
-      ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
-      console.log(erro);
-      return;
+
+    else{
+      try{
+        if(!URLImage){
+          ToastService.Error("Erro ao atualizar imagem de perfil", "selecione uma imagem");
+          return;
+        }
+          console.log("id: "+id)
+          const body = {
+            URLImage,
+            id
+          };
+
+          switch (tipo) {
+            case "PF":
+              await ApiService.Post("/PessoasFisicas/DefinirImagemDePerfil", {"URLImage": URLImage, id});              
+            break;
+            case "PJ":
+              await ApiService.Post("/PessoasJuridicas/DefinirImagemDePerfil", body);  
+            
+            break;
+            case "Corretor":
+              await ApiService.Post("/Corretores/DefinirImagemDePerfil", body);  
+            
+            break;               
+            case "Imobiliaria":
+              await ApiService.Post("/Imobiliarias/DefinirImagemDePerfil", body);  
+              
+            break;
+            default:
+              break;
+          }
+
+          ToastService.Success("imagem cadastrada com sucesso!");
+          setVisible(false);
+          buscarImagens();
+      }
+        catch(erro){
+          ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
+          console.log(erro);
+          return;
+        }
     }
+    
   }
 
   if (!adiciona) {
@@ -67,11 +118,12 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
                 {!URLImage ? <Image source={upload} style={styles.upload} /> : <Image source={{uri:URLImage}} style={styles.imagem} />}
               </View>
             </Pressable>
-            <TextInput 
+            {imovel? <TextInput 
             style={styles.textInput} 
             placeholder="Descrição" 
             value={descricao} 
-            onChangeText={(texto) => setDescricao(texto)} />
+            onChangeText={(texto) => setDescricao(texto)} /> 
+            : null }
           </View>
 
           <Pressable style={styles.enviar} onPress={()=>{enviar()}}>

@@ -87,10 +87,8 @@ const CadastroPessoaFisica = () => {
       };
       const response = await ApiService.Post("/PessoasFisicas/CadastrarPessoaFisica", (body))
 
-      const token = response.data.token;
-
-      await AuthService.SalvarToken(token);
-      navigation.navigate("TelaPrincipal2");
+      
+      navigation.navigate("login");
     }
     catch (error) {
       console.log(error);
@@ -101,7 +99,6 @@ const CadastroPessoaFisica = () => {
       ToastService.Error("Erro ao realizar login", "Houve um erro no servidor ao realizar o seu login\r\nTente novamente mais tarde.");
     }
   }
-
 
   return (
     <View style={styles.container}>

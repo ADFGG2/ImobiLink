@@ -80,10 +80,8 @@ const CadastroCorretor = () => {
 
 
       const response = await ApiService.Post("/Corretores/CadastrarCorretor", body)
-      const token = response.data.token;
-
-      await AuthService.SalvarToken(token);
-      navigation.navigate("TelaPrincipal1");
+      
+      navigation.navigate("login");
 
     }
     catch (error) {
