@@ -4,9 +4,12 @@ import { ImageBackground, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import AuthService from '../Services/AuthService';
+import ApiService from '../Services/ApiService.js';
 import foto from '../../src/assets/Images/Image Perfil .png';
+import { ModelImage } from "../components/imagemAmpliada/image_ampliada";
 import edit from '../images/icons/edit.png';
 import ModalTelaPrincipal from '../components/modalTelaPrincipal/ModalTelaPrincipal';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import LogoBackgroundPerfil from '../../src/assets/Svg/Logo/Logo_background_perfil';
 import ButtonVoltarEditarPerfil from '../assets/Svg/Buttons/Bnt_Voltar_editar_perfil';
@@ -16,6 +19,10 @@ const Perfil = () => {
 
   const navigation = useNavigation();
   const [dados, setDados] = useState("");
+  const [NovaImagemPerfil, setNovaImagemPerfil] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [adiciona, setAdiciona] = useState(true);
+  const [link, setLink] = useState("");   
 
 
 
@@ -26,7 +33,7 @@ const Perfil = () => {
   async function VerificarLogin() {
 
     const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
-
+    console.log(dados.URL_imagem_perfil)
 
     if (usuarioEstaLogado) {
       const dadosUser = await AuthService.PegarDadosLogados();
@@ -71,15 +78,18 @@ const Perfil = () => {
 
 
           <View style={styles.ellipse}>
-            <Pressable style={styles.circuloInternoPerfil} >
-              <Image
-                source={foto} style={styles.imagemPerfil} />
+          <Pressable style={styles.circuloInternoPerfil} >
+            {dados.URL_imagem_perfil != null || dados.URL_imagem_perfil != "" ?
+                <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
+                :
+                <FontAwesome5 name="user-circle" size={50} color="black" style={styles.imagemPerfil} />
+              }
             </Pressable>
 
             <View style={styles.area_bnt_editar}>
-              <TouchableOpacity style={styles.button_editar}>
+              <Pressable style={styles.button_editar} onPress={() => { setAdiciona(true); setModalIsOpen(true);  }}>
                 <Feather name="edit-2" size={18} color="black" />
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
 
@@ -140,16 +150,29 @@ const Perfil = () => {
           </TouchableOpacity>
 
 
+          <ModelImage
+            isVisible={modalIsOpen}
+            adiciona={adiciona}
+            setLink={setLink}
+            setVisible={setModalIsOpen}
+            link={link}
+            id={dados.CPF}
+            tipo="PF"
+          />
+
           <View style={styles.ellipse}>
-            <Pressable style={styles.circuloInternoPerfil} >
-              <Image
-                source={foto} style={styles.imagemPerfil} />
+            <Pressable style={styles.circuloInternoPerfil}  >
+            {dados.URL_imagem_perfil == null || dados.URL_imagem_perfil == ""  ?
+                <FontAwesome5 name="user-circle" size={150} color="black" />
+                :
+                <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
+              }
             </Pressable>
 
             <View style={styles.area_bnt_editar}>
-              <TouchableOpacity style={styles.button_editar}>
+              <Pressable style={styles.button_editar} onPress={() => { setAdiciona(true); setModalIsOpen(true);  }}>
                 <Feather name="edit-2" size={18} color="black" />
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
 

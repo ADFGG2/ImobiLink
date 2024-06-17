@@ -71,10 +71,8 @@ const CadastroPessoaJuridica = () => {
       };
 
       const response = await ApiService.Post("/PessoasJuridicas/CadastrarPessoaJuridica", body)
-      const token = response.data.token;
-
-      await AuthService.SalvarToken(token);
-      navigation.navigate("TelaPrincipal2");
+      
+      navigation.navigate("login");
 
 
     }
