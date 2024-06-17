@@ -184,12 +184,7 @@ const CadastroPessoaFisica = () => {
           placeholder="Repita a senha"
           placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
-        <TextInput
-          style={styles.inputs}
-          value={Cidade}
-          onChangeText={(texto) => setCidade(texto)}
-          placeholder="Cidade"
-          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
+
 
         <View style={styles.duplinha}>
 
@@ -207,6 +202,13 @@ const CadastroPessoaFisica = () => {
             placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
         </View>
+
+        <TextInput
+          style={styles.inputs}
+          value={Cidade}
+          onChangeText={(texto) => setCidade(texto)}
+          placeholder="Cidade"
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
         <DatePicker
           isVisible={showDatePicker}
