@@ -116,9 +116,13 @@ const cardImovel = ({ imovel }) => {
                             <Text style={styles.detalhesImoveisTxt}>{imovel.status === "Disponível" ? "Disponível" : "Habitado"}</Text>
                         </View>
 
-                        <Pressable >
-                            <MaterialCommunityIcons style={{ position: 'relative', left: 130, bottom: 18,  }} name="alert" size={18} color="#D2AC21" />
-                        </Pressable     > 
+                        {
+                        imovel.quantasImagens <=5 ?
+                                <Pressable >
+                                    <MaterialCommunityIcons style={{ position: 'relative', left: 130, bottom: 18,  }} name="alert" size={18} color="#D2AC21" />
+                                </Pressable     > 
+                            : null
+                        }
 
                     </View>
 
