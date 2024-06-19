@@ -17,16 +17,28 @@ const AcessoVendas = () => {
   const navigation = useNavigation();
   const [imoveis, setImoveis] = useState([]);
   const [imoveisShow, setImoveisShow] = useState(imoveis);
-  async function verificarLogin() {
+  const [dados, setDados] = useState("");
+
+
+
+  useEffect(() => {
+    VerificarLogin();
+  }, []);
+
+  async function VerificarLogin() {
 
     const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
 
-    if (!usuarioEstaLogado) {
+
+    if (usuarioEstaLogado) {
+      const dadosUser = await AuthService.PegarDadosLogados();
+      setDados(dadosUser);
+    }
+    else {
       navigation.navigate("LoginECadastro.js");
     }
   }
 
-  useEffect(() => { verificarLogin() }, [])
   useEffect(() => { buscarImoveis() }, [])
 
 
@@ -69,12 +81,20 @@ const AcessoVendas = () => {
         style={styles.portaCards}>
         {imoveisShow ? imoveisShow.map(
           (imovel, key) => (
-            <CardImovel key={key} imovel={imovel} estrela />
+            <CardImovel 
+              key={key} 
+              imovel={imovel} 
+              estrela 
+              tipo={dados.Tipo} />
           )
         )
           :
           imoveis.map((imovel, key) => (
-            <CardImovel key={key} imovel={imovel} estrela />
+            <CardImovel 
+              key={key} 
+              imovel={imovel} 
+              estrela 
+              tipo={dados.Tipo} />
           ))
         }
       </ScrollView>

@@ -19,19 +19,27 @@ const AcessoAlugueis = () => {
   const [imoveis, setImoveis] = useState([]);
   const [imoveisShow, setImoveisShow] = useState(imoveis)
   const [pesquisa, setPesquisa] = useState("");
-  async function verificarLogin() {
+  const [dados, setDados] = useState("");
+
+
+
+  useEffect(() => {
+    VerificarLogin();
+  }, []);
+
+  async function VerificarLogin() {
 
     const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
 
-    if (!usuarioEstaLogado) {
-      navigation.navigate("LoginECadastro.js");
+
+    if (usuarioEstaLogado) {
+      const dadosUser = await AuthService.PegarDadosLogados();
+      setDados(dadosUser);
     }
     else {
-      buscarImoveis();
+      navigation.navigate("LoginECadastro.js");
     }
   }
-
-  useEffect(() => { verificarLogin() }, [])
 
 
   async function buscarImoveis() {
@@ -75,12 +83,20 @@ const AcessoAlugueis = () => {
         <View style={styles.portaCards}>
           {imoveisShow ? imoveisShow.map(
             (imovel, key) => (
-              <CardImovel key={key} imovel={imovel} estrela />
+              <CardImovel 
+                key={key} 
+                imovel={imovel} 
+                estrela 
+                tipo={dados.Tipo} />
             )
           )
             :
             imoveis.map((imovel, key) => (
-              <CardImovel key={key} imovel={imovel} estrela />
+              <CardImovel 
+                key={key} 
+                imovel={imovel} 
+                estrela 
+                tipo={dados.Tipo}/>
             ))
           }
         </View>

@@ -9,7 +9,7 @@ import IconCama from '../../assets/Svg/Diversos/Cama';
 import IconChuveiro from '../../assets/Svg/Diversos/Chuveiro';
 import IconSofa from '../../assets/Svg/Diversos/Sofa';
 
-const cardImovel = ({ imovel, estrela }) => {
+const cardImovel = ({ imovel, estrela, tipo }) => {
     const navigation = useNavigation();
     const [img, setImg] = useState("");
 
@@ -54,11 +54,68 @@ const cardImovel = ({ imovel, estrela }) => {
             return fullName;
         }
     }
+
+
     const [isFavorite, setIsFavorite] = useState(false);
 
     const toggleFavorite = () => {
-        setIsFavorite(!isFavorite);
+        setIsFavorite(!isFavorite);       
     };
+    const favoritar = async ()=>{
+        if(tipo){
+            if(tipo=="Corretor")
+                {
+                   try {
+                    let valor = imovel.codigo;
+                    const response = await ApiService.Post(`/Corretores/AdicionarImovelFavorito`, {"idImovel":valor});
+                    setIsFavorite(true);
+                    } catch (erro) {
+                        console.log(erro);
+                        ToastService.Error("Erro ao favoritar");
+                    } 
+                }
+            else{
+                try {
+                    let valor = imovel.codigo;
+                    const response = await ApiService.Post(`/Imobiliarias/AdicionarImovelFavorito`, {"idImovel":valor});
+                    setIsFavorite(true);
+                } catch (erro) {
+                    console.log(erro);
+                    ToastService.Error("Erro ao favoritar");
+                }
+                } 
+            
+                
+        }
+    }
+
+    async function desfavoritar (idImovel){
+        if(tipo){
+            if(tipo=="Corretor")
+                {
+                   try {
+                    
+                    const response = await ApiService.Delete(`/Corretores/RemoverImovelFavorito`, {idImovel});
+                    setIsFavorite(false);
+                    } catch (erro) {
+                        console.log(erro);
+                        ToastService.Error("Erro ao favoritar");
+                    } 
+                }
+            else{
+                try {
+                    let valor = imovel.codigo;
+                    const response = await ApiService.Post(`/Imobiliarias/RemoverImovelFavorito`, {"idImovel":valor});
+                    setIsFavorite(false);
+                } catch (erro) {
+                    console.log(erro);
+                    ToastService.Error("Erro ao favoritar");
+                }
+                } 
+            
+                
+        }
+    }
 
 
     return (
@@ -76,18 +133,22 @@ const cardImovel = ({ imovel, estrela }) => {
                     <View style={styles.primeirosTxts}>
 
                     <View style={{position:'absolute', left: 130, top: 1}}>
-                    <Pressable onPress={toggleFavorite}>
+                    
                         {
                             estrela?
                                 isFavorite ? (
-                                    <AntDesign name="star" size={15} color="#D2AC21" />
+                                    <Pressable onPress={desfavoritar}>
+                                        <AntDesign name="star" size={15} color="#D2AC21" />
+                                    </Pressable>
                                 ) : (
-                                    <AntDesign name="staro" size={15} color="black" />
+                                    <Pressable onPress={favoritar}>
+                                        <AntDesign name="staro" size={15} color="black" />
+                                    </Pressable>
                                 )
                             :
                             null
                             }
-                    </Pressable>
+                    
                 </View>
                         <Text style={styles.textvalor}>
                             R$ {parseFloat(imovel.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
