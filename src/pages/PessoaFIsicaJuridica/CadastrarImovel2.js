@@ -17,6 +17,9 @@ import RgInput from '../../components/rgInput/rgInput';
 import InputNumerosSelect from '../../components/InputNumerosSelect/InputNumerosSelect';
 import RealInput from '../../components/RealInput/RealInput';
 
+import ButtonVoltar from '../../assets/Svg/Buttons/Bnt_Voltar_Cadastrar_imovel';
+import LogoBackground from '../../assets/Svg/Logo/Logobackground';
+
 const CadastrarImovel2 = () => {
   let ID;
   async function VerificarLogin() {
@@ -136,12 +139,23 @@ const CadastrarImovel2 = () => {
 
   return (
     <View style={styles.container}>
+      
       <ImageBackground
-        source={require("../../images/fundos/back6.png")}
-        style={styles.back}
+        source={require('../../assets/Images/BackGround/Back_Cadastrar.png')}
+        style={styles.backgraud_image}
       >
-        <TouchableOpacity onPress={() => navigation.goBack()} ><Text style={styles.return}> {`<`} </Text></TouchableOpacity>
+
+        <LogoBackground />
+
+        <TouchableOpacity
+          style={{ marginTop: 235, }}
+          onPress={() => navigation.goBack()} >
+          <ButtonVoltar />
+        </TouchableOpacity>
+
         <Text style={styles.titulo}>CADASTRAR IMÓVEL</Text>
+      </ImageBackground>
+
         <View style={styles.portaInputs}>
           <View style={styles.duplinha}>
             <InputNumerosSelect
@@ -200,7 +214,7 @@ const CadastrarImovel2 = () => {
 
 
 
-      </ImageBackground>
+      
     </View>
   );
 };
@@ -211,42 +225,31 @@ const CadastrarImovel2 = () => {
 export default CadastrarImovel2;
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    backgroundColor: '#fff',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    height: '100%'
+
   },
-  back: {
+  backgraud_image: {
     flex: 1,
-    resizeMode: "cover",
-    height: "100%",
+    marginTop: -300,
+    height: "70vh",
     width: "100%",
-    display: 'flex'
-  },
-  return: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    fontSize: '2em',
-    paddingTop: '1vh',
-    color: 'rgb(255,255,255)'
+
   },
   titulo: {
     fontSize: '2em',
     fontWeight: 'bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginTop: '5vh'
+    marginTop: 140
   },
   portaInputs: {
-    width: '100%',
-    height: '50%',
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '18vh'
+    marginBottom: 30
+
   },
   inputs: {
     width: '90vw',
@@ -274,18 +277,26 @@ const styles = StyleSheet.create({
     padding: '1vh'
   },
   botao: {
-    width: '43vw',
-    height: '6vh',
-    borderRadius: '3vh',
     backgroundColor: '#999EA9',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    width: 230,
+    height: 57,
+    borderRadius: 20,
+    marginTop: 60,
+    marginBottom: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowOffset: {
+      width: 3, // deslocamento horizontal da sombra
+      height: 3, // deslocamento vertical da sombra
+    },
+    shadowOpacity: 0.2, // opacidade da sombra
+    shadowRadius: 4, // raio da sombra
+    elevation: 1, // elevação da sombra (apenas Android)
   },
   textobtn: {
-    fontSize: '1.6em',
-    fontWeight: '500',
-    color: '#FFFFFF'
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#FEFEFE'
   },
   portaCheckPai: {
     display: 'flex',

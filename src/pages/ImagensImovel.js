@@ -107,7 +107,7 @@ const EditarImovel = () => {
         < LogoBackgroundPerfil />
       </ImageBackground>
 
-      <TouchableOpacity onPress={() => sair} style={{ position:'relative', left: - 158, top: -59 }}  >
+      <TouchableOpacity onPress={() => navigation.goBack()} style={{ position:'relative', left: - 158, top: -59 }}  >
         <ButtonVoltar />
       </TouchableOpacity>
 
