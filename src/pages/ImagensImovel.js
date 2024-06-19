@@ -86,7 +86,7 @@ const EditarImovel = () => {
   function sair() {
     try {
       if (imagens.length >= 5) {
-        navigation.goBack()
+        navigation.navigate("AcessoDetalhesImovel", {imovel})
         //fav? navigation.goBack() : ToastService.Error("defina uma imagem favorita")
       }
       else {
@@ -107,7 +107,7 @@ const EditarImovel = () => {
         < LogoBackgroundPerfil />
       </ImageBackground>
 
-      <TouchableOpacity onPress={() => navigation.navigate("AcessoDetalhesImovel", {imovel})} style={{ position:'relative', left: - 158, top: -59 }}  >
+      <TouchableOpacity onPress={() => sair} style={{ position:'relative', left: - 158, top: -59 }}  >
         <ButtonVoltar />
       </TouchableOpacity>
 

@@ -20,20 +20,20 @@ import RealInput from '../../components/RealInput/RealInput';
 const CadastrarImovel2 = () => {
   let ID;
   async function VerificarLogin() {
-      
+
     const usuarioEstaLogado = await AuthService.VerificarSeUsuarioEstaLogado();
-    
-  
+
+
     if (usuarioEstaLogado) {
       const dadosUser2 = await AuthService.PegarDadosLogados();
-      if(dadosUser2.Tipo == "PJ"){
+      if (dadosUser2.Tipo == "PJ") {
         ID = dadosUser2.CNPJ;
-      }else{
+      } else {
         ID = dadosUser2.CPF;
-      }  
-  
+      }
+
     }
-    else{
+    else {
       navigation.navigate("LoginECadastro.js");
     }
   }
@@ -97,17 +97,15 @@ const CadastrarImovel2 = () => {
         console.log("Erro ao realizar cadastro", "Preencha todos os dados!")
         return;
       }
-      body.Permuta = Permuta=="sim";
+      body.Permuta = Permuta == "sim";
       body.AutorizaFotos = AutorizaFotos == 'sim';
       body.AutorizarPlaca = AutorizarPlaca == 'sim';
       body.UnidadesDisponiveis = UnidadesDisponiveis;
       body.Descricao = Descricao;
       body.Observacoes = Observacoes;
       body.Id_dono = ID;
-
-      const response = await ApiService.Post("/Imoveis/CadastrarImovel", (body))
-
-      await navigation.navigate("ImagensImovel", {body});
+      const response = await ApiService.Post("/Imoveis/CadastrarImovel", (body));
+      await navigation.navigate("ImagensImovel", { body });
     }
     catch (error) {
       console.log(error);
@@ -121,8 +119,10 @@ const CadastrarImovel2 = () => {
 
   function HandleCheckBox(id) {
     const index = Observacoes.indexOf(id);
-
-    if (index !== -1) {
+    console.log(id)
+    console.log(Observacoes)
+    console.log(index)
+    if (index !== -1 || index == undefined) {
       // Se o número estiver na lista, remova-o
       const novaLista = [...Observacoes];
       novaLista.splice(Observacoes, 1);
