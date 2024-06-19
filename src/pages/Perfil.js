@@ -82,7 +82,7 @@ const Perfil = () => {
             {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" ?
                 <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
                 :
-                <FontAwesome5 name="user-circle" size={50} color="black" style={styles.imagemPerfil} />
+                <FontAwesome5 name="user-circle" size={150} color="black" />
               }
           </Pressable>
 
@@ -162,7 +162,7 @@ const Perfil = () => {
 
           <View style={styles.ellipse}>
             <Pressable style={styles.circuloInternoPerfil}  >
-            {dados.URL_imagem_perfil == null && dados.URL_imagem_perfil == ""  ?
+            {dados.URL_imagem_perfil == null || dados.URL_imagem_perfil == "" || dados.URL_imagem_perfil == undefinded ?
                 <FontAwesome5 name="user-circle" size={150} color="black" />
                 :
                 <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
@@ -236,7 +236,7 @@ const Perfil = () => {
             {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" ?
                 <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
                 :
-                <FontAwesome5 name="user-circle" size={50} color="black" style={styles.imagemPerfil} />
+                <FontAwesome5 name="user-circle" size={150} color="black" />
               }
           </Pressable>
 
@@ -248,7 +248,7 @@ const Perfil = () => {
           </View>
 
           <View style={styles.portaDadosImobi}>
-            <Text style={styles.titleName}>{getPrimeiroENome(dados.nome)}</Text>
+            <Text style={styles.titleName}>{getPrimeiroENome(dados.Nome)}</Text>
 
             <TouchableOpacity >
               <Text style={styles.text_editar_perfil}> Editar Perfil </Text>
@@ -256,23 +256,22 @@ const Perfil = () => {
 
             <View style={styles.duplinha}>
               <Text style={styles.text_dados} >Email</Text>
-              <Text style={styles.text_info}>{dados.email}</Text>
-            </View>
-
-            <View style={styles.duplinha}>
-              <Text style={styles.text_dados} >Endereco </Text>
-              <Text style={styles.text_info}>{dados.bairro}, {dados.cidade}</Text>
+              <Text style={styles.text_info}>{dados.Email}</Text>
             </View>
 
             <View style={styles.duplinha}>
               <Text style={styles.text_dados} >Telefone</Text>
-              <Text style={styles.text_info}>{formatPhoneNumber(dados.telefone)}</Text>
+              <Text style={styles.text_info}>{formatPhoneNumber(dados.Telefone)}</Text>
             </View>
 
+            <View style={styles.duplinha}>
+              <Text style={styles.text_dados} >CPF </Text>
+              <Text style={styles.text_info}>{dados.CPF}</Text>
+            </View>
 
             <View style={styles.duplinha}>
-              <Text style={styles.text_dados}>RG </Text>
-              <Text style={styles.text_info}>{formatRG(dados.rg)}</Text>
+              <Text style={styles.text_dados}>CRECI </Text>
+              <Text style={styles.text_info}>{formatRG(dados.CRECI)}</Text>
             </View>
 
             <View style={styles.duplinha}>
@@ -307,7 +306,7 @@ const Perfil = () => {
             {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" ?
                 <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
                 :
-                <FontAwesome5 name="user-circle" size={50} color="black" style={styles.imagemPerfil} />
+                <FontAwesome5 name="user-circle" size={150} color="black" />
               }
           </Pressable>
 
@@ -319,7 +318,7 @@ const Perfil = () => {
           </View>
 
           <View style={styles.portaDadosImobi}>
-            <Text style={styles.titleName}>{getPrimeiroENome(dados.nome)}</Text>
+            <Text style={styles.titleName}>{getPrimeiroENome(dados.Nome)}</Text>
 
             <TouchableOpacity >
               <Text style={styles.text_editar_perfil}> Editar Perfil </Text>
@@ -327,12 +326,12 @@ const Perfil = () => {
 
             <View style={styles.duplinha}>
               <Text style={styles.text_dados} >Email</Text>
-              <Text style={styles.text_info}>{dados.email}</Text>
+              <Text style={styles.text_info}>{dados.Email}</Text>
             </View>
 
             <View style={styles.duplinha}>
               <Text style={styles.text_dados} >Endereco </Text>
-              <Text style={styles.text_info}>{dados.bairro}, {dados.cidade}</Text>
+              <Text style={styles.text_info}>{dados.Bairro}, {dados.cidade}</Text>
             </View>
 
             <View style={styles.duplinha}>

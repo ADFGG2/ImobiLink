@@ -9,7 +9,7 @@ import IconCama from '../../assets/Svg/Diversos/Cama';
 import IconChuveiro from '../../assets/Svg/Diversos/Chuveiro';
 import IconSofa from '../../assets/Svg/Diversos/Sofa';
 
-const cardImovel = ({ imovel }) => {
+const cardImovel = ({ imovel, estrela }) => {
     const navigation = useNavigation();
     const [img, setImg] = useState("");
 
@@ -77,11 +77,16 @@ const cardImovel = ({ imovel }) => {
 
                     <View style={{position:'absolute', left: 130, top: 1}}>
                     <Pressable onPress={toggleFavorite}>
-                        {isFavorite ? (
-                            <AntDesign name="star" size={15} color="#D2AC21" />
-                        ) : (
-                            <AntDesign name="staro" size={15} color="black" />
-                        )}
+                        {
+                            estrela?
+                                isFavorite ? (
+                                    <AntDesign name="star" size={15} color="#D2AC21" />
+                                ) : (
+                                    <AntDesign name="staro" size={15} color="black" />
+                                )
+                            :
+                            null
+                            }
                     </Pressable>
                 </View>
                         <Text style={styles.textvalor}>

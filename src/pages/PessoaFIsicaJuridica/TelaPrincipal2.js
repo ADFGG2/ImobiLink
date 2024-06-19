@@ -59,7 +59,7 @@ const TelaPrincipal2 = () => {
               {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" && dados.URL_imagem_perfil != undefined ?
                 <Image source={{ uri: dados.URL_imagem_perfil }} style={styles.imagemPerfil} />
                 :
-                <FontAwesome5 name="user-circle" size={50} color="black" />
+                <FontAwesome5 name="user-circle" size={70} color="black" />
               }
             </Pressable>
 

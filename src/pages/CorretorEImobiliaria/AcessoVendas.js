@@ -69,12 +69,12 @@ const AcessoVendas = () => {
         style={styles.portaCards}>
         {imoveisShow ? imoveisShow.map(
           (imovel, key) => (
-            <CardImovel key={key} imovel={imovel} />
+            <CardImovel key={key} imovel={imovel} estrela />
           )
         )
           :
           imoveis.map((imovel, key) => (
-            <CardImovel key={key} imovel={imovel} />
+            <CardImovel key={key} imovel={imovel} estrela />
           ))
         }
       </ScrollView>

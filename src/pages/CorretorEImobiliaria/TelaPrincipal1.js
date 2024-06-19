@@ -54,13 +54,13 @@ const TelaPrincipal1 = () => {
               {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" && dados.URL_imagem_perfil != undefined ?
                 <Image source={{ uri: dados.URL_imagem_perfil }} style={styles.imagemPerfil} />
                 :
-                <FontAwesome5 name="user-circle" size={50} color="black" />
+                <FontAwesome5 name="user-circle" size={70} color="black" />
               }
             </Pressable>
           </View>
 
           <View style={styles.dados}>
-            <Text style={styles.nome}>{dados.Tipo == "Corretor" ? getPrimeiroENome(dados.nome) : dados.RazaoSocial}</Text>
+            <Text style={styles.nome}>{dados.Tipo == "Corretor" ? getPrimeiroENome(dados.Nome) : dados.RazaoSocial}</Text>
             <Text style={styles.tipo}>{dados.Tipo}</Text>
           </View>
 
@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E3E9F2', // Cor de fundo do círculo
     justifyContent: 'center',
     alignItems: 'center',
+    display: 'flex',
     shadowOffset: {
       width: 2, // deslocamento horizontal da sombra
       height: 2, // deslocamento vertical da sombra
@@ -206,6 +207,9 @@ const styles = StyleSheet.create({
   circuloInternoPerfil: {
     width: 67,
     height: 67,
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
     borderRadius: 67 / 2, // Metade da largura/altura
     backgroundColor: '#E3E9F2', // Cor de fundo do círculo interno
 
