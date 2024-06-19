@@ -58,6 +58,11 @@ const CadastrarImovel = () => {
 useEffect(() => {
   VerificarLogin();
 }, []);
+function handleValorEdit(valor)
+{
+  console.log("valor: "+valor)
+  setValorDoImovel(valor)
+}
 
 async function VerificarLogin() {
       
@@ -338,10 +343,10 @@ async function VerificarLogin() {
               placeholder="Valor Imovel"
               
               valor={ValorDoImovel}
-              setValor={(texto) => setValorDoImovel(texto)}
+              setValor={(texto) => handleValorEdit(texto)}
             />
             <InputNumerosSelect
-              options={["Disponível", "Indisponivel"]}
+              options={["Disponível", "Habitado"]}
               onSelect={setStatus}
               placeHold="Status"
                />

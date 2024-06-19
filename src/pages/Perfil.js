@@ -79,12 +79,12 @@ const Perfil = () => {
 
           <View style={styles.ellipse}>
           <Pressable style={styles.circuloInternoPerfil} >
-            {dados.URL_imagem_perfil != null || dados.URL_imagem_perfil != "" ?
+            {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" ?
                 <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
                 :
                 <FontAwesome5 name="user-circle" size={50} color="black" style={styles.imagemPerfil} />
               }
-            </Pressable>
+          </Pressable>
 
             <View style={styles.area_bnt_editar}>
               <Pressable style={styles.button_editar} onPress={() => { setAdiciona(true); setModalIsOpen(true);  }}>
@@ -162,7 +162,7 @@ const Perfil = () => {
 
           <View style={styles.ellipse}>
             <Pressable style={styles.circuloInternoPerfil}  >
-            {dados.URL_imagem_perfil == null || dados.URL_imagem_perfil == ""  ?
+            {dados.URL_imagem_perfil == null && dados.URL_imagem_perfil == ""  ?
                 <FontAwesome5 name="user-circle" size={150} color="black" />
                 :
                 <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
@@ -232,10 +232,13 @@ const Perfil = () => {
 
 
           <View style={styles.ellipse}>
-            <Pressable style={styles.circuloInternoPerfil} >
-              <Image
-                source={foto} style={styles.imagemPerfil} />
-            </Pressable>
+          <Pressable style={styles.circuloInternoPerfil} >
+            {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" ?
+                <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
+                :
+                <FontAwesome5 name="user-circle" size={50} color="black" style={styles.imagemPerfil} />
+              }
+          </Pressable>
 
             <View style={styles.area_bnt_editar}>
               <TouchableOpacity style={styles.button_editar}>
@@ -300,10 +303,13 @@ const Perfil = () => {
 
 
           <View style={styles.ellipse}>
-            <Pressable style={styles.circuloInternoPerfil} >
-              <Image
-                source={foto} style={styles.imagemPerfil} />
-            </Pressable>
+          <Pressable style={styles.circuloInternoPerfil} >
+            {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" ?
+                <Image source={{uri: dados.URL_imagem_perfil}} style={styles.imagemPerfil} />
+                :
+                <FontAwesome5 name="user-circle" size={50} color="black" style={styles.imagemPerfil} />
+              }
+          </Pressable>
 
             <View style={styles.area_bnt_editar}>
               <TouchableOpacity style={styles.button_editar}>

@@ -6,6 +6,7 @@ import ModalTelaPrincipal from '../../components/modalTelaPrincipal/ModalTelaPri
 import foto from '../../assets/Images/Image Perfil .png'
 import { useEffect, useState } from 'react';
 import AuthService from '../../Services/AuthService';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 
 const TelaPrincipal2 = () => {
@@ -55,10 +56,13 @@ const TelaPrincipal2 = () => {
 
           <View style={styles.circuloExternoPerfil}>
             <Pressable style={styles.circuloInternoPerfil} onPress={() => { navigation.navigate("Perfil") }}>
-              <Image
-                source={foto} style={styles.imagemPerfil}
-              />
+              {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" && dados.URL_imagem_perfil != undefined ?
+                <Image source={{ uri: dados.URL_imagem_perfil }} style={styles.imagemPerfil} />
+                :
+                <FontAwesome5 name="user-circle" size={50} color="black" />
+              }
             </Pressable>
+
           </View>
 
           <View style={styles.dados}>
@@ -75,7 +79,7 @@ const TelaPrincipal2 = () => {
         <View style={styles.portaBotoes}>
 
           <TouchableOpacity style={styles.button_1} onPress={() => { navigation.navigate("AcessoMeusImoveis") }}>
-            
+
             <ImageBackground source={require('../../assets/Images/Imovel.jpeg')} resizeMode='contain'>
               <View style={{
                 width: 250,
@@ -196,6 +200,7 @@ const styles = StyleSheet.create({
     height: 67,
     borderRadius: 67 / 2, // Metade da largura/altura
     backgroundColor: '#E3E9F2', // Cor de fundo do círculo interno
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',

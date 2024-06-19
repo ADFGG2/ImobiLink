@@ -6,6 +6,7 @@ import ModalTelaPrincipal from '../../components/modalTelaPrincipal/ModalTelaPri
 import foto from '../../assets/Images/Terra Ville.png'
 import { useEffect, useState } from 'react';
 import AuthService from '../../Services/AuthService';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const TelaPrincipal1 = () => {
 
@@ -49,10 +50,12 @@ const TelaPrincipal1 = () => {
         <View style={styles.perfil}>
 
           <View style={styles.circuloExternoPerfil}>
-            <Pressable style={styles.circuloInternoPerfil} onPress={() => { navigation.navigate("Perfil") }}>
-              <Image
-                source={foto} style={styles.imagemPerfil}
-              />
+          <Pressable style={styles.circuloInternoPerfil} onPress={() => { navigation.navigate("Perfil") }}>
+              {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" && dados.URL_imagem_perfil != undefined ?
+                <Image source={{ uri: dados.URL_imagem_perfil }} style={styles.imagemPerfil} />
+                :
+                <FontAwesome5 name="user-circle" size={50} color="black" />
+              }
             </Pressable>
           </View>
 

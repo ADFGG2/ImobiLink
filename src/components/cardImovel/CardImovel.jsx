@@ -117,10 +117,10 @@ const cardImovel = ({ imovel }) => {
                         </View>
 
                         {
-                        imovel.quantasImagens <=5 ?
-                                <Pressable >
+                        imovel.quantasImagens <= 4 ?
+                                <Pressable>
                                     <MaterialCommunityIcons style={{ position: 'relative', left: 130, bottom: 18,  }} name="alert" size={18} color="#D2AC21" />
-                                </Pressable     > 
+                                </Pressable> 
                             : null
                         }
 

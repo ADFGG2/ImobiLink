@@ -19,11 +19,10 @@ const RealInput = ({ valor, setValor, placeholder, tamanhoCompleto }) => {
       placeholderTextColor="rgba(0, 0, 0, 0.5)"
       onChangeText={(valor) => {
         setValorFormatado(valor);
-        valor = valor.replace("R$", "");
-        valor = valor.replace(".", "");
-        valor = valor.replace(",", ".");
-        setValor(Number(valor));
-        console.log(valor);
+        let valorSemFormatacao = valor.replace("R$", "").trim();
+        valorSemFormatacao = valorSemFormatacao.replace(/\./g, ""); // Remove todos os pontos
+        valorSemFormatacao = valorSemFormatacao.replace(",", "."); // Substitui a vírgula decimal por ponto
+        setValor(Number(valorSemFormatacao));
       }}
     />
 

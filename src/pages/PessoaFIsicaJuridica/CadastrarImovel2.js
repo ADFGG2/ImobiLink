@@ -94,6 +94,7 @@ const CadastrarImovel2 = () => {
     try {
       if (!Permuta || !AutorizarPlaca || !AutorizaFotos || !UnidadesDisponiveis || !Descricao) {
         ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
+        console.log("Erro ao realizar cadastro", "Preencha todos os dados!")
         return;
       }
       body.Permuta = Permuta=="sim";
@@ -106,7 +107,7 @@ const CadastrarImovel2 = () => {
 
       const response = await ApiService.Post("/Imoveis/CadastrarImovel", (body))
 
-      await navigation.navigate("AcessoMeusImoveis");
+      await navigation.navigate("ImagensImovel", {body});
     }
     catch (error) {
       console.log(error);
