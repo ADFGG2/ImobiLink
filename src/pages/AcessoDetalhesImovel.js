@@ -73,12 +73,12 @@ const AcessoDetalhesImovel = () => {
                 return "black"; // cor padrão
         }
     }
-    const translateY = useRef(new Animated.Value(345)).current;
-    const [isVisible, setIsVisible] = useState(false);
+    const translateY = useRef(new Animated.Value(310)).current;
+    const [isVisible, setIsVisible] = useState(true);
 
     const toggleAnimation = () => {
         Animated.timing(translateY, {
-            toValue: isVisible ? 345 : -20, // Ajuste o valor de 300 para a altura desejada
+            toValue: isVisible ? 310: -20, // Ajuste o valor de 300 para a altura desejada
             duration: 800,
             useNativeDriver: true,
         }).start();

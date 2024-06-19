@@ -54,6 +54,12 @@ const cardImovel = ({ imovel }) => {
             return fullName;
         }
     }
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const toggleFavorite = () => {
+        setIsFavorite(!isFavorite);
+    };
+
 
     return (
         <View style={styles.card} key={imovel?.Codigo}>
@@ -63,9 +69,21 @@ const cardImovel = ({ imovel }) => {
                     source={{ uri: img }}
                     style={styles.imagemImovel}
                 />
+                
+
 
                 <View style={styles.valorendereço}>
                     <View style={styles.primeirosTxts}>
+
+                    <View style={{position:'absolute', left: 130, top: 1}}>
+                    <Pressable onPress={toggleFavorite}>
+                        {isFavorite ? (
+                            <AntDesign name="star" size={15} color="#D2AC21" />
+                        ) : (
+                            <AntDesign name="staro" size={15} color="black" />
+                        )}
+                    </Pressable>
+                </View>
                         <Text style={styles.textvalor}>
                             R$ {parseFloat(imovel.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </Text>
@@ -117,11 +135,11 @@ const cardImovel = ({ imovel }) => {
                         </View>
 
                         {
-                        imovel.quantasImagens <= 4 ?
+                            imovel.quantasImagens <= 4 ?
                                 <Pressable>
-                                    <MaterialCommunityIcons style={{ position: 'relative', left: 130, bottom: 18,  }} name="alert" size={18} color="#D2AC21" />
-                                </Pressable> 
-                            : null
+                                    <MaterialCommunityIcons style={{ position: 'relative', left: 130, bottom: 18, }} name="alert" size={18} color="#D2AC21" />
+                                </Pressable>
+                                : null
                         }
 
                     </View>
@@ -157,7 +175,7 @@ const styles = StyleSheet.create({
     },
     texto: {
         textAlign: 'center',
-        fontSize: 10
+        fontSize: 9
     },
     parte1: {
         width: '100%',
@@ -187,7 +205,7 @@ const styles = StyleSheet.create({
         width: '40%',
         height: '100%',
         display: 'flex',
-        marginTop: 10,
+        marginTop: 5,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'left',
