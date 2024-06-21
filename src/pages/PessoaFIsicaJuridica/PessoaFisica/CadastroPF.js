@@ -85,10 +85,11 @@ const CadastroPessoaFisica = () => {
         CEP,
         Bairro
       };
-      const response = await ApiService.Post("/PessoasFisicas/CadastrarPessoaFisica", (body))
+      console.log(body);
+      const response = await ApiService.Post("/PessoasFisicas/CadastrarPessoaFisica", body)
 
       
-      navigation.navigate("login");
+      navigation.navigate("Login");
     }
     catch (error) {
       console.log(error);
@@ -261,7 +262,7 @@ const styles = StyleSheet.create({
     marginTop: 70
   },
   portaInputs: {
-    display: 'flex',
+    display: 'flex',  
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: -10

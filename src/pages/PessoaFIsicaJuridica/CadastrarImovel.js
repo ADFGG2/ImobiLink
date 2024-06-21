@@ -54,6 +54,64 @@ const CadastrarImovel = () => {
 
   let Observacoes = [];
 
+  const preenchimentoAutomatico = () => {
+      try{
+        setNumMatricula(12345)
+        setEndereco("Rua do Rouxinol")
+        setCep("06535-160")
+        setBairro("Cidade São Pedro - Gleba A")
+        setCidade("Santana de Parnaíba")
+        setTipo("Casa")
+        setAndares(1)
+        setDorms(1)
+        setSuites(1)
+        setSalas(1)
+        setGaragem(1)
+        setAreaUtil(1)
+        setCondominioFechado(true)
+        setValorDoImovel(15000)
+        setStatus("Disponível")
+        setAutorizaFotos(true)
+        setAutorizarPlaca(true)
+        setFinalidade("Aluguel")
+        setValorCondominio(1500000)
+        setValorIPTU(1500000)
+  
+        const body = {
+          "Matricula": parseInt(NumMatricula),
+          Finalidade,
+          Endereco,
+          CEP,
+          Bairro,
+          Cidade,
+          Tipo,
+          Andares,
+          "Dormitorios": Dorms,
+          Suites,
+          Salas,
+          "Garagens":Garagem,
+          "AreaUtil": parseFloat(AreaUtil),
+          "CondominioFechado": CondominioFechado=="sim",
+          "Valor":ValorDoImovel,
+          Status,
+          AutorizaFotos,
+          AutorizarPlaca,
+          Descricao,
+          "TaxaCondo": ValorCondominio,
+          "TaxaIPTU": ValorIPTU,
+          Permuta,
+          Observacoes,
+          "IdDono":Id_dono,
+          UnidadesDisponiveis,
+        };
+        navigation.navigate("CadastrarImovel2", {body});
+      }
+      catch(er){
+        console.log(er);
+      }
+     
+    
+  }
   
 useEffect(() => {
   VerificarLogin();
@@ -356,10 +414,18 @@ async function VerificarLogin() {
 
           <Pressable
             style={styles.botao}
-            onPress={RealizarCadastro}
+            onPress={preenchimentoAutomatico}
           >
             <Text style={styles.textobtn}>Continuar</Text>
           </Pressable>
+
+          <Pressable
+            style={styles.botao}
+            onPress={preenchimentoAutomatico}
+          >
+            <Text style={styles.textobtn}>Automatico</Text>
+          </Pressable>
+
         </View>
           
     </View>
@@ -389,7 +455,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginTop: 140
+    marginTop: 160
   },
   portaInputs: {
     display: 'flex',

@@ -81,7 +81,7 @@ const CadastroCorretor = () => {
 
       const response = await ApiService.Post("/Corretores/CadastrarCorretor", body)
       
-      navigation.navigate("login");
+      navigation.navigate("Login");
 
     }
     catch (error) {

@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from 'react-native'
 
 const ButtonVoltar = () => {
   return (
-    <View style={{ flex: 1, position: 'relative', top: 108, left: 31 }}>
+    <View style={{ flex: 1, position: 'absolute', top: 108, left: 31 }}>
 
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_b_1045_908)">

@@ -72,7 +72,7 @@ const CadastroPessoaJuridica = () => {
 
       const response = await ApiService.Post("/PessoasJuridicas/CadastrarPessoaJuridica", body)
       
-      navigation.navigate("login");
+      navigation.navigate("Login");
 
 
     }

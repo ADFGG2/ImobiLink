@@ -9,7 +9,7 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
   const [idImovel, setIdImovel] = useState(imovel?.codigo || "");
   const [descricao, setDescricao] = useState("");
   const [URLImage, setURLImage] = useState("");
-  
+
   async function selecionarImagem() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -22,80 +22,80 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
     setURLImage(result.assets[0].uri);
   }
 
-  async function enviar(){
-    if(imovel){
+  async function enviar() {
+    if (imovel) {
       setIdImovel(imovel.codigo)
-      try{
-        if(!URLImage || !descricao ){
+      try {
+        if (!URLImage || !descricao) {
           ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
           console.log("faltam dados")
           return;
         }
-          setIdImovel(imovel.codigo)
+        setIdImovel(imovel.codigo)
 
-          const body = {
-            idImovel,
-            descricao,
-            URLImage
-          };          
-         
+        const body = {
+          idImovel,
+          descricao,
+          URLImage
+        };
 
-          await ApiService.Post("/Imoveis/CadastrarImagem", body);
-          ToastService.Success("Usuário cadastrado com sucesso!");
-          setVisible(false);
-          buscarImagens();
+
+        await ApiService.Post("/Imoveis/CadastrarImagem", body);
+        ToastService.Success("Usuário cadastrado com sucesso!");
+        setVisible(false);
+        buscarImagens();
       }
-        catch(erro){
-          ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
-          console.log(erro);
-          return;
-        }
+      catch (erro) {
+        ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
+        console.log(erro);
+        return;
+      }
 
     }
 
-    else{
-      try{
-        if(!URLImage){
+    else {
+      try {
+        if (!URLImage) {
           ToastService.Error("Erro ao atualizar imagem de perfil", "selecione uma imagem");
+          console.log("Erro ao atualizar imagem de perfil", "selecione uma imagem");
           return;
         }
-          console.log("id: "+id)
-          const body = {
-            URLImage,
-            id
-          };
+        console.log("id: " + id)
+        const body = {
+          "URLImage":URLImage
+        };
 
-          switch (tipo) {
-            case "PF":
-              await ApiService.Post("/PessoasFisicas/DefinirImagemDePerfil", {"URLImage": URLImage, id});              
+        switch (tipo) {
+          case "PF":
+            await ApiService.Post("/PessoasFisicas/DefinirImagemDePerfil", URLImage);
             break;
-            case "PJ":
-              await ApiService.Post("/PessoasJuridicas/DefinirImagemDePerfil", body);  
-            
-            break;
-            case "Corretor":
-              await ApiService.Post("/Corretores/DefinirImagemDePerfil", body);  
-            
-            break;               
-            case "Imobiliaria":
-              await ApiService.Post("/Imobiliarias/DefinirImagemDePerfil", body);  
-              
-            break;
-            default:
-              break;
-          }
+          case "PJ":
+            await ApiService.Post("/PessoasJuridicas/DefinirImagemDePerfil", body);
 
-          ToastService.Success("imagem cadastrada com sucesso!");
-          setVisible(false);
-          buscarImagens();
+            break;
+          case "Corretor":
+            await ApiService.Post("/Corretores/DefinirImagemDePerfil", body);
+
+            break;
+          case "Imobiliaria":
+            await ApiService.Post("/Imobiliarias/DefinirImagemDePerfil", body);
+
+            break;
+          default:
+            break;
+        }
+
+        ToastService.Success("imagem cadastrada com sucesso!");
+        setVisible(false);
+        buscarImagens();
       }
-        catch(erro){
-          ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
-          console.log(erro);
-          return;
-        }
+      catch (erro) {
+        ToastService.Error("Erro ao realizar cadastro", "Preencha todos os dados!");
+        console.log(erro);
+        return;
+      }
     }
-    
+
   }
 
   if (!adiciona) {
@@ -115,18 +115,18 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
           <View style={styles.content}>
             <Pressable style={styles.Pressable} onPress={selecionarImagem}>
               <View style={styles.portaConteudo}>
-                {!URLImage ? <Image source={upload} style={styles.upload} /> : <Image source={{uri:URLImage}} style={styles.imagem} />}
+                {!URLImage ? <Image source={upload} style={styles.upload} /> : <Image source={{ uri: URLImage }} style={styles.imagem} />}
               </View>
             </Pressable>
-            {imovel? <TextInput 
-            style={styles.textInput} 
-            placeholder="Descrição" 
-            value={descricao} 
-            onChangeText={(texto) => setDescricao(texto)} /> 
-            : null }
+            {imovel ? <TextInput
+              style={styles.textInput}
+              placeholder="Descrição"
+              value={descricao}
+              onChangeText={(texto) => setDescricao(texto)} />
+              : null}
           </View>
 
-          <Pressable style={styles.enviar} onPress={()=>{enviar()}}>
+          <Pressable style={styles.enviar} onPress={() => { enviar() }}>
             <Text style={styles.enviarTxt}> Enviar </Text>
           </Pressable>
         </View>
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: '1em'
   },
-  enviar:{
+  enviar: {
     width: '6em',
     heigth: '2em',
     borderRadius: '0.3em',
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  enviarTxt:{
+  enviarTxt: {
     fontSize: '1em',
     fontWeight: 'bold',
     color: 'rgb(255,255,255)'

@@ -59,7 +59,7 @@ const CadastroImobiliaria = () => {
 
       const response = await ApiService.Post("/Imobiliarias/CadastrarImobiliaria", body)
       
-      navigation.navigate("login");
+      navigation.navigate("Login");
 
     }
     catch (error) {

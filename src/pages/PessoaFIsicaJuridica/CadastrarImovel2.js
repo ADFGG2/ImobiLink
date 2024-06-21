@@ -120,26 +120,26 @@ const CadastrarImovel2 = () => {
     }
   }
 
+
   function HandleCheckBox(id) {
     const index = Observacoes.indexOf(id);
-    console.log(id)
-    console.log(Observacoes)
-    console.log(index)
-    if (index !== -1 || index == undefined) {
-      // Se o número estiver na lista, remova-o
+
+    if (index !== -1) {
       const novaLista = [...Observacoes];
-      novaLista.splice(Observacoes, 1);
-      setObservacoes(Observacoes);
+      novaLista.splice(index, 1);
+      setObservacoes(novaLista);
     } else {
       // Se o número não estiver na lista, adicione-o
       setObservacoes([...Observacoes, id]);
-    }
+    } 
+    console.log(id)
+    console.log(Observacoes)
+    console.log(index)
   }
-
 
   return (
     <View style={styles.container}>
-      
+
       <ImageBackground
         source={require('../../assets/Images/BackGround/Back_Cadastrar.png')}
         style={styles.backgraud_image}
@@ -156,65 +156,65 @@ const CadastrarImovel2 = () => {
         <Text style={styles.titulo}>CADASTRAR IMÓVEL</Text>
       </ImageBackground>
 
-        <View style={styles.portaInputs}>
-          <View style={styles.duplinha}>
-            <InputNumerosSelect
-              options={["sim", "não"]}
-              onSelect={setPermuta}
-              placeHold="Permuta"
-              numero={true} />
+      <View style={styles.portaInputs}>
+        <View style={styles.duplinha}>
+          <InputNumerosSelect
+            options={["sim", "não"]}
+            onSelect={setPermuta}
+            placeHold="Permuta"
+            numero={true} />
 
-            <InputNumerosSelect
-              options={["sim", "não"]}
-              onSelect={setAutorizarPlaca}
-              placeHold="Perm. Placa"
-              numero={true} />
-          </View>
-
-          <View style={styles.duplinha}>
-            <InputNumerosSelect
-              options={["sim", "não"]}
-              onSelect={setAutorizaFotos}
-              placeHold="Perm. Fotografar"
-              numero={true} />
-
-            <InputNumerosSelect
-              options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-              onSelect={setUnidadesDisponiveis}
-              placeHold="qnt. Disponiveis"
-              numero={true} />
-          </View>
-          <View style={styles.portaCheckPai}>
-            <View style={styles.fileira}>
-              <CheckBox options={op1_8} onchange={HandleCheckBox} itensSelecionados={Observacoes} pequeno />
-            </View>
-            <View style={styles.fileira}>
-              <CheckBox options={op9_16} onchange={HandleCheckBox} itensSelecionados={Observacoes} pequeno />
-            </View>
-            <View style={styles.fileira}>
-              <CheckBox options={op17_24} onchange={HandleCheckBox} itensSelecionados={Observacoes} pequeno />
-            </View>
-          </View>
-          <TextInput
-            style={styles.inputs}
-            value={Descricao}
-            onChangeText={(texto) => setDescricao(texto)}
-            placeholder="Descrições Adicionais"
-          />
-
-          <Pressable
-            style={styles.botao}
-            onPress={RealizarCadastro}
-          >
-            <Text style={styles.textobtn}>Cadastrar</Text>
-          </Pressable>
+          <InputNumerosSelect
+            options={["sim", "não"]}
+            onSelect={setAutorizarPlaca}
+            placeHold="Perm. Placa"
+            numero={true} />
         </View>
 
+        <View style={styles.duplinha}>
+          <InputNumerosSelect
+            options={["sim", "não"]}
+            onSelect={setAutorizaFotos}
+            placeHold="Perm. Fotografar"
+            numero={true} />
+
+          <InputNumerosSelect
+            options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+            onSelect={setUnidadesDisponiveis}
+            placeHold="qnt. Disponiveis"
+            numero={true} />
+        </View>
+        <View style={styles.portaCheckPai}>
+          <View style={styles.fileira}>
+            <CheckBox options={op1_8} onchange={HandleCheckBox} itensSelecionados={Observacoes} pequeno />
+          </View>
+          <View style={styles.fileira}>
+            <CheckBox options={op9_16} onchange={HandleCheckBox} itensSelecionados={Observacoes} pequeno />
+          </View>
+          <View style={styles.fileira}>
+            <CheckBox options={op17_24} onchange={HandleCheckBox} itensSelecionados={Observacoes} pequeno />
+          </View>
+        </View>
+        <TextInput
+          style={styles.inputs}
+          value={Descricao}
+          onChangeText={(texto) => setDescricao(texto)}
+          placeholder="Descrições Adicionais"
+        />
+
+        <Pressable
+          style={styles.botao}
+          onPress={RealizarCadastro}
+        >
+          <Text style={styles.textobtn}>Cadastrar</Text>
+        </Pressable>
+      </View>
 
 
 
 
-      
+
+
     </View>
   );
 };
