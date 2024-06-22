@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
+
 
 const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
 
@@ -12,18 +14,13 @@ const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
             {options.map((op, index) => (
                 <View style={styles.optionContainer} key={op?.id} >
                     <TouchableOpacity
-                        style={!pequeno ? styles.touchable : styles.touchablePequeno}
+                        style={styles.checkbox}
                         onPress={() => toggle(op?.id)}>
                         {itensSelecionados.findIndex(i => i === op?.id) !== -1 ? (
-                            <Image
-                                source={require('../../images/icons/check.png')}
-                                style={!pequeno ? styles.checklogo : styles.checklogoPequeno}
-                            />
-
+                            <FontAwesome5 style={{}}name="square-full" size={15} color="#707070" />
                         ) : null}
-
                     </TouchableOpacity>
-                    <Text style={!pequeno ? styles.optext : styles.optextPequeno}>{op.text} </Text>
+                    <Text style={styles.label}>{op.text} </Text>
                 </View>
             ))}
         </View>
@@ -33,50 +30,34 @@ const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: '-11%',
-        marginBottom: 47
+        flex:1,
+        marginRight: 10,
+        flexWrap: 'wrap',
     },
     optionContainer: {
-        display: 'flex',
+        width: 119,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 8,
+        marginLeft: 2
     },
-    touchable: {
-        height: 17,
-        width: 17,
-        borderRadius: 4,
-        justifyContent: 'center',
-        alignItems:'center',
+    checkbox: {
+        width: 15,
+        height: 15,
+        borderWidth: 1,
         borderColor: '#707070',
-        borderWidth: 2
-    },
-    touchablePequeno: {
-        height: 10,
-        width: 10,
-        borderRadius: 1,
+        marginRight: 2,
         justifyContent: 'center',
-        borderColor: '#707070',
-        borderWidth: 1
+        alignItems: 'center',
+        backgroundColor: "#fff"
     },
-    optext: {
-        marginLeft:5,
-        color: '#555',
-        fontSize: 14,
-        fontWeight: '400',
+    checked: {
+        width: 8,
+        height: 8,
+        backgroundColor: '#707070',
     },
-    optextPequeno: {
-        marginLeft: 9,
-        color: '#555',
+    label: {
         fontSize: 10,
-        fontWeight: '400',
-    },
-    checklogo: {
-        width: 19,
-        height: 19
-    },
-    checklogoPequeno: {
-        width: 10,
-        height: 10
     }
 });
 

@@ -63,7 +63,8 @@ const CadastrarImovel2 = () => {
     { text: 'Elevador de Serviço', id: 5 },
     { text: 'Play Ground', id: 6 },
     { text: 'Ar Condicionado', id: 7 },
-    { text: 'Elevador Social', id: 8 }
+    { text: 'Elevador Social', id: 8 },
+    { text: 'Segurança 24h', id: 16 }
   ];
 
   const op9_16 = [
@@ -75,7 +76,6 @@ const CadastrarImovel2 = () => {
     { text: 'Área de lazer', id: 13 },
     { text: 'Churrasqueira', id: 14 },
     { text: 'Closet', id: 15 },
-    { text: 'Segurança 24h', id: 16 }
   ];
 
   const op17_24 = [
@@ -108,7 +108,7 @@ const CadastrarImovel2 = () => {
       body.Observacoes = Observacoes;
       body.Id_dono = ID;
       const response = await ApiService.Post("/Imoveis/CadastrarImovel", (body));
-      await navigation.navigate("ImagensImovel", { body });
+      await navigation.navigate("AcessoMeusImovei");
     }
     catch (error) {
       console.log(error);
@@ -210,11 +210,6 @@ const CadastrarImovel2 = () => {
         </Pressable>
       </View>
 
-
-
-
-
-
     </View>
   );
 };
@@ -242,13 +237,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginTop: 140
+    marginTop: 160
   },
   portaInputs: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 30
+    marginTop: 130
 
   },
   inputs: {
@@ -281,7 +276,7 @@ const styles = StyleSheet.create({
     width: 230,
     height: 57,
     borderRadius: 20,
-    marginTop: 60,
+    marginTop: 50,
     marginBottom: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -299,14 +294,14 @@ const styles = StyleSheet.create({
     color: '#FEFEFE'
   },
   portaCheckPai: {
-    display: 'flex',
     width: '90%',
+    marginTop: 20,
+    marginBottom:20,
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row'
   },
   fileira: {
-    display: 'flex',
     flexDirection: 'column',
     width: '33%'
   }

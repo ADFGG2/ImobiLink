@@ -19,6 +19,7 @@ import RealInput from '../../components/RealInput/RealInput';
 
 import ButtonVoltar from '../../assets/Svg/Buttons/Bnt_Voltar_Cadastrar_imovel';
 import LogoBackground from '../../assets/Svg/Logo/Logobackground';
+import {MaterialIcons } from '@expo/vector-icons'
 
 
 const CadastrarImovel = () => {
@@ -414,16 +415,16 @@ async function VerificarLogin() {
 
           <Pressable
             style={styles.botao}
-            onPress={preenchimentoAutomatico}
+            onPress={RealizarCadastro}
           >
             <Text style={styles.textobtn}>Continuar</Text>
           </Pressable>
 
           <Pressable
-            style={styles.botao}
+            style={{ flex:1 , position: 'absolute', top:'89%', left: '90%', opacity: 0.2}}
             onPress={preenchimentoAutomatico}
           >
-            <Text style={styles.textobtn}>Automatico</Text>
+           <MaterialIcons name="auto-awesome-motion" size={24} color="black" />
           </Pressable>
 
         </View>
