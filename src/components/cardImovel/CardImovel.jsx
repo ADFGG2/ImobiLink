@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Image, Pressable, StyleSheet, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import ToastService from '../../Services/ToastService';
@@ -12,6 +12,7 @@ import IconSofa from '../../assets/Svg/Diversos/Sofa';
 const cardImovel = ({ imovel, estrela, tipo }) => {
     const navigation = useNavigation();
     const [img, setImg] = useState("");
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         pegaImagem();
@@ -59,63 +60,69 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
     const [isFavorite, setIsFavorite] = useState(false);
 
     const toggleFavorite = () => {
-        setIsFavorite(!isFavorite);       
+        setIsFavorite(!isFavorite);
     };
-    const favoritar = async ()=>{
-        if(tipo){
-            if(tipo=="Corretor")
-                {
-                   try {
-                    let valor = imovel.codigo;
-                    const response = await ApiService.Post(`/Corretores/AdicionarImovelFavorito`, {"idImovel":valor});
-                    setIsFavorite(true);
-                    } catch (erro) {
-                        console.log(erro);
-                        ToastService.Error("Erro ao favoritar");
-                    } 
-                }
-            else{
+    const favoritar = async () => {
+        if (tipo) {
+            if (tipo == "Corretor") {
                 try {
                     let valor = imovel.codigo;
-                    const response = await ApiService.Post(`/Imobiliarias/AdicionarImovelFavorito`, {"idImovel":valor});
+                    const response = await ApiService.Post(`/Corretores/AdicionarImovelFavorito`, { "idImovel": valor });
                     setIsFavorite(true);
                 } catch (erro) {
                     console.log(erro);
                     ToastService.Error("Erro ao favoritar");
                 }
-                } 
-            
-                
+            }
+            else {
+                try {
+                    let valor = imovel.codigo;
+                    const response = await ApiService.Post(`/Imobiliarias/AdicionarImovelFavorito`, { "idImovel": valor });
+                    setIsFavorite(true);
+                } catch (erro) {
+                    console.log(erro);
+                    ToastService.Error("Erro ao favoritar");
+                }
+            }
+
+
         }
     }
 
-    async function desfavoritar (idImovel){
-        if(tipo){
-            if(tipo=="Corretor")
-                {
-                   try {
-                    
-                    const response = await ApiService.Delete(`/Corretores/RemoverImovelFavorito`, {idImovel});
-                    setIsFavorite(false);
-                    } catch (erro) {
-                        console.log(erro);
-                        ToastService.Error("Erro ao favoritar");
-                    } 
-                }
-            else{
+    async function desfavoritar(idImovel) {
+        if (tipo) {
+            if (tipo == "Corretor") {
                 try {
-                    let valor = imovel.codigo;
-                    const response = await ApiService.Post(`/Imobiliarias/RemoverImovelFavorito`, {"idImovel":valor});
+
+                    const response = await ApiService.Delete(`/Corretores/RemoverImovelFavorito`, { idImovel });
                     setIsFavorite(false);
                 } catch (erro) {
                     console.log(erro);
                     ToastService.Error("Erro ao favoritar");
                 }
-                } 
-            
-                
+            }
+            else {
+                try {
+                    let valor = imovel.codigo;
+                    const response = await ApiService.Post(`/Imobiliarias/RemoverImovelFavorito`, { "idImovel": valor });
+                    setIsFavorite(false);
+                } catch (erro) {
+                    console.log(erro);
+                    ToastService.Error("Erro ao favoritar");
+                }
+            }
+
+
         }
     }
+    const openModal = () => {
+        setModalVisible(true);
+    };
+
+    // Função para fechar o modal
+    const closeModal = () => {
+        setModalVisible(false);
+    };
 
 
     return (
@@ -126,30 +133,30 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
                     source={{ uri: img }}
                     style={styles.imagemImovel}
                 />
-                
+
 
 
                 <View style={styles.valorendereço}>
                     <View style={styles.primeirosTxts}>
 
-                    <View style={{position:'absolute', left: 130, top: 1}}>
-                    
-                        {
-                            estrela?
-                                isFavorite ? (
-                                    <Pressable onPress={desfavoritar}>
-                                        <AntDesign name="star" size={15} color="#D2AC21" />
-                                    </Pressable>
-                                ) : (
-                                    <Pressable onPress={favoritar}>
-                                        <AntDesign name="staro" size={15} color="black" />
-                                    </Pressable>
-                                )
-                            :
-                            null
+                        <View style={{ position: 'absolute', left: 130, top: 1 }}>
+
+                            {
+                                estrela ?
+                                    isFavorite ? (
+                                        <Pressable onPress={desfavoritar}>
+                                            <AntDesign name="star" size={15} color="#D2AC21" />
+                                        </Pressable>
+                                    ) : (
+                                        <Pressable onPress={favoritar}>
+                                            <AntDesign name="staro" size={15} color="black" />
+                                        </Pressable>
+                                    )
+                                    :
+                                    null
                             }
-                    
-                </View>
+
+                        </View>
                         <Text style={styles.textvalor}>
                             R$ {parseFloat(imovel.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </Text>
@@ -188,10 +195,12 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
                             </View>
                         </Pressable>
 
-                        <View style={styles.row2}>
-                            <Ionicons name="person-circle-outline" size={18} color="black" />
-                            <Text style={styles.detalhesImoveisTxt}>{getFirstAndSecondName(imovel.nomeAutor)}</Text>
-                        </View>
+                        <Pressable onPress={openModal}>
+                            <View style={styles.row2}>
+                                <Ionicons name="person-circle-outline" size={18} color="black" />
+                                <Text style={styles.detalhesImoveisTxt}>{getFirstAndSecondName(imovel.nomeAutor)}</Text>
+                            </View>
+                        </Pressable>
 
                         <View style={styles.row}>
                             <View>
@@ -212,6 +221,33 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
 
                 </View>
             </View>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={closeModal}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.txtModal}>{getFirstAndSecondName(imovel.nomeAutor)}</Text>
+                        
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                            <MaterialCommunityIcons name="email-outline" size={20} color="black" />
+                            <Text style={styles.txtDados}> Bercko@gmail.com </Text>
+                        </View>
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                            <FontAwesome name="whatsapp" size={20} color="black" />
+                            <Text style={styles.txtDados}> 11 97411-3797 </Text>
+                        </View>
+
+                        <Pressable onPress={closeModal}>
+                            <AntDesign style={styles.closeText} name="closecircleo" size={20} color="black" />
+                            
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 };
@@ -323,4 +359,42 @@ const styles = StyleSheet.create({
         paddingLeft: 2,
         fontSize: 10
     },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalContent: {
+        width: '70%',
+        height: '20%',
+        padding: 15,
+        backgroundColor: '#bebebe',
+        borderRadius: 11,
+        alignItems: 'center ',
+        justifyContent:'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 1, // deslocamento horizontal da sombra
+            height: 1, // deslocamento vertical da sombra
+        },
+        shadowOpacity: 0.4, // opacidade da sombra
+        shadowRadius: 6, // raio da sombra
+
+    },
+    closeText: {
+        marginTop: 25,
+
+    },
+    txtModal: {
+        fontSize: 25,
+        fontWeight: '600',
+        letterSpacing: 1
+        
+    },
+    txtDados: {
+        fontSize: 12,
+        fontWeight: '400',
+        letterSpacing: 1
+    }
 })

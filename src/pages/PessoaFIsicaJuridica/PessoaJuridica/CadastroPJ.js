@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 import { ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CepInput from '../../../components/cepInput/cepInput';
-import CheckBox from '../../../components/checkbox/checkbox';
+import CheckTermosDeUso from '../../../components/CheckBox/checkbox_cadastro';
 import PhoneInput from '../../../components/phoneInput/phoneInput';
 import CnpjInput from '../../../components/cnpjInput/cnpjInput';
 import ToastService from '../../../Services/ToastService';
@@ -13,6 +13,7 @@ import AuthService from '../../../Services/AuthService';
 
 import ButtonVoltar from '../../../assets/Svg/Buttons/Bnt_Voltar';
 import LogoBackground from '../../../assets/Svg/Logo/Logobackground';
+
 
 const CadastroPessoaJuridica = () => {
   const navigation = useNavigation();
@@ -71,7 +72,7 @@ const CadastroPessoaJuridica = () => {
       };
 
       const response = await ApiService.Post("/PessoasJuridicas/CadastrarPessoaJuridica", body)
-      
+
       navigation.navigate("Login");
 
 
@@ -182,7 +183,7 @@ const CadastroPessoaJuridica = () => {
             placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
         </View>
-        
+
         <TextInput
           style={styles.inputs}
           value={Cidade}
@@ -190,7 +191,7 @@ const CadastroPessoaJuridica = () => {
           placeholder="Cidade"
           placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
-        <CheckBox options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
+        <CheckTermosDeUso options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
 
         <Pressable
           style={styles.botao}

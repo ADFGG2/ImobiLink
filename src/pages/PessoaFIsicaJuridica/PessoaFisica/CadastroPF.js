@@ -8,7 +8,7 @@ import ApiService from '../../../Services/ApiService';
 import AuthService from '../../../Services/AuthService';
 
 import DatePicker from 'react-native-neat-date-picker';
-import CheckBox from '../../../components/checkbox/checkbox';
+import CheckTermosDeUso from '../../../components/CheckBox/checkbox_cadastro';
 import CepInput from '../../../components/cepInput/cepInput';
 import PhoneInput from '../../../components/phoneInput/phoneInput';
 import CpfInput from '../../../components/cpfInput/cpfInput';
@@ -219,7 +219,7 @@ const CadastroPessoaFisica = () => {
           colorOptions={{ headerColor: '#000', selectedDateBackgroundColor: "#000" }}
         />
 
-        <CheckBox options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
+        <CheckTermosDeUso options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
 
       </View>
 
@@ -265,7 +265,8 @@ const styles = StyleSheet.create({
     display: 'flex',  
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: -10
+    marginBottom: -10,
+    
   },
   inputs: {
     width: '90vw',

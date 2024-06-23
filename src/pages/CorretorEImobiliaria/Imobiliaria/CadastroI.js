@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 import { ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CheckBox from '../../../components/checkbox/checkbox';
+import CheckTermosDeUso from '../../../components/CheckBox/checkbox_cadastro';
 import CepInput from '../../../components/cepInput/cepInput';
 import PhoneInput from '../../../components/phoneInput/phoneInput';
 import CnpjInput from '../../../components/cnpjInput/cnpjInput';
@@ -58,7 +58,7 @@ const CadastroImobiliaria = () => {
       };
 
       const response = await ApiService.Post("/Imobiliarias/CadastrarImobiliaria", body)
-      
+
       navigation.navigate("Login");
 
     }
@@ -115,7 +115,7 @@ const CadastroImobiliaria = () => {
           value={RazaoSocial}
           onChangeText={(texto) => setRazaoSocial(texto)}
           placeholder="Razao Social"
-          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
         <View style={styles.duplinha}>
 
@@ -129,7 +129,7 @@ const CadastroImobiliaria = () => {
             onChangeText={(texto) => setCRECI(texto)}
             placeholder="CRECI F"
             maxLength={7}
-            placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
         </View>
 
@@ -139,7 +139,7 @@ const CadastroImobiliaria = () => {
           value={RepresentanteLegal}
           onChangeText={(texto) => setRepresentanteLegal(texto)}
           placeholder="Representante Legal"
-          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
         <View style={styles.duplinha}>
 
@@ -148,7 +148,7 @@ const CadastroImobiliaria = () => {
             value={Email}
             onChangeText={(texto) => setEmail(texto)}
             placeholder="E-mail"
-            placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
           <PhoneInput
             telefonePai={Telefone}
@@ -161,7 +161,7 @@ const CadastroImobiliaria = () => {
           value={Senha}
           onChangeText={(texto) => setSenha(texto)}
           placeholder="Senha"
-          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
 
         <TextInput
@@ -169,7 +169,7 @@ const CadastroImobiliaria = () => {
           value={confirmasenha}
           onChangeText={(texto) => setconfirmasenha(texto)}
           placeholder="Repita a senha"
-          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
         <View style={styles.duplinha}>
 
@@ -184,7 +184,7 @@ const CadastroImobiliaria = () => {
             value={Bairro}
             onChangeText={(texto) => setBairro(texto)}
             placeholder="Bairro"
-            placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+            placeholderTextColor="rgba(0, 0, 0, 0.5)" />
         </View>
 
         <TextInput
@@ -192,9 +192,9 @@ const CadastroImobiliaria = () => {
           value={Cidade}
           onChangeText={(texto) => setCidade(texto)}
           placeholder="Cidade"
-          placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+          placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
-        <CheckBox options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
+        <CheckTermosDeUso options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
 
       </View>
 

@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 
-const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
+const CheckTermosDeUso = ({ options, itensSelecionados, onchange, pequeno }) => {
 
     function toggle(id) {
         onchange(id);
@@ -21,7 +21,7 @@ const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
                             
                         ) : null}
                     </TouchableOpacity>
-                    <Text style={styles.label}>{op.text}</Text>
+                    <Text style={styles.label}>{op.text} </Text>
                 </View>
             ))}
         </View>
@@ -32,15 +32,13 @@ const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        marginRight: 10,
-        flexWrap: 'wrap',
+        width: '100%',
     },
     optionContainer: {
-        width: 119,
+        width:300,
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 8,
-        marginLeft: 2
+        marginBottom: 40,
     },
     checkbox: {
         width: 15,
@@ -58,8 +56,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#707070',
     },
     label: {
-        fontSize: 10,
+        fontSize: 12,
+        color:"#707070"
     }
 });
 
-export default CheckBox;
+export default CheckTermosDeUso;

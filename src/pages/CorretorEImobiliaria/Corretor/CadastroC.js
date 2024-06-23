@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 import { ImageBackground, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import DatePicker from 'react-native-neat-date-picker';
-import CheckBox from '../../../components/checkbox/checkbox';
+import CheckTermosDeUso from '../../../components/CheckBox/checkbox_cadastro';
 import PhoneInput from '../../../components/phoneInput/phoneInput';
 import CpfInput from '../../../components/cpfInput/cpfInput';
 import ToastService from '../../../Services/ToastService';
@@ -80,7 +80,7 @@ const CadastroCorretor = () => {
 
 
       const response = await ApiService.Post("/Corretores/CadastrarCorretor", body)
-      
+
       navigation.navigate("Login");
 
     }
@@ -193,7 +193,7 @@ const CadastroCorretor = () => {
           colorOptions={{ headerColor: '#000', selectedDateBackgroundColor: "#000" }}
         />
 
-        <CheckBox options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
+        <CheckTermosDeUso options={options2} onchange={HandleCheckBox} itensSelecionados={Observacoes} />
 
       </View>
 

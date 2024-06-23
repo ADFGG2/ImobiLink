@@ -108,7 +108,7 @@ const CadastrarImovel2 = () => {
       body.Observacoes = Observacoes;
       body.Id_dono = ID;
       const response = await ApiService.Post("/Imoveis/CadastrarImovel", (body));
-      await navigation.navigate("AcessoMeusImovei");
+      await navigation.navigate("AcessoMeusImoveis");
     }
     catch (error) {
       console.log(error);
