@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+
 
 const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
 
@@ -15,15 +17,12 @@ const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
                         style={!pequeno ? styles.touchable : styles.touchablePequeno}
                         onPress={() => toggle(op?.id)}>
                         {itensSelecionados.findIndex(i => i === op?.id) !== -1 ? (
-                            <Image
-                                source={require('../../images/icons/check.png')}
-                                style={!pequeno ? styles.checklogo : styles.checklogoPequeno}
-                            />
-
+                            <Feather name="check" size={15} color="#707070" />
+                            
                         ) : null}
 
                     </TouchableOpacity>
-                    <Text style={!pequeno ? styles.optext : styles.optextPequeno}>{op.text} </Text>
+                    <Text style={styles.label}>{op.text}</Text>
                 </View>
             ))}
         </View>

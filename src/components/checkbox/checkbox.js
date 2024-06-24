@@ -14,12 +14,13 @@ const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
             {options.map((op, index) => (
                 <View style={styles.optionContainer} key={op?.id} >
                     <TouchableOpacity
-                        style={styles.checkbox}
+                        style={!pequeno ? styles.touchable : styles.touchablePequeno}
                         onPress={() => toggle(op?.id)}>
                         {itensSelecionados.findIndex(i => i === op?.id) !== -1 ? (
                             <Feather name="check" size={15} color="#707070" />
                             
                         ) : null}
+
                     </TouchableOpacity>
                     <Text style={styles.label}>{op.text}</Text>
                 </View>
@@ -31,34 +32,50 @@ const CheckBox = ({ options, itensSelecionados, onchange, pequeno }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
-        marginRight: 10,
-        flexWrap: 'wrap',
+        marginLeft: '-11%',
+        marginBottom: 47
     },
     optionContainer: {
-        width: 119,
+        display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 8,
-        marginLeft: 2
+        alignItems: 'center'
     },
-    checkbox: {
-        width: 15,
-        height: 15,
-        borderWidth: 1,
-        borderColor: '#707070',
-        marginRight: 2,
+    touchable: {
+        height: 17,
+        width: 17,
+        borderRadius: 4,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "#fff"
+        alignItems:'center',
+        borderColor: '#707070',
+        borderWidth: 2
     },
-    checked: {
-        width: 8,
-        height: 8,
-        backgroundColor: '#707070',
+    touchablePequeno: {
+        height: 10,
+        width: 10,
+        borderRadius: 1,
+        justifyContent: 'center',
+        borderColor: '#707070',
+        borderWidth: 1
     },
-    label: {
+    optext: {
+        marginLeft:5,
+        color: '#555',
+        fontSize: 14,
+        fontWeight: '400',
+    },
+    optextPequeno: {
+        marginLeft: 9,
+        color: '#555',
         fontSize: 10,
+        fontWeight: '400',
+    },
+    checklogo: {
+        width: 19,
+        height: 19
+    },
+    checklogoPequeno: {
+        width: 10,
+        height: 10
     }
 });
 
