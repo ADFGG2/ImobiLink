@@ -30,7 +30,7 @@ const PortaImagem = ({ link, descricao, setLink, id, setConfirmDialogVisible, se
           tipo == "PJ" || tipo == "PF" ?
             <Pressable 
             onPress={() => { favoritar(id, imovelId) }}
-            style={{position:'relative', left: 65, bottom: 13}}>
+            style={{position:'relative', left: 60, bottom: 14}}>
               {fav ? <MaterialIcons name="favorite" size={10} color="#BD0B0B" /> : <MaterialIcons name="favorite-border" size={10} color="#000" />}
             </Pressable> :
             null}
@@ -44,8 +44,8 @@ const PortaImagem = ({ link, descricao, setLink, id, setConfirmDialogVisible, se
 export default PortaImagem;
 const styles = StyleSheet.create({
   retangulo: {
-    width: 155,
-    height: 116,
+    width: 150,
+    height: 111,
     marginLeft: 10,
     alignItems: 'center',
     backgroundColor: "#BEBEBE",
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   textinicon: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 73
+    marginTop: 70
   },
   textdescrition: {
     fontSize: 12,

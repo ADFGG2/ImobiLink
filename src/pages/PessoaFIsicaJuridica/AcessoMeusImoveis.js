@@ -61,7 +61,7 @@ const AcessoMeusImoveis = () => {
   return (
     <View style={styles.container}>
 
-      
+
       <ImageBackground
         source={require('../../assets/Images/BackGround/Back_Cadastrar.png')}
         style={styles.backgraud_image}
@@ -78,7 +78,7 @@ const AcessoMeusImoveis = () => {
 
 
       <View style={styles.portaPesquisa}>
-      <BarraDePesquisa key={1} setImoveisShow={setImoveisShow} imoveisShow={imoveisShow} imoveis={imoveis} />
+        <BarraDePesquisa key={1} setImoveisShow={setImoveisShow} imoveisShow={imoveisShow} imoveis={imoveis} />
       </View>
 
       <ScrollView

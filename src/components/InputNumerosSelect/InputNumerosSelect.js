@@ -22,7 +22,7 @@ const InputNumerosSelect = ({ options, onSelect, defaultValue, placeHold, numero
                 <AntDesign name="down" size={10} color="#999EA9" />
             </TouchableOpacity>
             <Modal
-                animationType="slide"
+                animationType="fade"
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(false)}
@@ -56,19 +56,24 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-
-    },
-    modalContent: {
-        backgroundColor: '#00000',
-        padding: 20,
-        borderRadius: 10,
-        elevation: 5,
-        paddingBottom: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        
     },
     option: {
-        padding: 10,
-        backgroundColor: '#FFF',
-        borderRadius: 5
+        width: 120,
+        height: 50,
+        marginTop: 10,
+        backgroundColor: '#bebebe',
+        borderRadius: 11,
+        alignItems: 'center ',
+        justifyContent:'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 1, // deslocamento horizontal da sombra
+            height: 1, // deslocamento vertical da sombra
+        },
+        shadowOpacity: 0.4, // opacidade da sombra
+        shadowRadius: 6, // raio da sombra
     },
     inputs2: {
         width: '44vw',
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
         color: 'rgba(0, 0, 0, 0.5)', // Change this color to your desired color
     },
     modalText: {
-        color: 'rgba(0, 0, 0, 0.5)',
+        color: 'rgba(0, 0, 0, 0.8)',
     }
 });
 

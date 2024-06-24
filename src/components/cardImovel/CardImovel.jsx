@@ -186,7 +186,7 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
                         </View>
                     </View>
 
-                    <View style={{ alignItems: 'center', flexDirection: 'column', alignItems: 'flex-start' }}>
+                    <View style={{ alignItems: 'center', flexDirection: 'column', alignItems: 'flex-start', marginTop: 5 }}>
 
                         <Pressable onPress={() => navigation.navigate("AcessoDetalhesImovel", { imovel })}>
                             <View style={styles.row}>
@@ -316,6 +316,7 @@ const styles = StyleSheet.create({
     detalhesImoveis: {
         marginLeft: -9,
         paddingLeft: 3,
+        marginTop: 5,
         height: '20%',
         display: 'flex',
         flexDirection: 'row',

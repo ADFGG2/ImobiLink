@@ -48,63 +48,61 @@ const BarraDePesquisa = ({ imoveis, imoveisShow, setImoveisShow }) => {
 
     return (
         <>
-            <View style={{ flex:1,alignItems:'center', justifyContent:'center', marginHorizontal:10,}}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10, }}>
                 <Modal
                     transparent={true}
                     visible={modalVisible2}
-                    style={styles.Modal}
+                    style={styles.modal}
                     onRequestClose={() => {
                         setModalVisible2(!modalVisible2);
                     }}>
                     <View
-                        style={styles.Modal}>
+                        style={styles.modal}>
                         <View style={styles.content}>
-                            <Text>Filtro</Text>
-                            <View style={styles.valores}>
-                                <TextInput
-                                    style={styles.inputsValor}
-                                    value={filtroDeValorMinimo}
-                                    onChangeText={(texto) => setFiltroDeValorMinimo(texto.replace(/[^0-9]/g, ''))}
-                                    placeholder="valor Minimo" />
+                            <Text style={{fontSize: 21, fontWeight: '600', letterSpacing: 1, marginTop:15}} >Filtro</Text>
+                        <View style={styles.valores}>
+                            <TextInput
+                                style={styles.inputsValor}
+                                value={filtroDeValorMinimo}
+                                onChangeText={(texto) => setFiltroDeValorMinimo(texto.replace(/[^0-9]/g, ''))}
+                                placeholder="Valor Mínimo"
+                                placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+                                
 
-                                <TextInput
-                                    style={styles.inputsValor}
-                                    value={filtroDeValorMaximo}
-                                    onChangeText={(texto) => setFiltroDeValorMaximo(texto.replace(/[^0-9]/g, ''))}
-                                    placeholder="valor Maximo" />
-                            </View>
-                            <View
-                                style={styles.valores}
-                            >
-                                <InputFlatList
-                                    options={cidadesDisponiveis}
-                                    onSelect={setFiltroDeCidade}
-                                    defaultValue={filtroDeCidade}
-                                    placeHold="Cidades" />
-                            </View>
+                            <TextInput
+                                style={styles.inputsValor}
+                                value={filtroDeValorMaximo}
+                                onChangeText={(texto) => setFiltroDeValorMaximo(texto.replace(/[^0-9]/g, ''))}
+                                placeholder="Valor Máximo"
+                                placeholderTextColor="rgba(0, 0, 0, 0.5)"  />
+                        </View>
+                        <View
+                            style={styles.valoresLista}
+                        >
+                            <InputFlatList
+                                options={cidadesDisponiveis}
+                                onSelect={setFiltroDeCidade}
+                                defaultValue={filtroDeCidade}
+                                placeHold="Cidades" />
+                        </View>
 
-                            <View>
-                                <InputFlatList
-                                    options={bairrosDisponiveis}
-                                    onSelect={setFiltroDeBairro}
-                                    defaultValue={filtroDeBairro}
-                                    placeHold="Bairros" />
-                            </View>
+                        <View style={styles.valoresLista}>
+                            <InputFlatList
+                                options={bairrosDisponiveis}
+                                onSelect={setFiltroDeBairro}
+                                defaultValue={filtroDeBairro}
+                                placeHold="Bairros" />
                         </View>
                     </View>
-                </Modal>
-                </View>
+            </View>
+        </Modal >
+                </View >
 
-                <View style={styles.BarraDePesquisa} key={1}>
-                    <MaterialCommunityIcons name="magnify" size={20} color="black" />
-                    <TextInput
-                        placeholder="Busque Por..."
-                        placeholderTextColor="#B0B0B0"
-                        onChange={(texto) => { setPesquisaPai(texto) }} />
-                    <Pressable style={styles.filtro} onPress={() => { setModalVisible2(true) }}>
-                        <Octicons name="filter" size={20} color="black" />
-                    </Pressable>
-                </View>
+    <View style={styles.BarraDePesquisa} key={1}>
+        <Pressable style={styles.filtro} onPress={() => { setModalVisible2(true) }}>
+            <Octicons name="filter" size={23} color="black" />
+        </Pressable>
+    </View>
             
         </>
     );
@@ -114,12 +112,11 @@ export default BarraDePesquisa;
 
 const styles = StyleSheet.create({
     BarraDePesquisa: {
-        width: 265,
-        height: 40,
-        borderRadius: '1.5em',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        width:50,
+        height: 50,
+        borderRadius: 50/2,
+        justifyContent: 'center',
+        alignItems:'center',
         backgroundColor: '#ECECEC',
         borderColor: '#B0B0B0',
         padding: '0.3em',
@@ -134,34 +131,49 @@ const styles = StyleSheet.create({
         fontSize: '1em'
     },
     content: {
-        width: '25em',
-        height: '25em',
-        backgroundColor: 'rgb(200,200,200)',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    },
-    Modal: {
-        flex:1,
         width: '90%',
-        height: '100%',
+        height: '30%',
+        backgroundColor: '#bebebe',
+        borderRadius: 11,
+        alignItems: 'center ',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 1, // deslocamento horizontal da sombra
+            height: 1, // deslocamento vertical da sombra
+        },
+        shadowOpacity: 0.4, // opacidade da sombra
+        shadowRadius: 6, // raio da sombra
+    },
+    modal: {
+        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     valores: {
         width: '90%',
         height: '20%',
-        display: 'flex',
+        marginTop: 15,
+        alignItems:'center',
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
     },
     inputsValor: {
-        width: '15vh',
+        width: 120,
         height: '5vh',
         borderRadius: '0.7vh',
-        backgroundColor: 'rgb(230,230,230)',
         borderWidth: 1,
-        borderColor: 'rgb(0,0,0)',
-        padding: 3,
-        fontSize: '1em'
+        borderColor: 'rgba(0, 0, 0, 0.5)',
+        padding: 20,
+        fontSize: 12, 
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    valoresLista:{
+        width: '90%',
+        height: '20%',
+        marginTop: 15,
+        alignItems:'center',
+        justifyContent: 'center',
     }
 });
