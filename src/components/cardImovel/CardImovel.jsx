@@ -18,11 +18,15 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
         pegaImagem();
     }, []);
 
+    const formatPhoneNumber = (phoneNumber) => {
+        return phoneNumber ? phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '';
+      };
     async function pegaImagem() {
         try {
             let valor = imovel.codigo;
             const response = await ApiService.Get(`/imoveis/PegaImagemFav/${valor}`);
             setImg(response.data);
+            console.log(imovel);
         } catch (erro) {
             console.log(erro);
             ToastService.Error("Erro ao buscar imagens");
@@ -233,12 +237,12 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
                         
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
                             <MaterialCommunityIcons name="email-outline" size={20} color="black" />
-                            <Text style={styles.txtDados}> Bercko@gmail.com </Text>
+                            <Text style={styles.txtDados}> {imovel.emailDono} </ Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
                             <FontAwesome name="whatsapp" size={20} color="black" />
-                            <Text style={styles.txtDados}> 11 97411-3797 </Text>
+                            <Text style={styles.txtDados}> {formatPhoneNumber(imovel.telefoneDono)} </Text>
                         </View>
 
                         <Pressable onPress={closeModal}>
