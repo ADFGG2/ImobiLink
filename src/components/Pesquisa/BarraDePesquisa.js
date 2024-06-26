@@ -59,7 +59,7 @@ const BarraDePesquisa = ({ imoveis, imoveisShow, setImoveisShow }) => {
                     <View
                         style={styles.modal}>
                         <View style={styles.content}>
-                            <Text style={{fontSize: 21, fontWeight: '600', letterSpacing: 1, marginTop:15}} >Filtro</Text>
+                            <Text style={{fontSize: 21, fontWeight: '700', letterSpacing: 1, marginTop:15}} >Filtro</Text>
                         <View style={styles.valores}>
                             <TextInput
                                 style={styles.inputsValor}

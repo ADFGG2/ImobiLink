@@ -5,6 +5,8 @@ import upload from '../../images/icons/upload.png';
 import ToastService from '../../Services/ToastService';
 import ApiService from '../../Services/ApiService';
 
+import {} from '@expo/vector-icons'
+
 export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imovel, buscarImagens, id, tipo }) {
   const [idImovel, setIdImovel] = useState(imovel?.codigo || "");
   const [descricao, setDescricao] = useState("");
@@ -147,8 +149,8 @@ const styles = StyleSheet.create({
   content: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '90%',
-    height: '40%',
+    width: '100%',
+    height: '50%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',

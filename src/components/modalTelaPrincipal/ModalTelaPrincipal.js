@@ -60,7 +60,18 @@ const ModalTelaPrincipal = () => {
                 useNativeDriver: true,
             }).start();
         }
+    }
+    const closeModal = () => {
+        setModalVisible(false);
+        setModalVisible2(false);
+        Animated.timing(slideAnim, {
+            toValue: -200,
+            duration: 300,
+            easing: Easing.ease,
+            useNativeDriver: true,
+        }).start();
     };
+    
 
     return (
         <Pressable onPress={handleOutsidePress}>
@@ -77,7 +88,7 @@ const ModalTelaPrincipal = () => {
                         </BlurView>
 
                         <BlurView intensity={30} tint={"dark"} style={styles.popup_modal}>
-                            <Pressable onPress={() => navigation.navigate("Perfil")}>
+                            <Pressable onPress={() => { closeModal(); navigation.navigate("Perfil"); }}>
                                 <View style={styles.modalView}>
                                     <IconEditar />
                                 </View>
@@ -99,7 +110,6 @@ const ModalTelaPrincipal = () => {
                         <ButtonMenu style={!modalVisible ? styles.Menu : styles.invisivel} />
                     </Pressable>
                 </BlurView>
-
 
             </View>
         </Pressable>

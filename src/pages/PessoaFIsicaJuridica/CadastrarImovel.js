@@ -254,7 +254,7 @@ async function VerificarLogin() {
 
         <TouchableOpacity
           style={{ marginTop: 235, }}
-          onPress={() => navigation.goBack()} >
+          onPress={() => navigation.navigate('TelaPrincipal2')}>
           <ButtonVoltar />
         </TouchableOpacity>
 
