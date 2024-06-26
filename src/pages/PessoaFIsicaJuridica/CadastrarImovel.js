@@ -311,14 +311,14 @@ async function VerificarLogin() {
 
           <TextInput
             style={styles.inputs}
-            value={Cidade}
+            value={Cidade}  
             onChangeText={(texto) => setCidade(texto)}
             placeholder="Cidade"
             placeholderTextColor="rgba(0, 0, 0, 0.5)" />
 
           <View style={styles.duplinha}>
             <InputNumerosSelect
-              options={["Chácara", "Terreno", "Casa", "Sítio", "Fazenda", "Área Comercial", "Area Residencial"]}
+              options={["Chácara", "Terreno", "Casa", "Sítio", "Fazenda", "Área Comercial", "Area Residencial", "Apartamento"]}
               onSelect={setTipo}
               placeHold="Tipo de Imóvel"
                />

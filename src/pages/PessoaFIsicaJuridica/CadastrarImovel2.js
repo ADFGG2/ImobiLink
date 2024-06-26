@@ -8,7 +8,7 @@ import ApiService from '../../Services/ApiService';
 import AuthService from '../../Services/AuthService';
 
 import DatePicker from 'react-native-neat-date-picker';
-import CheckBox from '../../components/checkbox/checkbox';
+import CheckBox from '../../components/CheckBox/checkbox';
 import CepInput from '../../components/cepInput/cepInput';
 import PhoneInput from '../../components/phoneInput/phoneInput';
 import CpfInput from '../../components/cpfInput/cpfInput';
