@@ -49,15 +49,16 @@ const TelaPrincipal1 = () => {
       >
         <View style={styles.perfil}>
 
-          <View style={styles.circuloExternoPerfil}>
-          <Pressable style={styles.circuloInternoPerfil} onPress={() => { navigation.navigate("Perfil") }}>
+          <Pressable onPress={() => { navigation.navigate("Perfil") }} style={styles.circuloExternoPerfil}>
+           {/*<Pressable style={styles.circuloInternoPerfil} onPress={() => { navigation.navigate("Perfil") }}>
               {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" && dados.URL_imagem_perfil != undefined ?
                 <Image source={{ uri: dados.URL_imagem_perfil }} style={styles.imagemPerfil} />
                 :
                 <FontAwesome5 name="user-circle" size={70} color="black" />
               }
-            </Pressable>
-          </View>
+            </Pressable>*/}
+             <Image style={styles.imagemPerfil} source={require('../../assets/Images/Perfil Homem Corretor.png')} />
+          </Pressable>
 
           <View style={styles.dados}>
             <Text style={styles.nome}>{dados.Tipo == "Corretor" ? getPrimeiroENome(dados.Nome) : dados.RazaoSocial}</Text>

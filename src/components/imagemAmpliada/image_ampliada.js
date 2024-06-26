@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, Image, Pressable, TextInput, Modal } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable, TextInput, Modal, TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import upload from '../../images/icons/upload.png';
 import ToastService from '../../Services/ToastService';
 import ApiService from '../../Services/ApiService';
 
-import {} from '@expo/vector-icons'
+import { FontAwesome, AntDesign } from '@expo/vector-icons';
 
 export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imovel, buscarImagens, id, tipo }) {
   const [idImovel, setIdImovel] = useState(imovel?.codigo || "");
@@ -41,7 +41,6 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
           URLImage
         };
 
-
         await ApiService.Post("/Imoveis/CadastrarImagem", body);
         ToastService.Success("Usuário cadastrado com sucesso!");
         setVisible(false);
@@ -52,10 +51,7 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
         console.log(erro);
         return;
       }
-
-    }
-
-    else {
+    } else {
       try {
         if (!URLImage) {
           ToastService.Error("Erro ao atualizar imagem de perfil", "selecione uma imagem");
@@ -64,7 +60,7 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
         }
         console.log("id: " + id)
         const body = {
-          "URLImage":URLImage
+          "URLImage": URLImage
         };
 
         switch (tipo) {
@@ -73,15 +69,12 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
             break;
           case "PJ":
             await ApiService.Post("/PessoasJuridicas/DefinirImagemDePerfil", body);
-
             break;
           case "Corretor":
             await ApiService.Post("/Corretores/DefinirImagemDePerfil", body);
-
             break;
           case "Imobiliaria":
             await ApiService.Post("/Imobiliarias/DefinirImagemDePerfil", body);
-
             break;
           default:
             break;
@@ -97,17 +90,23 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
         return;
       }
     }
-
   }
 
   if (!adiciona) {
     return (
       <Modal transparent={true} visible={isVisible} onRequestClose={() => { setVisible(false); setLink(null); }}>
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <Image source={link} style={styles.imagem} />
+        <TouchableWithoutFeedback onPress={() => { setVisible(false); setLink(null); }}>
+          <View style={styles.container}>
+            <TouchableWithoutFeedback>
+              <View style={styles.content}>
+                <Image source={link} style={styles.imagem} />
+                <Pressable onPress={() => { setVisible(false); setLink(null); }}>
+                  <AntDesign style={{ bottom:35,  shadow: { width: 1, height: 1 }}} name="closecircle" size={24} color="white" />
+                </Pressable>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </Modal>
     );
   } else {
@@ -117,12 +116,13 @@ export function ModelImage({ adiciona, link, isVisible, setVisible, setLink, imo
           <View style={styles.content}>
             <Pressable style={styles.Pressable} onPress={selecionarImagem}>
               <View style={styles.portaConteudo}>
-                {!URLImage ? <Image source={upload} style={styles.upload} /> : <Image source={{ uri: URLImage }} style={styles.imagem} />}
+                {!URLImage ? <FontAwesome name="upload" size={70} color='rgb(150,150,150)' /> : <Image source={{ uri: URLImage }} style={styles.imagem} />}
               </View>
             </Pressable>
             {imovel ? <TextInput
               style={styles.textInput}
-              placeholder="Descrição"
+              placeholder="Ex: Suíte Principal"
+              placeholderTextColor="rgba(0, 0, 0, 0.5)"
               value={descricao}
               onChangeText={(texto) => setDescricao(texto)} />
               : null}
@@ -149,8 +149,9 @@ const styles = StyleSheet.create({
   content: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
+    width: '95%',
     height: '50%',
+    borderRadius: 11,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
@@ -158,13 +159,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(150,150,150)'
   },
   Pressable: {
-    width: '98%',
+    width: '95%',
     height: '80%',
+    borderRadius: 11,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgb(200,200,200)',
-    marginTop: '1em'
+    marginTop: 2
   },
   portaConteudo: {
     width: '100%',
@@ -180,29 +182,39 @@ const styles = StyleSheet.create({
   imagem: {
     width: "100%",
     height: '100%',
+    borderRadius: 11,
     backgroundColor: 'rgb(0,100,100)'
   },
   textInput: {
     width: '90%',
     height: 40,
+    marginBottom: 7,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    fontSize: '1em'
+    fontSize: 15,
+    fontStyle:'italic'
   },
   enviar: {
-    width: '6em',
-    heigth: '2em',
-    borderRadius: '0.3em',
-    backgroundColor: '#999EA9',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: 'rgb(200,200,200)',
+    width: 150,
+    height: 50,
+    borderRadius: 25,
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowOffset: {
+      width: 3, // deslocamento horizontal da sombra
+      height: 3, // deslocamento vertical da sombra
+  },
+  shadowOpacity: 0.2, // opacidade da sombra
+  shadowRadius: 4, // raio da sombra
+    
   },
   enviarTxt: {
-    fontSize: '1em',
+    fontSize: 18,
     fontWeight: 'bold',
-    color: 'rgb(255,255,255)'
+    color: 'rgb(100,100,100)'
   }
 });

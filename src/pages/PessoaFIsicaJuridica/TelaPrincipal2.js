@@ -54,61 +54,62 @@ const TelaPrincipal2 = () => {
       >
         <View style={styles.perfil}>
 
-          <View style={styles.circuloExternoPerfil}>
-            <Pressable style={styles.circuloInternoPerfil} onPress={() => { navigation.navigate("Perfil") }}>
+          <Pressable onPress={() => { navigation.navigate("Perfil") }} style={styles.circuloExternoPerfil}>
+            {/* <Pressable style={styles.circuloInternoPerfil} onPress={() => { navigation.navigate("Perfil") }}>
               {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" && dados.URL_imagem_perfil != undefined ?
                 <Image source={{ uri: dados.URL_imagem_perfil }} style={styles.imagemPerfil} />
                 :
                 <FontAwesome5 name="user-circle" size={70} color="black" />
               }
+            </Pressable>*/}
+              <Image style={styles.imagemPerfil} source={require('../../assets/Images/Perfil Homem.png')} />
             </Pressable>
+            
+
+            <View style={styles.dados}>
+              <Text style={styles.nome}>
+                {dados.Tipo == "PJ" ? dados.NomeEmpresa : getPrimeiroENome(dados.nome)}
+              </Text>
+              <Text style={styles.tipo}>{getTipoUsuario(dados.Tipo)}</Text>
+            </View>
+
+            <ModalTelaPrincipal />
 
           </View>
 
-          <View style={styles.dados}>
-            <Text style={styles.nome}>
-              {dados.Tipo == "PJ" ? dados.NomeEmpresa : getPrimeiroENome(dados.nome)}
-            </Text>
-            <Text style={styles.tipo}>{getTipoUsuario(dados.Tipo)}</Text>
+          <View style={styles.portaBotoes}>
+
+            <TouchableOpacity style={styles.button_1} onPress={() => { navigation.navigate("AcessoMeusImoveis") }}>
+
+              <ImageBackground source={require('../../assets/Images/Imovel.jpeg')} resizeMode='contain'>
+                <View style={{
+                  width: 250,
+                  height: 200,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                }}>
+                  <Text style={styles.btnTxt}>Meus Imoveis</Text>
+                </View>
+              </ImageBackground>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.button_2} onPress={() => { navigation.navigate("CadastrarImovel") }}>
+
+              <ImageBackground source={require('../../assets/Images/Cadastrando.jpeg')} resizeMode='center' >
+                <View style={{
+                  width: 250,
+                  height: 200,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                }}>
+                  <Text style={styles.btnTxt}>Cadastrar Imoveis</Text>
+                </View>
+              </ImageBackground>
+            </TouchableOpacity>
+
           </View>
-
-          <ModalTelaPrincipal />
-
-        </View>
-
-        <View style={styles.portaBotoes}>
-
-          <TouchableOpacity style={styles.button_1} onPress={() => { navigation.navigate("AcessoMeusImoveis") }}>
-
-            <ImageBackground source={require('../../assets/Images/Imovel.jpeg')} resizeMode='contain'>
-              <View style={{
-                width: 250,
-                height: 200,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-              }}>
-                <Text style={styles.btnTxt}>Meus Imoveis</Text>
-              </View>
-            </ImageBackground>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button_2} onPress={() => { navigation.navigate("CadastrarImovel") }}>
-
-            <ImageBackground source={require('../../assets/Images/Cadastrando.jpeg')} resizeMode='center' >
-              <View style={{
-                width: 250,
-                height: 200,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-              }}>
-                <Text style={styles.btnTxt}>Cadastrar Imoveis</Text>
-              </View>
-            </ImageBackground>
-          </TouchableOpacity>
-
-        </View>
 
       </ImageBackground>
 

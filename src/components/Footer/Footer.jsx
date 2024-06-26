@@ -124,8 +124,8 @@ export default function Footer({ exibirTab, tipoLogin }) {
                             </Pressable>
 
                             <Pressable style={styles.button} onPress={() => click("imovel")}>
-                                <AntDesign name="staro" size={25} color={"#999EA9"} />
-                                <Text style={styles.texto}>Imoveis Favoritos</Text>
+                                <AntDesign name="star" size={25} color={"#999EA9"} />
+                                <Text style={styles.texto}>Favoritos</Text>
                             </Pressable>
                             <Pressable style={styles.button} onPress={() => click("duvidas")}>
                                 <FontAwesome5 name="question" size={25} color={"#999EA9"} />

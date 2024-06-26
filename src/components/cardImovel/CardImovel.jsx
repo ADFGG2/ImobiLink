@@ -1,5 +1,5 @@
-import { View, Text, Image, Pressable, StyleSheet, Modal } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, Pressable, StyleSheet, Modal, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ToastService from '../../Services/ToastService';
 import ApiService from '../../Services/ApiService';
@@ -9,7 +9,7 @@ import IconCama from '../../assets/Svg/Diversos/Cama';
 import IconChuveiro from '../../assets/Svg/Diversos/Chuveiro';
 import IconSofa from '../../assets/Svg/Diversos/Sofa';
 
-const cardImovel = ({ imovel, estrela, tipo }) => {
+const CardImovel = ({ imovel, estrela, tipo }) => {
     const navigation = useNavigation();
     const [img, setImg] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
@@ -20,13 +20,13 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
 
     const formatPhoneNumber = (phoneNumber) => {
         return phoneNumber ? phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '';
-      };
+    };
+
     async function pegaImagem() {
         try {
             let valor = imovel.codigo;
             const response = await ApiService.Get(`/imoveis/PegaImagemFav/${valor}`);
             setImg(response.data);
-            console.log(imovel);
         } catch (erro) {
             console.log(erro);
             ToastService.Error("Erro ao buscar imagens");
@@ -60,74 +60,51 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
         }
     }
 
-
     const [isFavorite, setIsFavorite] = useState(false);
 
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
     };
+
     const favoritar = async () => {
         if (tipo) {
-            if (tipo == "Corretor") {
-                try {
-                    let valor = imovel.codigo;
-                    const response = await ApiService.Post(`/Corretores/AdicionarImovelFavorito`, { "idImovel": valor });
-                    setIsFavorite(true);
-                } catch (erro) {
-                    console.log(erro);
-                    ToastService.Error("Erro ao favoritar");
-                }
+            try {
+                let valor = imovel.codigo;
+                const response = await (tipo === "Corretor" ?
+                    ApiService.Post(`/Corretores/AdicionarImovelFavorito`, { "idImovel": valor }) :
+                    ApiService.Post(`/Imobiliarias/AdicionarImovelFavorito`, { "idImovel": valor })
+                );
+                setIsFavorite(true);
+            } catch (erro) {
+                console.log(erro);
+                ToastService.Error("Erro ao favoritar");
             }
-            else {
-                try {
-                    let valor = imovel.codigo;
-                    const response = await ApiService.Post(`/Imobiliarias/AdicionarImovelFavorito`, { "idImovel": valor });
-                    setIsFavorite(true);
-                } catch (erro) {
-                    console.log(erro);
-                    ToastService.Error("Erro ao favoritar");
-                }
-            }
-
-
         }
     }
 
-    async function desfavoritar(idImovel) {
+    const desfavoritar = async () => {
         if (tipo) {
-            if (tipo == "Corretor") {
-                try {
-
-                    const response = await ApiService.Delete(`/Corretores/RemoverImovelFavorito`, { idImovel });
-                    setIsFavorite(false);
-                } catch (erro) {
-                    console.log(erro);
-                    ToastService.Error("Erro ao favoritar");
-                }
+            try {
+                let valor = imovel.codigo;
+                const response = await (tipo === "Corretor" ?
+                    ApiService.Delete(`/Corretores/RemoverImovelFavorito`, { idImovel: valor }) :
+                    ApiService.Post(`/Imobiliarias/RemoverImovelFavorito`, { "idImovel": valor })
+                );
+                setIsFavorite(false);
+            } catch (erro) {
+                console.log(erro);
+                ToastService.Error("Erro ao desfavoritar");
             }
-            else {
-                try {
-                    let valor = imovel.codigo;
-                    const response = await ApiService.Post(`/Imobiliarias/RemoverImovelFavorito`, { "idImovel": valor });
-                    setIsFavorite(false);
-                } catch (erro) {
-                    console.log(erro);
-                    ToastService.Error("Erro ao favoritar");
-                }
-            }
-
-
         }
     }
+
     const openModal = () => {
         setModalVisible(true);
     };
 
-    // Função para fechar o modal
     const closeModal = () => {
         setModalVisible(false);
     };
-
 
     return (
         <View style={styles.card} key={imovel?.Codigo}>
@@ -138,13 +115,9 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
                     style={styles.imagemImovel}
                 />
 
-
-
                 <View style={styles.valorendereço}>
                     <View style={styles.primeirosTxts}>
-
                         <View style={{ position: 'absolute', left: 130, top: 1 }}>
-
                             {
                                 estrela ?
                                     isFavorite ? (
@@ -159,7 +132,6 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
                                     :
                                     null
                             }
-
                         </View>
                         <Text style={styles.textvalor}>
                             R$ {parseFloat(imovel.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -225,38 +197,40 @@ const cardImovel = ({ imovel, estrela, tipo }) => {
 
                 </View>
             </View>
+
             <Modal
                 animationType="fade"
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={closeModal}
             >
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                        <Text style={styles.txtModal}>{getFirstAndSecondName(imovel.nomeAutor)}</Text>
-                        
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
-                            <MaterialCommunityIcons name="email-outline" size={20} color="black" />
-                            <Text style={styles.txtDados}> {imovel.emailDono} </ Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
-                            <FontAwesome name="whatsapp" size={20} color="black" />
-                            <Text style={styles.txtDados}> {formatPhoneNumber(imovel.telefoneDono)} </Text>
-                        </View>
-
-                        <Pressable onPress={closeModal}>
-                            <AntDesign style={styles.closeText} name="closecircleo" size={20} color="black" />
+                <TouchableWithoutFeedback onPress={closeModal}>
+                    <View style={styles.modalContainer}>
+                        <View style={styles.modalContent}>
+                            <Text style={styles.txtModal}>{getFirstAndSecondName(imovel.nomeAutor)}</Text>
                             
-                        </Pressable>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                                <MaterialCommunityIcons name="email-outline" size={20} color="black" />
+                                <Text style={styles.txtDados}> {imovel.emailDono} </Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                                <FontAwesome name="whatsapp" size={20} color="black" />
+                                <Text style={styles.txtDados}> {formatPhoneNumber(imovel.telefoneDono)} </Text>
+                            </View>
+
+                            <Pressable onPress={closeModal}>
+                                <AntDesign style={styles.closeText} name="closecircleo" size={20} color="black" />
+                            </Pressable>
+                        </View>
                     </View>
-                </View>
+                </TouchableWithoutFeedback>
             </Modal>
         </View>
     );
 };
 
-export default cardImovel;
+export default CardImovel;
 
 const styles = StyleSheet.create({
     card: {
@@ -272,7 +246,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.4, // opacidade da sombra
         shadowRadius: 6, // raio da sombra
-
     },
     textvalor: {
         textAlign: 'center',
@@ -290,7 +263,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 5,
         flexDirection: 'row',
         backgroundColor: 'rgba(217, 217, 217, 0.5)',
-
     },
     imagemImovel: {
         width: '50%',
@@ -299,11 +271,10 @@ const styles = StyleSheet.create({
         borderRightColor: '#797979',
         borderTopLeftRadius: 11,
         borderBottomLeftRadius: 11,
-
     },
     primeirosTxts: {
         width: '100%',
-        alignItens: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
         paddingRight: 1
     },
@@ -376,8 +347,8 @@ const styles = StyleSheet.create({
         padding: 15,
         backgroundColor: '#bebebe',
         borderRadius: 11,
-        alignItems: 'center ',
-        justifyContent:'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         shadowColor: '#000',
         shadowOffset: {
             width: 1, // deslocamento horizontal da sombra
@@ -385,21 +356,18 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.4, // opacidade da sombra
         shadowRadius: 6, // raio da sombra
-
     },
     closeText: {
         marginTop: 25,
-
     },
     txtModal: {
         fontSize: 25,
         fontWeight: '600',
         letterSpacing: 1
-        
     },
     txtDados: {
         fontSize: 12,
         fontWeight: '400',
         letterSpacing: 1
     }
-})
+});

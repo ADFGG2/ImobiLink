@@ -161,18 +161,21 @@ const Perfil = () => {
           />
 
           <View style={styles.ellipse}>
-            <Pressable style={styles.circuloInternoPerfil}  >
+            {/*<Pressable style={styles.circuloInternoPerfil}  >
               {dados.URL_imagem_perfil == null || dados.URL_imagem_perfil == "" || dados.URL_imagem_perfil == undefinded ?
                 <FontAwesome5 name="user-circle" size={150} color="black" />
                 :
                 <Image source={{ uri: dados.URL_imagem_perfil }} style={styles.imagemPerfil} />
               }
-            </Pressable>
+            </Pressable> */}
+            <View style={styles.circuloInternoPerfil}>
+              <Image  style={styles.imagemPerfil} source={require('../assets/Images/Perfil Homem.png')}/>
 
-            <View style={styles.area_bnt_editar}>
-              <Pressable style={styles.button_editar} onPress={() => { setAdiciona(true); setModalIsOpen(true); }}>
-                <Feather name="edit-2" size={18} color="black" />
-              </Pressable>
+              <View style={styles.area_bnt_editar}>
+                <Pressable style={styles.button_editar} onPress={() => { setAdiciona(true); setModalIsOpen(true); }}>
+                  <Feather name="edit-2" size={18} color="black" />
+                </Pressable>
+              </View>
             </View>
           </View>
 
@@ -234,19 +237,23 @@ const Perfil = () => {
 
 
           <View style={styles.ellipse}>
-            <Pressable style={styles.circuloInternoPerfil} >
+             {/*<Pressable style={styles.circuloInternoPerfil} >
               {dados.URL_imagem_perfil != null && dados.URL_imagem_perfil != "" ?
                 <Image source={{ uri: dados.URL_imagem_perfil }} style={styles.imagemPerfil} />
                 :
                 <FontAwesome5 name="user-circle" size={150} color="black" />
               }
-            </Pressable>
+            </Pressable>*/}
+            <View style={styles.circuloInternoPerfil}>
+              <Image  style={styles.imagemPerfil} source={require('../assets/Images/Perfil Homem Corretor.png')}/>
+
 
             <View style={styles.area_bnt_editar}>
               <TouchableOpacity style={styles.button_editar}>
                 <Feather name="edit-2" size={18} color="black" />
               </TouchableOpacity>
             </View>
+          </View>
           </View>
 
           <View style={styles.portaDadosImobi}>

@@ -132,7 +132,7 @@ export default function MyStack() {
             <Stack.Screen
               name="AcessoFavoritos"
               component={AcessoFavoritos}
-              options={{ title: "AcessoFavoritos" }}
+              options={{ title: "AcessoFavoritos" , headerShown: false}}
             />
             <Stack.Screen
               name="Perfil"
